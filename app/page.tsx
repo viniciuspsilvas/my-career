@@ -1,8 +1,19 @@
 "use client";
 import { useDarkMode } from "@/src/hooks/useGlobalState";
+import { useState, useEffect } from "react";
 
 export default function HomePage() {
   const { darkMode, toggleDarkMode } = useDarkMode();
+
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  if (!isHydrated) {
+    return null; // Evita renderização antes da reidratação
+  }
 
   return (
     <main>

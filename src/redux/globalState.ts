@@ -3,8 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
 export interface GlobalState {
-  darkMode?: boolean;
-  drawerOpened?: boolean;
+  darkMode: boolean;
+  drawerOpened: boolean;
 }
 
 const initialState: GlobalState = {
