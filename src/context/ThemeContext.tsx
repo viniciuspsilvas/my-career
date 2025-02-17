@@ -1,28 +1,32 @@
 "use client";
 
-import { createContext, useState, useContext, ReactNode } from "react";
+import { createContext, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../redux/store";
 
 interface ThemeContextType {
   theme: string;
-  toggleTheme: () => void;
 }
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined
 );
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setTheme] = useState<string>("light");
+export const ThemeProvider = () => {
+  const darkMode = useSelector((state: RootState) => state.global.darkMode);
 
-  const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === "light" ? "dark" : "light"));
-  };
-
-  return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
+  useEffect(
+    () => {
+      if (darkMode) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    },
+    [darkMode]
   );
+
+  return null;
 };
 
 export const useTheme = (): ThemeContextType => {
