@@ -1,8 +1,8 @@
-"use client"
-import { useTheme } from "@/src/context/ThemeContext";
+"use client";
+import { useDarkMode } from "@/src/hooks/useGlobalState";
 
 export default function HomePage() {
-  const { theme, toggleTheme } = useTheme();
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <main>
@@ -11,9 +11,9 @@ export default function HomePage() {
 
       <div>
         <p>
-          The current theme is {theme}
+          The current theme is {`darkMode: ${darkMode}`}
         </p>
-        <button onClick={toggleTheme}>Toggle Theme</button>
+        <button onClick={toggleDarkMode}>Toggle Theme</button>
       </div>
     </main>
   );
