@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation'
 
 import dynamic from 'next/dynamic';
 
-const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), { ssr: false });
+const ThemeToggleButton = dynamic(() => import('./theme-toggle-button'), { ssr: false });
 
 
 const containerVariants = {
