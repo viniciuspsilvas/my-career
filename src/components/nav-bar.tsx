@@ -1,17 +1,17 @@
 'use client'
 
-import { Text } from '@/src/components/global/text'
 import { Routes } from '@/src/lib/routes'
-import logoSymbol from '@/public/assets/symbol-logotype-hive-bookings-colors-white.png'
-import logo from '@/public/assets/text-logotype-hive-bookings-colors-white.png'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC, memo, useCallback, useEffect } from 'react'
-import { useDrawerMode, useTheme } from '../hooks/useGlobalState'
+import { useDrawerMode } from '../hooks/useGlobalState'
 import { motion, useAnimate, stagger } from 'framer-motion'
-import { isEqual } from 'lodash'
+import { FaBriefcase, FaEnvelopeOpen, FaHome, FaUser } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
-import { ThemeMode } from '../redux/globalState'
+
+import dynamic from 'next/dynamic';
+
+const ThemeToggleButton = dynamic(() => import('./ThemeToggleButton'), { ssr: false });
+
 
 const containerVariants = {
   initial: { opacity: 0, y: -100 },
@@ -20,44 +20,102 @@ const containerVariants = {
 
 export type NavBarProps = object
 
-const ItemMenu: React.FC<{ pathname: string; label: string; passHref?: boolean; target?: string }> = memo(
-  ({ pathname, label, passHref = false, target = '_self' }) => {
-    const { toggleDrawer, drawerOpened } = useDrawerMode()
-    const currentPath = usePathname()
+const ItemMenu: React.FC<{ 
+  pathname: string; 
+  label: string; 
+  icon: React.ReactNode; 
+  passHref?: boolean; 
+  target?: string; 
+}> = memo(({ pathname, label, icon, passHref = false, target = '_self' }) => {
+  const { toggleDrawer, drawerOpened } = useDrawerMode();
+  const currentPath = usePathname()
 
-    const closeMenu = () => {
-      if (drawerOpened) {
-        toggleDrawer()
-      }
+  const closeMenu = () => {
+    if (drawerOpened) {
+      toggleDrawer();
     }
-
-    return (
-      <motion.li style={{ originX: 0 }} whileHover={{ scale: [1, 1.1, 1], transition: { repeat: Infinity, duration: 0.6, repeatType: 'loop' } }}>
-        <Link href={pathname} className="flex items-center" onClick={closeMenu} passHref={passHref} target={target}>
-          <Text className={`block py-4 md:py-2 pl-3 pr-4 ${isEqual(currentPath, pathname) ? 'text-primary-500 dark:text-primary-00' : 'text-white dark:text-black'} uppercase hover:underline hover:text-primary hover:underline-offset-4 transition-all duration-300 ease-in-out`}>
-            {label}
-          </Text>
-        </Link>
-      </motion.li>
-    )
-  }
-)
-
-ItemMenu.displayName = 'ItemMenu'
-
-const themeOptions: ThemeMode[] = ["light", "dark", "system"];
-
-export const NavBar: FC<NavBarProps> = () => {
-  const { toggleDrawer, drawerOpened } = useDrawerMode()
-  const {theme, toggleSelectTheme} = useTheme();
-
-  const toggleSelectThemeHandler = () => {
-    const currentIndex = themeOptions.indexOf(theme);
-    const nextTheme = themeOptions[(currentIndex + 1) % themeOptions.length];
-    toggleSelectTheme(nextTheme)
   };
 
+  return (
+    <motion.li 
+      initial={{ width: 48, height: 48 }} // Começa como um círculo
+      whileHover={{ width: "auto" }} // Expande no hover
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      className="relative flex items-center hover:bg-primary-700 bg-black-200 hover:bg-opacity-90 bg-opacity-90 rounded-full overflow-hidden"
+    >
+      <Link 
+        href={pathname} 
+        onClick={closeMenu} 
+        passHref={passHref} 
+        target={target} 
+        className="flex items-center"
+      >
+        <span className={`w-[48px] h-[48px] flex items-center justify-center  ${currentPath === pathname ? 'text-primary-500' : 'text-white'}`}>
+          {icon}
+        </span>
 
+        <span className="text-white uppercase pr-4">
+          {label}
+        </span>
+      </Link>
+    </motion.li>
+  );
+});
+ItemMenu.displayName = 'ItemMenu'
+
+const menuVariants = {
+  hidden: { opacity: 0, x: '100%' },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  exit: { opacity: 0, x: '100%', transition: { duration: 0.3 } },
+};
+
+const MobileMenuItem = ({ pathname, label, icon }: { pathname: string; label: string; icon: React.ReactNode }) => {
+  const { toggleDrawer } = useDrawerMode();
+  const currentPath = usePathname();
+
+  return (
+    <motion.li
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      className="text-white text-lg uppercase py-4 border-b border-gray-700 w-full text-center"
+    >
+      <Link href={pathname} onClick={toggleDrawer} className={`flex items-center gap-6 ${currentPath === pathname ? 'text-primary-500' : 'text-white'}`}>
+        {icon}
+        {label}
+      </Link>
+    </motion.li>
+  );
+};
+
+const MobileMenu = () => {
+  const { drawerOpened, toggleDrawer } = useDrawerMode();
+
+  return (
+    <motion.div
+      className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 flex flex-col items-center justify-center z-50  px-12"
+      variants={menuVariants}
+      initial="hidden"
+      animate={drawerOpened ? 'visible' : 'hidden'}
+      exit="exit"
+    >
+      <button
+        onClick={toggleDrawer}
+        className="absolute top-6 right-8 text-white text-3xl"
+      >
+        &times;
+      </button>
+      <ul className="w-full text-center">
+        <MobileMenuItem label="Home" pathname={Routes.root} icon={<FaHome />} />
+        <MobileMenuItem label="Blog" pathname={Routes.blog} icon={<FaUser />} />
+        <MobileMenuItem label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
+        <MobileMenuItem label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
+      </ul>
+    </motion.div>
+  );
+};
+
+export const NavBar: FC<NavBarProps> = () => {
+  const { toggleDrawer } = useDrawerMode()
   const [scope, animate] = useAnimate()
 
   const animateList = useCallback(() => {
@@ -70,68 +128,39 @@ export const NavBar: FC<NavBarProps> = () => {
 
   return (
     <>
-      <motion.nav className="border-gray-200 bg-black dark:bg-white-30 shadow-md z-50" variants={containerVariants} initial="initial" animate="show">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2 px-4">
-          {/* Logo */}
-          <Link href="/" className="flex items-center">
-            <Image width={150} priority src={logo} alt="Hive Bookings logo" className="hidden md:block mx-auto my-1" />
-            <Image width={50} priority src={logoSymbol} alt="Hive Bookings logo" className="block md:hidden mx-auto my-1" />
-          </Link>
-
-          {/* Botão Hamburguer Mobile */}
-          <button onClick={toggleDrawer} type="button" className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600" aria-controls="navbar-solid-bg" aria-expanded="false">
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-          </button>
-
-          {/* Itens do Menu */}
-          <div className={`${drawerOpened ? '' : 'hidden'} w-full md:block md:w-auto`} id="navbar-solid-bg">
-            <ul ref={scope} className="flex flex-col font-medium mt-4 md:flex-row md:space-x-8 md:mt-0">
-              <ItemMenu label="Home" pathname={Routes.root} />
-              <ItemMenu label="Blog" pathname={Routes.blog} />
-              <ItemMenu label="Portfolio" pathname={Routes.portfolio} />
-              <ItemMenu label="Contact" pathname={Routes.contact} />
-            </ul>
-          </div>
-
-          {/* Dark Mode Toggle Button */}
-          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-2 px-4">
-        {/* Dark Mode Toggle */}
-        <button
-          onClick={toggleSelectThemeHandler}
-          className="p-2 ml-4 text-gray-400 hover:text-yellow-500 transition-all"
+      {/* Botão de Toggle para o Menu Mobile */}
+      <motion.nav className="" variants={containerVariants} initial="initial" animate="show">
+        <button 
+          onClick={toggleDrawer} 
+          type="button" 
+          className="border-gray-200 bg-black dark:bg-black-200 shadow-md z-50 fixed right-2 top-2 inline-flex items-center p-2 m-2 w-12 h-12 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 text-gray-400 hover:bg-gray-700 focus:ring-gray-600" 
+          aria-controls="navbar-solid-bg" 
+          aria-expanded="false"
         >
-          {theme === "light" ? (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M17.293 13.293a8 8 0 01-10.586 0 1 1 0 011.414-1.414 6 6 0 008.172 0 1 1 0 011.414 1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          ) : theme === "dark" ? (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M10 2a1 1 0 011 1v2a1 1 0 11-2 0V3a1 1 0 011-1zm4.95 3.05a1 1 0 010 1.414l-1.414 1.414a1 1 0 11-1.414-1.414l1.414-1.414a1 1 0 011.414 0zM18 10a1 1 0 01-1 1h-2a1 1 0 110-2h2a1 1 0 011 1zm-3.05 4.95a1 1 0 00-1.414 0l-1.414 1.414a1 1 0 101.414 1.414l1.414-1.414a1 1 0 000-1.414zM10 18a1 1 0 01-1-1v-2a1 1 0 112 0v2a1 1 0 01-1 1zm-4.95-3.05a1 1 0 000 1.414l1.414 1.414a1 1 0 001.414-1.414L6.464 14.95a1 1 0 00-1.414 0zM4 10a1 1 0 011-1h2a1 1 0 110 2H5a1 1 0 01-1-1zm3.05-4.95a1 1 0 000 1.414L5.636 7.879a1 1 0 11-1.414-1.414L5.636 4.05a1 1 0 011.414 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          ) : (
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path
-                fillRule="evenodd"
-                d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zM12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0z"
-                clipRule="evenodd"
-              />
-            </svg>
-          )}
+          <span className="sr-only">Open main menu</span>
+          <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+          </svg>
         </button>
-      </div>
-        </div>
       </motion.nav>
+
+      {/* Botão de Toggle para o Tema */}
+      <div className="fixed right-0 top-0 p-4">
+        <ThemeToggleButton />
+      </div>
+
+      {/* Itens do Menu - Só aparecerá em md:mode */}
+      <div className={`hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 p-4 w-48`} id="navbar-solid-bg">
+        <ul ref={scope} className="flex flex-col font-medium space-y-4 items-end">
+          <ItemMenu label="Home" pathname={Routes.root} icon={<FaHome />} />
+          <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaUser />} />
+          <ItemMenu label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
+          <ItemMenu label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
+        </ul>
+      </div>
+
+
+      <MobileMenu />
     </>
   )
 }

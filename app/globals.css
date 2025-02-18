@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body {
-  @apply bg-white text-black dark:bg-black dark:text-white;
+  @apply bg-tertiary-100 text-black dark:bg-black dark:text-white;
   font-family: Arial, Helvetica, sans-serif;
 }
