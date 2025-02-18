@@ -1,34 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 
+export type ThemeMode = "light" | "dark" | "system";
+
 export interface GlobalState {
-  darkMode: boolean;
+  theme: ThemeMode;
   drawerOpened: boolean;
 }
 
 const initialState: GlobalState = {
-  darkMode: false,
-  drawerOpened: false
+  theme: "system",
+  drawerOpened: false,
 };
 
 export const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    toggleDarkMode: (state) => {
-      state.darkMode = !state.darkMode;
+    toggleTheme: (state, action: PayloadAction<ThemeMode>) => {
+      state.theme = state.theme = action.payload;
     },
     toggleDrawer: (state) => {
       state.drawerOpened = !state.drawerOpened;
-    }
-  }
+    },
+  },
 });
 
-export const { toggleDarkMode, toggleDrawer } = globalSlice.actions;
+export const { toggleTheme, toggleDrawer } = globalSlice.actions;
 
-export const isDarkMode = (state: RootState) => state.global.darkMode;
-
+export const selectTheme = (state: RootState) => state.global.theme;
 export const isDrawerOpened = (state: RootState) => state.global.drawerOpened;
 
 export default globalSlice.reducer;

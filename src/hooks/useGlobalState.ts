@@ -1,19 +1,23 @@
 
-import { isDarkMode, isDrawerOpened, 
-  toggleDrawer as toggle,  // TODO Check a better way to name it, 
-  toggleDarkMode as toggleDark } from "../redux/globalState"; // TODO: observe tha names duplicating, (reducer and and dispatch function)
+import {
+  isDrawerOpened,
+  selectTheme,
+  ThemeMode,
+  toggleDrawer as toggle,  // TODO: observe tha names duplicating, (reducer and and dispatch function)
+  toggleTheme,
+} from "../redux/globalState";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-export const useDarkMode = () => {
-  const darkMode = useAppSelector(isDarkMode);
+export const useTheme = () => {
+  const theme = useAppSelector(selectTheme);
 
   const dispatch = useAppDispatch();
 
-  const toggleDarkMode = () => {
-    dispatch(toggleDark());
+  const toggleSelectTheme = (_theme: ThemeMode) => {
+    dispatch(toggleTheme(_theme));
   };
 
-  return { darkMode, toggleDarkMode };
+  return { theme, toggleSelectTheme };
 };
 
 

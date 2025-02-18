@@ -1,40 +1,40 @@
 "use client";
 
-import { createContext, useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { selectTheme } from "../redux/globalState";
 
-interface ThemeContextType {
-  theme: string;
-}
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const theme = useSelector(selectTheme);
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(
-  undefined
-);
+  useEffect(() => {
+    const applyTheme = (isDark: boolean) => {
+      document.documentElement.classList.toggle("dark", isDark);
+    };
 
-export const ThemeProvider = () => {
-  const darkMode = useSelector((state: RootState) => state.global.darkMode);
-
-  useEffect(
-    () => {
-      if (darkMode) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
+    const handleSystemThemeChange = (event: MediaQueryListEvent) => {
+      if (theme === "system") {
+        applyTheme(event.matches);
       }
-    },
-    [darkMode]
-  );
+    };
 
-  return null;
-};
+    // Aplicar o tema inicial
+    if (theme === "system") {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyTheme(prefersDark);
+    } else {
+      applyTheme(theme === "dark");
+    }
 
-export const useTheme = (): ThemeContextType => {
-  const context = useContext(ThemeContext);
+    // Adicionar listener para mudanças no tema do sistema
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    mediaQuery.addEventListener("change", handleSystemThemeChange);
 
-  if (!context) {
-    throw new Error("useTheme must be used within a ThemeProvider");
-  }
+    // Remover listener ao desmontar o componente
+    return () => {
+      mediaQuery.removeEventListener("change", handleSystemThemeChange);
+    };
+  }, [theme]);
 
-  return context;
-};
+  return <>{children}</>;
+}

@@ -11,8 +11,9 @@ type ProvidersProps = {
 export function Providers({ children }: ProvidersProps) {
   return (
     <Provider store={store}>
-      {children}
-      <ThemeProvider />
+      <ThemeProvider>
+        {children}
+      </ThemeProvider>
     </Provider>
   );
 }
