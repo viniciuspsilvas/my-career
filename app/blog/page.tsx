@@ -1,5 +1,6 @@
 "use client";
 
+import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import { SetStateAction, useState } from "react";
 
 export default function BlogPage() {
@@ -59,14 +60,12 @@ export default function BlogPage() {
     <section className="bg-white dark:bg-gray-900 min-h-screen p-8">
       {/* Container Principal */}
       <div className="max-w-6xl mx-auto py-12">
-        {/* Título Principal */}
-        <h1 className="text-4xl font-bold text-center mb-4">
-          <span className="text-gray-900 dark:text-white">MY </span>
-          <span className="text-primary-500">BLOG</span>
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 text-center mb-12">
-          Read my latest blog articles!
-        </p>
+        {/* Título Animado */}
+        <AnimatedTitleSection
+          backTitle="BLOG"
+          mainTitle={<>MY <span className="text-primary-500">BLOG</span></>}
+          supportText="Read my latest blog articles!"
+        />
 
         {/* Lista de Posts do Blog */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
