@@ -4,7 +4,7 @@ export function useStat() {
   return useQuery({
     queryKey: ["stat"],
     queryFn: async () => {
-      const res = await fetch("/api/stat");
+      const res = await fetch("/api/stats");
       if (!res.ok) throw new Error("Failed to fetch stat");
       return res.json();
     },
