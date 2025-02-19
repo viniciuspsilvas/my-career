@@ -9,6 +9,7 @@ import { useExperience } from "@/src/hooks/useExperience";
 import { usePersonalInfo } from "@/src/hooks/usePersonalInfo";
 import { useSkill } from "@/src/hooks/useSkill";
 import { useStat } from "@/src/hooks/useStat";
+import { IoCode } from "react-icons/io5";
 
 export default function AboutPage() {
 
@@ -66,7 +67,7 @@ export default function AboutPage() {
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               PERSONAL INFOS
             </h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 ">
               <div className="text-gray-600 dark:text-gray-400">
                 <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</span>
                 <span className="block text-gray-800 dark:text-gray-200">{personalInfo.fullName}</span>
@@ -184,7 +185,7 @@ export default function AboutPage() {
               >
                 {/* Ícone */}
                 <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center z-10">
-                  {item.icon}
+                  <IoCode />
                 </div>
                 {/* Conteúdo */}
                 <div className="flex-1 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:scale-105 transition-all duration-300">
