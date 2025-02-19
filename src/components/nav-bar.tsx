@@ -109,7 +109,7 @@ const MobileMenu = () => {
         <MobileMenuItem label="About" pathname={Routes.about} icon={<FaUser />} />
         <MobileMenuItem label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
         <MobileMenuItem label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
-        <MobileMenuItem label="Use" pathname={Routes.tools} icon={<FaTools />} />
+        <MobileMenuItem label="Tools" pathname={Routes.tools} icon={<FaTools />} />
         <MobileMenuItem label="Blog" pathname={Routes.blog} icon={<FaComment />} />
         <ThemeToggleButton />
       </ul>
@@ -159,7 +159,7 @@ export const NavBar: FC<NavBarProps> = () => {
           <ItemMenu label="About" pathname={Routes.about} icon={<FaUser />} />
           <ItemMenu label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
           <ItemMenu label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
-          <ItemMenu label="Use" pathname={Routes.tools} icon={<FaTools />} />
+          <ItemMenu label="Tools" pathname={Routes.tools} icon={<FaTools />} />
           <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} />
         </ul>
       </div>
