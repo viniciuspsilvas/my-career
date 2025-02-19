@@ -1,127 +1,143 @@
 "use client";
 
-import { FaDownload, FaBriefcase, FaGraduationCap } from "react-icons/fa";
+import { FaDownload } from "react-icons/fa";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { motion } from "framer-motion";
+import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
+import { useExperience } from "@/src/hooks/useExperience";
+import { usePersonalInfo } from "@/src/hooks/usePersonalInfo";
+import { useSkill } from "@/src/hooks/useSkill";
+import { useStat } from "@/src/hooks/useStat";
 
 export default function AboutPage() {
-  // Dados fictícios para a página
-  const personalInfos = [
-    { label: "First Name", value: "Vinicius" },
-    { label: "Last Name", value: "Silva" },
-    { label: "Age", value: "37 Years" },
-    { label: "Nationality", value: "Brazilian" },
-    { label: "Freelance", value: "Available" },
-    { label: "Address", value: "Gold Coast, Australia" },
-    { label: "Phone", value: "+55 11 99999-9999" },
-    { label: "Email", value: "viniciuspsilvas@gmail.com" },
-    { label: "Skype", value: "viniciuspsilvas" },
-    { label: "Languages", value: "English, Portuguese" }
-  ];
 
-  const stats = [
-    { label: "Years of Experience", value: "12+" },
-    { label: "Completed Projects", value: "97+" },
-    { label: "Happy Customers", value: "81+" },
-    { label: "Awards Won", value: "53+" }
-  ];
+  const { data: personalInfos, isLoading: personalInfosLoading, error: personalInfosError } = usePersonalInfo();
+  const { data: stats, isLoading: statsLoading, error: statsError } = useStat();
+  const { data: skills, isLoading: skillsLoading, error: skillsError } = useSkill();
+  const { data: experiences, isLoading: experienceLoading, error: experienceError } = useExperience();
 
-  const skills = [
-    { name: "HTML", percentage: 85 },
-    { name: "CSS", percentage: 75 },
-    { name: "JavaScript", percentage: 90 },
-    { name: "React", percentage: 70 },
-    { name: "Node.js", percentage: 80 },
-    { name: "MongoDB", percentage: 60 },
-    { name: "GraphQL", percentage: 50 },
-    { name: "Next.js", percentage: 65 }
-  ];
+  if (personalInfosLoading ||statsLoading ||  skillsLoading || experienceLoading ) return (
+    <motion.div
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900"
+    >
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full"
+      />
+    </motion.div>
+  );
 
-  const timeline = [
-    {
-      year: "2020 - Present",
-      title: "Senior Developer",
-      company: "Tech Company",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      icon: <FaBriefcase />
-    },
-    {
-      year: "2015 - 2020",
-      title: "Software Engineer",
-      company: "Another Company",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      icon: <FaBriefcase />
-    },
-    {
-      year: "2010 - 2014",
-      title: "Computer Science Degree",
-      company: "XYZ University",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-      icon: <FaGraduationCap />
-    }
-  ];
+  if (personalInfosError 
+    || statsError 
+    || skillsError 
+    || experienceError
+  ) return <p className="text-center text-red-500">Error loading projects.</p>;
+
+  const personalInfo = personalInfos[0];
 
   return (
     <section className="bg-white dark:bg-gray-900 min-h-screen p-8">
       {/* Container Principal */}
       <div className="max-w-6xl mx-auto py-12">
-        {/* Título Principal */}
-        <h1 className="text-4xl font-bold text-center mb-4">
-          <span className="text-gray-900 dark:text-white">ABOUT </span>
-          <span className="text-primary-500">ME</span>
-        </h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 text-center mb-12">
-          Learn more about my background, skills, and experience!
-        </p>
+        {/* Título Principal com Animação */}
+        <AnimatedTitleSection
+          backTitle="ABOUT"
+          mainTitle={
+            <>
+              ABOUT <span className="text-primary-500">ME</span>
+            </>
+          }
+          supportText="Learn more about my background, skills, and experience!"
+        />
 
         {/* Seção de Informações Pessoais */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+        >
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
               PERSONAL INFOS
             </h2>
             <div className="grid grid-cols-2 gap-4">
-              {personalInfos.map((info, index) =>
-                <div key={index} className="text-gray-600 dark:text-gray-400">
-                  <span className="font-semibold">{info.label}:</span>{" "}
-                  {info.value}
-                </div>
-              )}
+              <div className="text-gray-600 dark:text-gray-400">
+                <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</span>
+                <span className="block text-gray-800 dark:text-gray-200">{personalInfo.fullName}</span>
+              </div>
+              <div className="text-gray-600 dark:text-gray-400">
+                <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Title</span>
+                <span className="block text-gray-800 dark:text-gray-200">{personalInfo.title}</span>
+              </div>
+              <div className="text-gray-600 dark:text-gray-400">
+                <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Email</span>
+                <span className="block text-gray-800 dark:text-gray-200">{personalInfo.email}</span>
+              </div>
+              <div className="text-gray-600 dark:text-gray-400">
+                <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Location</span>
+                <span className="block text-gray-800 dark:text-gray-200">{personalInfo.location}</span>
+              </div>
+              <div className="text-gray-600 dark:text-gray-400 col-span-2">
+                <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Profile</span>
+                <span className="block text-gray-800 dark:text-gray-200">{personalInfo.profile}</span>
+              </div>
             </div>
-            <button className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
+            >
               <FaDownload />
               <span>Download CV</span>
-            </button>
+            </motion.button>
           </div>
 
           {/* Seção de Estatísticas */}
           <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, index) =>
-              <div
+            {stats.map((stat, index : number) => (
+              <motion.div
                 key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
                 className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:scale-105 transition-all duration-300"
               >
                 <h3 className="text-primary-500 text-3xl font-bold">
                   {stat.value}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {stat.label}
-                </p>
-              </div>
-            )}
+                <p className="text-gray-600 dark:text-gray-400">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
         <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
         {/* Seção de Habilidades */}
-        <div className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             MY SKILLS
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {skills.map((skill, index) =>
-              <div key={index} className="text-center">
+            {skills.map((skill, index : number) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+                className="text-center"
+              >
                 <div className="w-24 h-24 mx-auto mb-4">
                   <CircularProgressbar
                     value={skill.percentage}
@@ -131,31 +147,41 @@ export default function AboutPage() {
                       text: {
                         fill: "#07d2be",
                         fontSize: "24px",
-                        fontWeight: "bold"
-                      } 
+                        fontWeight: "bold",
+                      },
                     }}
                   />
                 </div>
                 <p className="text-gray-900 dark:text-white font-semibold">
                   {skill.name}
                 </p>
-              </div>
-            )}
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
 
         <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
         {/* Seção de Experiência & Educação */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             EXPERIENCE & EDUCATION
           </h2>
           <div className="space-y-8 relative">
             {/* Linha da Timeline */}
             <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-100 dark:bg-gray-700" />
-            {timeline.map((item, index) =>
-              <div key={index} className="flex items-start space-x-4">
+            {experiences.map((item, index : number) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.2, duration: 0.5 }}
+                className="flex items-start space-x-4"
+              >
                 {/* Ícone */}
                 <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center z-10">
                   {item.icon}
@@ -175,10 +201,10 @@ export default function AboutPage() {
                     {item.description}
                   </p>
                 </div>
-              </div>
-            )}
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
