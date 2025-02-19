@@ -1,66 +1,91 @@
-'use client'
+'use client';
 
 import { FaPaperPlane, FaEnvelope, FaPhone, FaFacebook, FaTwitter, FaYoutube, FaDribbble } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatedTitleSection } from '@/src/components/global/animated-title-section';
 
 export default function ContactPage() {
   return (
     <section className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen p-8 transition-colors duration-300">
       {/* Container Principal */}
       <div className="max-w-4xl mx-auto py-12">
-        {/* Título Chamativo */}
-        <h1 className="text-4xl font-bold text-center mb-4">
-          <span className="text-gray-900 dark:text-white">GET IN </span>
-          <span className="text-primary-500">TOUCH</span>
-        </h1>
-
-        {/* Texto de Apoio */}
-        <p className="text-lg text-gray-600 dark:text-gray-400 text-center mb-12">
-          Have a question or want to collaborate? Feel free to reach out!
-        </p>
+        {/* Título Animado */}
+        <AnimatedTitleSection
+          backTitle="REACH OUT"
+          mainTitle={<>CONTACT <span className="text-primary-500">ME</span></>}
+          supportText="Have a question or want to collaborate? Feel free to reach out!"
+        />
 
         {/* Informações de Contato */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {/* E-mail */}
-          <div className="flex items-center space-x-4">
-            <div className="bg-primary-500 p-4 rounded-full">
-              <FaEnvelope className="text-white text-2xl" />
-            </div>
-            <div>
-              <p className="text-gray-600 dark:text-gray-400">Email</p>
-              <p className="text-gray-900 dark:text-white font-semibold">contact@vinitech.dev</p>
-            </div>
-          </div>
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+          >
+            {/* E-mail */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center space-x-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300"
+            >
+              <div className="bg-primary-500 p-4 rounded-full">
+                <FaEnvelope className="text-white text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-600 dark:text-gray-400">Email</p>
+                <p className="text-gray-900 dark:text-white font-semibold">contact@vinitech.dev</p>
+              </div>
+            </motion.div>
 
-          {/* Telefone */}
-          <div className="flex items-center space-x-4">
-            <div className="bg-primary-500 p-4 rounded-full">
-              <FaPhone className="text-white text-2xl" />
-            </div>
-            <div>
-              <p className="text-gray-600 dark:text-gray-400">Phone</p>
-              <p className="text-gray-900 dark:text-white font-semibold">+55 (11) 98765-4321</p>
-            </div>
-          </div>
-        </div>
+            {/* Telefone */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center space-x-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300"
+            >
+              <div className="bg-primary-500 p-4 rounded-full">
+                <FaPhone className="text-white text-2xl" />
+              </div>
+              <div>
+                <p className="text-gray-600 dark:text-gray-400">Phone</p>
+                <p className="text-gray-900 dark:text-white font-semibold">+55 (11) 98765-4321</p>
+              </div>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Redes Sociais */}
-        <div className="flex justify-center space-x-6 mb-12">
-          <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300">
-            <FaFacebook className="text-2xl" />
-          </a>
-          <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300">
-            <FaTwitter className="text-2xl" />
-          </a>
-          <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300">
-            <FaYoutube className="text-2xl" />
-          </a>
-          <a href="#" className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300">
-            <FaDribbble className="text-2xl" />
-          </a>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="flex justify-center space-x-6 mb-12"
+        >
+          {[
+            { icon: <FaFacebook className="text-2xl" />, link: "#" },
+            { icon: <FaTwitter className="text-2xl" />, link: "#" },
+            { icon: <FaYoutube className="text-2xl" />, link: "#" },
+            { icon: <FaDribbble className="text-2xl" />, link: "#" },
+          ].map((social, index) => (
+            <a
+              key={index}
+              href={social.link}
+              className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300"
+            >
+              {social.icon}
+            </a>
+          ))}
+        </motion.div>
 
         {/* Formulário de Contato */}
-        <form className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg transition-colors duration-300">
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+          className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg transition-colors duration-300"
+        >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Nome */}
             <div>
@@ -108,15 +133,17 @@ export default function ContactPage() {
 
           {/* Botão de Envio */}
           <div className="mt-8">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               type="submit"
               className="w-full bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
             >
               <span>Send Message</span>
               <FaPaperPlane className="text-lg" />
-            </button>
+            </motion.button>
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
   );
