@@ -1,8 +1,10 @@
 "use client";
 
+import { SetStateAction, useState } from "react";
+
 export default function BlogPage() {
   // Dados fictícios para os posts do blog
-  const blogPosts = [
+  const allPosts = [
     {
       title: "How to Own Your Audience by Creating an Email List",
       content:
@@ -21,7 +23,37 @@ export default function BlogPage() {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
       date: "October 1, 2023",
     },
+    {
+      title: "The Future of AI in Web Development",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      date: "September 25, 2023",
+    },
+    {
+      title: "Building Scalable Applications with Microservices",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      date: "September 20, 2023",
+    },
+    {
+      title: "Mastering React Hooks: A Comprehensive Guide",
+      content:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+      date: "September 15, 2023",
+    },
   ];
+
+  // Estado para controlar a página atual
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6; // Número de posts por página
+
+  // Lógica para dividir os posts em páginas
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = allPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Função para mudar de página
+  const paginate = (pageNumber: SetStateAction<number>) => setCurrentPage(pageNumber);
 
   return (
     <section className="bg-white dark:bg-gray-900 min-h-screen p-8">
@@ -37,8 +69,8 @@ export default function BlogPage() {
         </p>
 
         {/* Lista de Posts do Blog */}
-        <div className="space-y-8">
-          {blogPosts.map((post, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          {currentPosts.map((post, index) => (
             <div
               key={index}
               className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
@@ -49,6 +81,23 @@ export default function BlogPage() {
               <p className="text-gray-600 dark:text-gray-400 mb-4">{post.content}</p>
               <p className="text-gray-500 dark:text-gray-300 text-sm">{post.date}</p>
             </div>
+          ))}
+        </div>
+
+        {/* Paginação */}
+        <div className="flex justify-center space-x-4">
+          {Array.from({ length: Math.ceil(allPosts.length / postsPerPage) }, (_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => paginate(i + 1)}
+              className={`px-4 py-2 rounded-full ${
+                currentPage === i + 1
+                  ? "bg-primary-500 text-white"
+                  : "bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white"
+              } hover:bg-primary-600 hover:text-white transition-all duration-300`}
+            >
+              {i + 1}
+            </button>
           ))}
         </div>
       </div>

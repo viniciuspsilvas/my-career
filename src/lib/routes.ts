@@ -10,4 +10,5 @@ export enum Routes {
   awards = '/awards',
   services = '/services',
   contact = '/contact',
+  tools = '/tools',
 }
