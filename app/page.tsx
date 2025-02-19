@@ -196,6 +196,8 @@ export default function HomePage() {
             >
               <Component />
             </Suspense>
+            // TODO adicionar botao pra voltar ao topo da pagina
+            // TODO trigar as animation quando o usuario chegar na secao
           )}
     </>
   );
