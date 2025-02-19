@@ -61,11 +61,11 @@ export default function PortfolioPage() {
                 }}
               >
                 {/* Imagem do Projeto */}
-                <img
+                {/* <img
                   src={project.image}
                   alt={project.title}
                   className="w-full h-48 object-cover rounded"
-                />
+                /> */}
                 
                 {/* Título do Projeto */}
                 <h2 className="text-xl font-semibold mt-4 text-gray-900 dark:text-white">

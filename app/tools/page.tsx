@@ -131,11 +131,11 @@ export default function ToolsPage() {
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {selectedTool.description}
                 </p>
-                <img
+                {/* <img
                   src="/placeholder.png"
                   alt={selectedTool.value}
                   className="w-full h-32 object-cover mb-4"
-                />
+                /> */}
                 <button
                   className="bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all duration-300"
                   onClick={() => setSelectedTool(null)}

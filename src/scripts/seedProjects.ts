@@ -298,9 +298,9 @@ const seedTools = async () => {
 };
 
 // TODO DESCOMENTAR PARA RODAR O SCRIPT
-// seedProjects();
-// seedExperiences();
-// seedStats();
-// seedSkills();
-// seedPersonalInfo();
-// seedTools();
+seedProjects();
+seedExperiences();
+seedStats();
+seedSkills();
+seedPersonalInfo();
+seedTools();
