@@ -6,6 +6,7 @@ import { Experience } from "../models/Experience";
 import { Stat } from "../models/Stat";
 import { Skill } from "../models/Skill";
 import { PersonalInfo } from "../models/PersonalInfo";
+import { Tool } from "../models/Tools";
 
 
 const experiences = [
@@ -122,6 +123,87 @@ const personalInfo = {
 };
 
 
+const tools = [
+  {
+    title: "VS Code",
+    description: "Powerful code editor with great extensions.",
+    link: "https://code.visualstudio.com/",
+    image: "/images/vscode.png",
+  },
+  {
+    title: "TypeScript",
+    description: "Typed superset of JavaScript for scalability.",
+    link: "https://www.typescriptlang.org/",
+    image: "/images/typescript.png",
+  },
+  {
+    title: "React JS",
+    description: "Library for building UI components.",
+    link: "https://react.dev/",
+    image: "/images/react.png",
+  },
+  {
+    title: "React Query",
+    description: "Data fetching and state management tool.",
+    link: "https://tanstack.com/query/latest",
+    image: "/images/react-query.png",
+  },
+  {
+    title: "Tailwind",
+    description: "Utility-first CSS framework for fast styling.",
+    link: "https://tailwindcss.com/",
+    image: "/images/tailwind.png",
+  },
+  {
+    title: "Next JS",
+    description: "Full-stack React framework for web apps.",
+    link: "https://nextjs.org/",
+    image: "/images/nextjs.png",
+  },
+  {
+    title: "Node.js",
+    description: "JavaScript runtime for backend development.",
+    link: "https://nodejs.org/",
+    image: "/images/nodejs.png",
+  },
+  {
+    title: "Prisma",
+    description: "Modern ORM for Node.js and TypeScript.",
+    link: "https://www.prisma.io/",
+    image: "/images/prisma.png",
+  },
+  {
+    title: "Mongoose",
+    description: "MongoDB object modeling for Node.js.",
+    link: "https://mongoosejs.com/",
+    image: "/images/mongoose.png",
+  },
+  {
+    title: "PostgreSQL",
+    description: "Powerful relational database system.",
+    link: "https://www.postgresql.org/",
+    image: "/images/postgresql.png",
+  },
+  {
+    title: "MongoDB",
+    description: "NoSQL document-oriented database.",
+    link: "https://www.mongodb.com/",
+    image: "/images/mongodb.png",
+  },
+  {
+    title: "Azure",
+    description: "Cloud computing platform from Microsoft.",
+    link: "https://azure.microsoft.com/",
+    image: "/images/azure.png",
+  },
+  {
+    title: "AWS",
+    description: "Amazon Web Services for cloud computing.",
+    link: "https://aws.amazon.com/",
+    image: "/images/aws.png",
+  },
+];
+
 const seedProjects = async () => {
   await connectDB();
 
@@ -202,10 +284,23 @@ const seedPersonalInfo = async () => {
   }
 };
 
+const seedTools = async () => {
+  await connectDB();
+
+  try {
+    await Tool.insertMany(tools);
+    console.log("Tools inserted successfully");
+  } catch (error) {
+    console.error("Error inserting Tool seeds:", error);
+  } finally {
+    process.exit();
+  }
+};
 
 // TODO DESCOMENTAR PARA RODAR O SCRIPT
-seedProjects();
-seedExperiences();
-seedStats();
-seedSkills();
-seedPersonalInfo();
+// seedProjects();
+// seedExperiences();
+// seedStats();
+// seedSkills();
+// seedPersonalInfo();
+// seedTools();
