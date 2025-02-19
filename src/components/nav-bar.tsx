@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { FC, memo, useCallback, useEffect } from 'react'
 import { useDrawerMode } from '../hooks/useGlobalState'
 import { motion, useAnimate, stagger } from 'framer-motion'
-import { FaBriefcase, FaEnvelopeOpen, FaHome, FaUser } from 'react-icons/fa'
+import { FaBriefcase, FaComment, FaEnvelopeOpen, FaHome, FaUser } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
 
 import dynamic from 'next/dynamic';
@@ -106,9 +106,10 @@ const MobileMenu = () => {
       </button>
       <ul className="w-full text-center">
         <MobileMenuItem label="Home" pathname={Routes.root} icon={<FaHome />} />
-        <MobileMenuItem label="Blog" pathname={Routes.blog} icon={<FaUser />} />
+        <MobileMenuItem label="About" pathname={Routes.about} icon={<FaUser />} />
         <MobileMenuItem label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
         <MobileMenuItem label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
+        <MobileMenuItem label="Blog" pathname={Routes.blog} icon={<FaComment />} />
       </ul>
     </motion.div>
   );
@@ -153,12 +154,12 @@ export const NavBar: FC<NavBarProps> = () => {
       <div className={`hidden md:block fixed right-0 top-1/2 transform -translate-y-1/2 p-4 w-48`} id="navbar-solid-bg">
         <ul ref={scope} className="flex flex-col font-medium space-y-4 items-end">
           <ItemMenu label="Home" pathname={Routes.root} icon={<FaHome />} />
-          <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaUser />} />
+          <ItemMenu label="About" pathname={Routes.about} icon={<FaUser />} />
           <ItemMenu label="Portfolio" pathname={Routes.portfolio} icon={<FaBriefcase />} />
           <ItemMenu label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
+          <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} />
         </ul>
       </div>
-
 
       <MobileMenu />
     </>
