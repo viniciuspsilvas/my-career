@@ -5,6 +5,7 @@ import { Project } from "../models/Project";
 import { Experience } from "../models/Experience";
 import { Stat } from "../models/Stat";
 import { Skill } from "../models/Skill";
+import { PersonalInfo } from "../models/PersonalInfo";
 
 
 const experiences = [
@@ -83,27 +84,25 @@ const experiences = [
 ];
 
 const stats = [
-  { label: "HTML5", value: "85%" },
-  { label: "CSS3", value: "75%" },
-  { label: "JavaScript", value: "90%" },
+  { label: "HTML5 / CSS3", value: "85%" },
+  { label: "JavaScript / TypeScript", value: "90%" },
   { label: "Node.js", value: "80%" },
   { label: "React", value: "70%" },
   { label: "React Native", value: "65%" },
   { label: "Redux", value: "70%" },
-  { label: "Storybook", value: "60%" },
-  { label: "Styled Components", value: "50%" },
-  { label: "TypeScript", value: "75%" },
-  { label: "iOS & Android", value: "60%" },
-  { label: "GraphQL", value: "50%" },
-  { label: "GIT Workflows", value: "70%" },
-  { label: "REST & Web Services", value: "75%" },
+  // { label: "Storybook", value: "60%" },
+  // { label: "Styled Components", value: "50%" },
+  // { label: "iOS & Android", value: "60%" },
+  // { label: "GraphQL", value: "50%" },
+  // { label: "GIT Workflows", value: "70%" },
+  // { label: "REST & Web Services", value: "75%" },
 ];
 
 const skills = [
-  { name: "Node.js", percentage: 85 },
-  { name: "Express", percentage: 80 },
-  { name: "Apollo Server", percentage: 75 },
-  { name: "TypeScript", percentage: 85 },
+  // { name: "Node.js", percentage: 85 },
+  // { name: "Express", percentage: 80 },
+  // { name: "Apollo Server", percentage: 75 },
+  // { name: "TypeScript", percentage: 85 },
   { name: "AWS", percentage: 70 },
   { name: "EC2, ECS, ELB, S3, IAM", percentage: 65 },
   { name: "Prisma ORM", percentage: 60 },
@@ -114,13 +113,14 @@ const skills = [
   { name: "DevOps", percentage: 65 },
 ];
 
-const personalInfo = [
-  { label: "Full Name", value: "Vinicius Silva" },
-  { label: "Title", value: "Full Stack Developer" },
-  { label: "Email", value: "viniciuspsilvas@gmail.com" },
-  { label: "Location", value: "Gold Coast, NSW, Australia" },
-  { label: "Profile", value: "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions." },
-];
+const personalInfo = {
+  fullName: "Vinicius Silva",
+  title: "Full Stack Developer",
+  email: "viniciuspsilvas@gmail.com",
+  location: "Gold Coast, NSW, Australia",
+  profile: "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions.",
+};
+
 
 const seedProjects = async () => {
   await connectDB();
@@ -193,7 +193,7 @@ const seedPersonalInfo = async () => {
   await connectDB();
 
   try {
-    await Stat.insertMany(personalInfo);
+    await PersonalInfo.insertMany(personalInfo);
     console.log("Personal Info inserted successfully");
   } catch (error) {
     console.error("Error inserting Personal Info seeds:", error);
@@ -204,8 +204,8 @@ const seedPersonalInfo = async () => {
 
 
 // TODO DESCOMENTAR PARA RODAR O SCRIPT
-// seedProjects();
-// seedExperiences();
-// seedStats();
-// seedSkills();
-// seedPersonalInfo();
+seedProjects();
+seedExperiences();
+seedStats();
+seedSkills();
+seedPersonalInfo();
