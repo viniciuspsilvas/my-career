@@ -127,12 +127,12 @@ export default function AboutPage() {
                     value={skill.percentage}
                     text={`${skill.percentage}%`}
                     styles={{
-                      path: { stroke: `#07d2be` }, // Cor primária
+                      path: { stroke: `#07d2be` },
                       text: {
-                        fill: "#F4F4F4",
+                        fill: "#07d2be",
                         fontSize: "24px",
                         fontWeight: "bold"
-                      } // Cor do texto
+                      } 
                     }}
                   />
                 </div>
@@ -153,7 +153,7 @@ export default function AboutPage() {
           </h2>
           <div className="space-y-8 relative">
             {/* Linha da Timeline */}
-            <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-700" />
+            <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-100 dark:bg-gray-700" />
             {timeline.map((item, index) =>
               <div key={index} className="flex items-start space-x-4">
                 {/* Ícone */}
