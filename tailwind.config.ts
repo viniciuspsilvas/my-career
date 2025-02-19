@@ -12,7 +12,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['var(--font-aguda)']
+        sans: ['var(--font-aguda)'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       textShadow: {
         sm: '1px 1px 2px var(--tw-shadow-color)',

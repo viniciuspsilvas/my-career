@@ -23,3 +23,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 ## Run the seeds
 
  npx tsx src/scripts/seedProjects.ts                    
+ 
