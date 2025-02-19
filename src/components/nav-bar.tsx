@@ -111,6 +111,7 @@ const MobileMenu = () => {
         <MobileMenuItem label="Contact" pathname={Routes.contact} icon={<FaEnvelopeOpen />} />
         <MobileMenuItem label="Use" pathname={Routes.tools} icon={<FaTools />} />
         <MobileMenuItem label="Blog" pathname={Routes.blog} icon={<FaComment />} />
+        <ThemeToggleButton />
       </ul>
     </motion.div>
   );
@@ -131,7 +132,7 @@ export const NavBar: FC<NavBarProps> = () => {
   return (
     <>
       {/* Botão de Toggle para o Menu Mobile */}
-      <motion.nav variants={containerVariants} initial="initial" animate="show">
+      <motion.nav variants={containerVariants} initial="initial" animate="show" >
         <button 
           onClick={toggleDrawer} 
           type="button" 
@@ -147,7 +148,7 @@ export const NavBar: FC<NavBarProps> = () => {
       </motion.nav>
 
       {/* Botão de Toggle para o Tema */}
-      <div className="fixed right-0 top-0 p-4 z-50">
+      <div className="hidden md:block fixed right-0 top-0 p-4 z-50">
         <ThemeToggleButton />
       </div>
 
