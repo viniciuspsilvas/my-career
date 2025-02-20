@@ -65,7 +65,9 @@ export default function AboutPageClient() {
             </div>
             <div className="text-gray-600 dark:text-gray-400">
               <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Email</span>
-              <span className="block text-gray-800 dark:text-gray-200">{personalInfo.email}</span>
+              <a href={`mailto:${personalInfo.email}`} className="block text-gray-800 dark:text-gray-200 text-sm md:text-base underline">
+                {personalInfo.email}
+              </a>
             </div>
             <div className="text-gray-600 dark:text-gray-400">
               <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Location</span>
