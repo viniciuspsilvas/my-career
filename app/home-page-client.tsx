@@ -24,6 +24,7 @@ const sections = [
 export default function HomePage() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
   const controls = useAnimation();
   const [ref, inView] = useInView();
   const theme = useResolvedTheme();
@@ -44,6 +45,27 @@ export default function HomePage() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 200) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
+
 
   if (!isHydrated) {
     return null;
@@ -173,6 +195,33 @@ export default function HomePage() {
             <Component />
           </Suspense>
         )}
+
+      {isMobile && showScrollButton && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          transition={{ duration: 0.3 }}
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 p-3 border border-primary-600 text-primary rounded-full shadow-lg hover:border-primary-700 transition-colors"
+          aria-label="Scroll to top"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 10l7-7m0 0l7 7m-7-7v18"
+            />
+          </svg>
+        </motion.button>
+      )}
     </>
   );
 }
