@@ -13,6 +13,20 @@ import { IoCode } from "react-icons/io5";
 import Loading from "@/src/components/global/loading";
 import ErrorMessage from "@/src/components/global/error-message";
 import Session from "@/src/components/global/session";
+import { Text } from "@/src/components/global/text";
+
+const InfoItem = ({ label, value, isLink }: { label: string; value: string; isLink?: boolean }) => (
+  <div className="text-gray-600 dark:text-gray-400">
+    <Text category="label">{label}</Text>
+    {isLink ? (
+      <a href={`mailto:${value}`} className="block text-gray-800 dark:text-gray-200 text-sm md:text-base underline">
+        {value}
+      </a>
+    ) : (
+      <Text category="p1">{value}</Text>
+    )}
+  </div>
+);
 
 export default function AboutPageClient() {
   const { data: personalInfos, isLoading: personalInfosLoading, error: personalInfosError } = usePersonalInfo();
@@ -54,32 +68,19 @@ export default function AboutPageClient() {
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
             PERSONAL INFOS
           </h2>
-          <div className="grid grid-cols-2 gap-4 ">
-            <div className="text-gray-600 dark:text-gray-400">
-              <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</span>
-              <span className="block text-gray-800 dark:text-gray-200">{personalInfo.fullName}</span>
-            </div>
-            <div className="text-gray-600 dark:text-gray-400">
-              <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Title</span>
-              <span className="block text-gray-800 dark:text-gray-200">{personalInfo.title}</span>
-            </div>
-            <div className="text-gray-600 dark:text-gray-400">
-              <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Email</span>
-              <a href={`mailto:${personalInfo.email}`} className="block text-gray-800 dark:text-gray-200 text-sm md:text-base underline">
-                {personalInfo.email}
-              </a>
-            </div>
-            <div className="text-gray-600 dark:text-gray-400">
-              <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Location</span>
-              <span className="block text-gray-800 dark:text-gray-200">{personalInfo.location}</span>
-            </div>
+          <div className="sm:grid sm:grid-cols-2 space-y-2 gap-4">
+            <InfoItem label="Full Name" value={personalInfo.fullName} />
+            <InfoItem label="Title" value={personalInfo.title} />
+            <InfoItem label="Email" value={personalInfo.email} isLink />
+            <InfoItem label="Location" value={personalInfo.location} />
           </div>
+
           <div className="flex justify-center items-end mb-4 md:mt-10"> 
-              <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
-          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
+            >
             <FaDownload />
             <span>Download CV</span>
           </motion.button>

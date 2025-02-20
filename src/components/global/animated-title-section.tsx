@@ -35,7 +35,7 @@ export const AnimatedTitleSection = ({ backTitle, mainTitle, supportText }: Anim
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="text-lg text-gray-600 dark:text-gray-400 text-center mb-12 mt-5"
+        className="sm:text-lg text-gray-600 dark:text-gray-400 text-center mb-12 mt-5"
       >
         {supportText}
       </motion.p>

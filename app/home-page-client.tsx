@@ -155,7 +155,7 @@ export default function HomePage() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="text-3xl md:text-5xl font-bold dark:text-gray-200 text-gray-800"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold dark:text-gray-200 text-gray-800"
           >
             Hey, I&apos;m Vinicius Silva 👋
           </motion.h1>
@@ -164,16 +164,16 @@ export default function HomePage() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="text-xl md:text-2xl text-primary-600 font-semibold mt-2"
+            className="text-base sm:text-xl md:text-2xl text-primary-600 font-semibold mt-4 sm:mt-2"
           >
-            Full Stack Developer & Problem Solver
+            Full Stack Developer <span className="hidden sm:block"> & Problem Solver</span>
           </motion.h2>
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="mt-4 text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600 "
+            className="mt-4 text-sm sm:text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600 "
           >
             With over 10 years of experience in web development, I’m a frontend-focused full-stack developer who loves turning complex problems into simple, intuitive solutions. My passion lies in crafting sleek, responsive user interfaces that provide seamless digital experiences. While I have full-stack capabilities, my expertise shines in building engaging and high-performance frontends. Let’s create something amazing together!
           </motion.p>

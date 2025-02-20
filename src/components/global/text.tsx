@@ -88,7 +88,7 @@ export const Text = ({ category, className, children, status = 'basic', ...rest 
     case 'label':
       return (
         <label className={cn('label', variants({ status, className }))} {...rest}>
-          <span className="label-text text-sm">{children}</span>
+          <span className="label-text text-sm text-gray-500 dark:text-gray-400">{children}</span>
         </label>
       )
     case 'small':
@@ -99,7 +99,7 @@ export const Text = ({ category, className, children, status = 'basic', ...rest 
       )
     case 'legend':
       return (
-        <legend {...rest} className={cn('text-sm', variants({ status, className }))}>
+        <legend {...rest} className={cn('text-sm text-gray-800 dark:text-gray-200', variants({ status, className }))}>
           {children}
         </legend>
       )
