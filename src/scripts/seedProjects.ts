@@ -215,66 +215,65 @@ const blogPosts = [
   },
 
   {
-    title: "Unlocking Advanced Web Development: Browser Rendering, Event Handling, and High-Performance Graphics",
-    content: `## The Magic Behind the Web
-  
-  Ever wondered how your browser takes raw code and transforms it into a beautiful, interactive web page? Or how you can make your JavaScript more efficient without freezing the UI? Advanced web development is packed with techniques to make your apps faster, smoother, and more interactive. Today, we’re diving into key topics like the **browser rendering pipeline**, **event handling**, **WebWorkers**, **WebGL**, and **WebGPU**.
-  
-  ## Understanding the Browser Rendering Pipeline
-  
-  When you load a webpage, your browser goes through several steps to display content: parsing HTML, building the DOM, applying CSS, running JavaScript, calculating layouts, and finally painting pixels on the screen.
-  
-  ### Optimising Performance
-  - **Minimise reflows and repaints**: Avoid unnecessary style changes and large DOM manipulations.
-  - **Use GPU acceleration**: Transform-heavy animations should use \`will-change\` or \`translate3d\`.
-  - **Lazy loading**: Defer loading off-screen images and components.
-  
-  ## Efficient Event Handling in JavaScript
-  
-  Event handling allows users to interact with web applications, but improper implementation can lead to sluggish performance.
-  
-  ### Best Practices
-  - **Use event delegation**: Attach event listeners to parent elements instead of multiple child elements.
-  - **Throttle and debounce**: Limit the number of function executions in rapid-fire events like scrolling.
-  - **Passive event listeners**: Improve scroll performance by marking listeners as \`passive\`.
-  
-  ## WebWorkers: Multithreading for the Web
-  
-  JavaScript is single-threaded, but **WebWorkers** let you run tasks in the background without blocking the UI.
-  
-  ### When to Use WebWorkers
-  - **Heavy computations**: Data processing, cryptographic operations, and large calculations.
-  - **Background tasks**: Fetching data, processing files, or handling WebSockets.
-  
-  #### Example:
-  \`\`\`ts
-  const worker = new Worker('worker.js');
-  worker.postMessage('Start task');
-  worker.onmessage = (e) => console.log(e.data);
-  \`\`\`
-  
-  ## WebGL & WebGPU: High-Performance 3D Graphics
-  
-  ### WebGL: The Backbone of Web Graphics
-  WebGL allows rendering 3D graphics in the browser using the GPU. Libraries like [Three.js](https://threejs.org/) simplify WebGL development.
-  
-  #### Example:
-  \`\`\`ts
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer();
-  document.body.appendChild(renderer.domElement);
-  \`\`\`
-  
-  ### WebGPU: The Next Generation
-  WebGPU improves upon WebGL, providing better performance, modern APIs, and direct GPU access. While still new, it promises faster rendering and computation.
-  
-  ## Wrapping Up
-  
-  Mastering these advanced web technologies takes time, but the payoff is huge. Optimising rendering, handling events efficiently, using WebWorkers, and leveraging WebGL/WebGPU will take your web development skills to the next level.
-  
-  ### Ready to Level Up?
-  Try integrating these techniques into a project! Whether it's a high-performance dashboard or a 3D visualisation, these tools will make your web apps smoother and faster. Got a cool project idea? Drop it in the comments! 🚀
+    title: "The Magic Behind the Web",
+    content: `<p>Ever wondered how your browser takes raw code and transforms it into a beautiful, interactive web page? Or how you can make your JavaScript more efficient without freezing the UI? Advanced web development is packed with techniques to make your apps faster, smoother, and more interactive. Today, we’re diving into key topics like the <strong>browser rendering pipeline</strong>, <strong>event handling</strong>, <strong>WebWorkers</strong>, <strong>WebGL</strong>, and <strong>WebGPU</strong>.</p>
+              <h2>Understanding the Browser Rendering Pipeline</h2>
+
+              <p>When you load a webpage, your browser goes through several steps to display content: parsing HTML, building the DOM, applying CSS, running JavaScript, calculating layouts, and finally painting pixels on the screen.</p>
+
+              <h3>Optimising Performance</h3>
+              <ul>
+                <li><strong>Minimise reflows and repaints</strong>: Avoid unnecessary style changes and large DOM manipulations.</li>
+                <li><strong>Use GPU acceleration</strong>: Transform-heavy animations should use <code>will-change</code> or <code>translate3d</code>.</li>
+                <li><strong>Lazy loading</strong>: Defer loading off-screen images and components.</li>
+              </ul>
+
+              <h2>Efficient Event Handling in JavaScript</h2>
+
+              <p>Event handling allows users to interact with web applications, but improper implementation can lead to sluggish performance.</p>
+
+              <h3>Best Practices</h3>
+              <ul>
+                <li><strong>Use event delegation</strong>: Attach event listeners to parent elements instead of multiple child elements.</li>
+                <li><strong>Throttle and debounce</strong>: Limit the number of function executions in rapid-fire events like scrolling.</li>
+                <li><strong>Passive event listeners</strong>: Improve scroll performance by marking listeners as <code>passive</code>.</li>
+              </ul>
+
+              <h2>WebWorkers: Multithreading for the Web</h2>
+
+              <p>JavaScript is single-threaded, but <strong>WebWorkers</strong> let you run tasks in the background without blocking the UI.</p>
+
+              <h3>When to Use WebWorkers</h3>
+              <ul>
+                <li><strong>Heavy computations</strong>: Data processing, cryptographic operations, and large calculations.</li>
+                <li><strong>Background tasks</strong>: Fetching data, processing files, or handling WebSockets.</li>
+              </ul>
+
+              <h4>Example:</h4>
+              <pre><code class="language-ts">const worker = new Worker('worker.js');
+              worker.postMessage('Start task');
+              worker.onmessage = (e) => console.log(e.data);</code></pre>
+
+              <h2>WebGL & WebGPU: High-Performance 3D Graphics</h2>
+
+              <h3>WebGL: The Backbone of Web Graphics</h3>
+              <p>WebGL allows rendering 3D graphics in the browser using the GPU. Libraries like <a href="https://threejs.org/" target="_blank">Three.js</a> simplify WebGL development.</p>
+
+              <h4>Example:</h4>
+              <pre><code class="language-ts">const scene = new THREE.Scene();
+              const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+              const renderer = new THREE.WebGLRenderer();
+              document.body.appendChild(renderer.domElement);</code></pre>
+
+              <h3>WebGPU: The Next Generation</h3>
+              <p>WebGPU improves upon WebGL, providing better performance, modern APIs, and direct GPU access. While still new, it promises faster rendering and computation.</p>
+
+              <h2>Wrapping Up</h2>
+
+              <p>Mastering these advanced web technologies takes time, but the payoff is huge. Optimising rendering, handling events efficiently, using WebWorkers, and leveraging WebGL/WebGPU will take your web development skills to the next level.</p>
+
+              <h3>Ready to Level Up?</h3>
+              <p>Try integrating these techniques into a project! Whether it's a high-performance dashboard or a 3D visualisation, these tools will make your web apps smoother and faster. Got a cool project idea? Drop it in the comments! 🚀</p>
   `,
     author: "Vinicius Silva",
     coverImage: "https://source.unsplash.com/800x400/?technology,coding",

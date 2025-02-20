@@ -1,24 +1,21 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
 import Loading from "@/src/components/global/loading";
 import ErrorMessage from "@/src/components/global/error-message";
-import Link from "next/link"; 
-import { FaArrowLeft } from "react-icons/fa"; 
+import Link from "next/link";
+import { FaArrowLeft } from "react-icons/fa";
 import { useBlogPostById } from "@/src/hooks/useBlogPosts";
+import { Text } from "@/src/components/global/text";
+import { getHumanReadableDateFormat } from "@/src/lib/date";
 
 interface PostPageClientProps {
   id: string;
 }
 
 export default function PostPageClient({ id }: PostPageClientProps) {
-  const {
-    data: post,
-    isLoading,
-    error,
-  } = useBlogPostById(id); 
+  const { data: post, isLoading, error } = useBlogPostById(id);
 
   if (isLoading) {
     return <Loading />;
@@ -50,13 +47,18 @@ export default function PostPageClient({ id }: PostPageClientProps) {
         </Link>
       </motion.div>
 
-      <AnimatedTitleSection
-        backTitle="BLOG"
-        mainTitle={<>{post.title}</>}
-        supportText={`Published by ${post.author} on ${
-          post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : "Unknown date"
-        }`}
-      />
+      <div className="flex flex-col items-center gap-2 md:gap-4 ">
+        <Text category="h1" className="text-center">
+          {post.title}
+        </Text>
+        <Text category="small" status="basic" className="text-center">
+          <span className="hidden md:inline">Written  </span>
+          by {post.author} about {" "}
+          {post.publishedAt
+            ? getHumanReadableDateFormat(post.publishedAt)
+            : "Unknown date"}
+        </Text>
+      </div>
 
       <AnimatePresence>
         <motion.div
@@ -83,7 +85,10 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="prose dark:prose-invert max-w-none"
           >
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            <div
+              className="text-gray-700 dark:text-gray-300"
+              dangerouslySetInnerHTML={{ __html: post.content }}
+            />
           </motion.div>
 
           {/* Tags */}
@@ -93,14 +98,14 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-8 flex flex-wrap gap-2"
           >
-            {post.tags.map((tag, index) => (
+            {post.tags.map((tag, index) =>
               <span
                 key={index}
-                className="bg-primary-500 text-white px-3 py-1 rounded-full text-sm"
+                className="border border-primary-500 text-primary-500 px-3 py-1 rounded-full text-sm"
               >
                 {tag}
               </span>
-            ))}
+            )}
           </motion.div>
         </motion.div>
       </AnimatePresence>

@@ -12,7 +12,7 @@ const variants = cva('', {
       info: 'text-info-200',
       warning: 'text-warning-200',
       danger: 'text-danger-400',
-      basic: 'text-gray-100',
+      basic: 'text-gray-400 dark:text-gray-500',
       none: ''
     }
   },
@@ -41,7 +41,7 @@ export interface TextProps extends HTMLAttributes<unknown>, VariantProps<typeof 
   htmlFor?: string
 }
 
-export const Text = ({ category, className, children, status = 'basic', ...rest }: TextProps): JSX.Element => {
+export const Text = ({ category, className, children, status = 'none', ...rest }: TextProps): JSX.Element => {
   switch (category) {
     case 'p1':
       return (
@@ -51,13 +51,13 @@ export const Text = ({ category, className, children, status = 'basic', ...rest 
       )
     case 'h1':
       return (
-        <h1 className={cn('text-4xl md:text-5xl font-medium leading-tight', variants({ status, className }))}>
+        <h1 className={cn('text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white relative z-10 font-poppins', variants({ status, className }))}>
           {children}
         </h1>
       )
     case 'h2':
       return (
-        <h2 {...rest} className={cn('text-3xl md:text-4xl font-medium leading-tight', variants({ status, className }))}>
+        <h2 {...rest} className={cn('text-2xl font-bold leading-tight text-gray-900 dark:text-white', variants({ status, className }))}>
           {children}
         </h2>
       )
