@@ -6,7 +6,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
 const siteLocale = process.env.NEXT_PUBLIC_SITE_LOCALE || "";
 const siteDescription = "Explore my latest blog posts and insights.";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: `Blog | ${siteName}`,
   description: siteDescription,
   icons: "/favicon.ico",

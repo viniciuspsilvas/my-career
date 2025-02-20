@@ -7,7 +7,7 @@ const siteLocale = process.env.NEXT_PUBLIC_SITE_LOCALE || "";
 const siteDescription =
   "Learn more about my experience, background, and expertise.";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: `About Me | ${siteName}`,
   description: siteDescription,
   icons: "/favicon.ico",
