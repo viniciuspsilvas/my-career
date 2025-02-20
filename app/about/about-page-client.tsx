@@ -73,12 +73,9 @@ export default function AboutPageClient() {
               <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Location</span>
               <span className="block text-gray-800 dark:text-gray-200">{personalInfo.location}</span>
             </div>
-            <div className="text-gray-600 dark:text-gray-400 col-span-2">
-              <span className="block text-sm font-medium text-gray-500 dark:text-gray-400">Profile</span>
-              <span className="block text-gray-800 dark:text-gray-200">{personalInfo.profile}</span>
-            </div>
           </div>
-          <motion.button
+          <div className="flex justify-center items-end mb-4 md:mt-10"> 
+              <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
@@ -86,6 +83,7 @@ export default function AboutPageClient() {
             <FaDownload />
             <span>Download CV</span>
           </motion.button>
+          </div>
         </div>
 
         {/* Seção de Estatísticas */}
