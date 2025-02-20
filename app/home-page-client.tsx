@@ -148,7 +148,7 @@ export default function HomePage() {
               transition: { staggerChildren: 0.3 }
             }
           }}
-          className="md:w-2/3 text-center md:text-left mt-6 md:mt-0"
+          className="md:w-2/3 text-center md:text-left mt-6 md:mt-0 pr-6 "
         >
           <motion.h1
             variants={{
@@ -173,9 +173,9 @@ export default function HomePage() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="mt-4 text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600"
+            className="mt-4 text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600 "
           >
-            With over 10 years of experience in web development, I&apos;m a full-stack developer who loves turning complex problems into simple, and intuitive solutions. Whether it&apos;s crafting a sleek user interface or building robust backend systems, I&apos;m all about creating seamless digital experiences. Let&apos;s build something amazing together!
+            With over 10 years of experience in web development, I’m a frontend-focused full-stack developer who loves turning complex problems into simple, intuitive solutions. My passion lies in crafting sleek, responsive user interfaces that provide seamless digital experiences. While I have full-stack capabilities, my expertise shines in building engaging and high-performance frontends. Let’s create something amazing together!
           </motion.p>
 
           <GradientButton />

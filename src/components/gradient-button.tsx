@@ -18,7 +18,7 @@ export const GradientButton = () => {
         onClick={handleClick}
         className="mt-10 pl-4 relative overflow-hidden text-primary-500 rounded-full flex items-center justify-center space-x-2 shadow-md border-2 border-primary-500 hover:text-white"
         animate={{
-          backgroundColor: ["#101426", "#026466", "#101426"],
+          backgroundColor: ["#003637", "#026466", "#003637"],
           scale: [1, 1.1, 1],
           transition: { repeat: Infinity, duration: 1.5 }
         }}
