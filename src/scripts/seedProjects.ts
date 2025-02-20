@@ -9,7 +9,6 @@ import { PersonalInfo } from "../models/PersonalInfo";
 import { Tool } from "../models/Tool";
 import { BlogPost } from "../models/BlogPost";
 
-
 const experiences = [
   {
     year: "Feb 2023 – Jun 2023",
@@ -294,117 +293,105 @@ const blogPosts = [
   }
 ];
 
+const projects = [
+  {
+    title: "Portfolio Website",
+    description: "A modern portfolio built with Next.js and TailwindCSS.",
+    image: "https://via.placeholder.com/300",
+    link: "https://myportfolio.com",
+  },
+  {
+    title: "E-commerce App",
+    description: "An online store built with React, Node.js, and MongoDB.",
+    image: "https://via.placeholder.com/300",
+    link: "https://myecommerce.com",
+  },
+];
+
+
 const seedProjects = async () => {
-  await connectDB();
-
-  const projects = [
-    {
-      title: "Portfolio Website",
-      description: "A modern portfolio built with Next.js and TailwindCSS.",
-      image: "https://via.placeholder.com/300",
-      link: "https://myportfolio.com",
-    },
-    {
-      title: "E-commerce App",
-      description: "An online store built with React, Node.js, and MongoDB.",
-      image: "https://via.placeholder.com/300",
-      link: "https://myecommerce.com",
-    },
-  ];
-
   try {
     await Project.insertMany(projects);
     console.log("Projects inserted successfully");
   } catch (error) {
     console.error("Error inserting Project seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedExperiences = async () => {
-  await connectDB();
-
   try {
     await Experience.insertMany(experiences);
     console.log("Experiences inserted successfully");
   } catch (error) {
     console.error("Error inserting Experience seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedStats = async () => {
-  await connectDB();
-
   try {
     await Stat.insertMany(stats);
     console.log("Stats inserted successfully");
   } catch (error) {
     console.error("Error inserting Stat seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedSkills = async () => {
-  await connectDB();
-
   try {
     await Skill.insertMany(skills);
     console.log("Skills inserted successfully");
   } catch (error) {
     console.error("Error inserting Skill seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedPersonalInfo = async () => {
-  await connectDB();
-
   try {
     await PersonalInfo.insertMany(personalInfo);
     console.log("Personal Info inserted successfully");
   } catch (error) {
     console.error("Error inserting Personal Info seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedTools = async () => {
-  await connectDB();
-
   try {
     await Tool.insertMany(tools);
     console.log("Tools inserted successfully");
   } catch (error) {
     console.error("Error inserting Tool seeds:", error);
-  } finally {
-    process.exit();
   }
 };
 
 const seedBlogPosts = async () => {
-  await connectDB();
-
   try {
     await BlogPost.insertMany(blogPosts);
     console.log("BlogPosts inserted successfully");
   } catch (error) {
     console.error("Error inserting blogPosts seeds:", error);
+  }
+};
+
+const seedAll = async () => {
+  try {
+    await connectDB();
+
+    await Promise.all([
+      seedProjects(),
+      seedExperiences(),
+      seedStats(),
+      seedSkills(),
+      seedPersonalInfo(),
+      seedTools(),
+      seedBlogPosts(),
+    ]);
+
+    console.log("All seeds inserted successfully");
+  } catch (error) {
+    console.error("Error seeding database:", error);
   } finally {
     process.exit();
   }
 };
 
-// TODO DESCOMENTAR PARA RODAR O SCRIPT
-seedProjects();
-seedExperiences();
-seedStats();
-seedSkills();
-seedPersonalInfo();
-seedTools();
-seedBlogPosts();
+seedAll();
