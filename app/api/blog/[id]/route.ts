@@ -2,10 +2,13 @@ import { connectDB } from "@/src/lib/mongodb";
 import { BlogPost } from "@/src/models/BlogPost";
 import { NextResponse } from "next/server";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     await connectDB();
-    const { id } = await params; 
+    const { id } = await params;
     const post = await BlogPost.findById(id);
 
     if (!post) {

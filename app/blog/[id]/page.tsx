@@ -28,11 +28,11 @@ import PostPageClient from "./post-page-client";
 //   }
 // };
 
-interface Props {
-  params: { id: string };
-}
-
-export default async function PostPage({ params }: Props) {
+export default async function Page({
+  params
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const id = (await params).id;
 
   return <PostPageClient id={id} />;
