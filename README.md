@@ -28,3 +28,6 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
  tree -I 'node_modules' -L 3            
  
+
+ ##  Clean the project
+ rm -rf node_modules .next .turbo package-lock.json yarn.lock pnpm-lock.yaml && npm cache clean --force

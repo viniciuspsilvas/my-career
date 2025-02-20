@@ -1,4 +1,3 @@
-// src/components/global/Session.tsx
 import { ReactNode } from "react";
 
 interface SessionProps {
