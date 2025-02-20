@@ -104,7 +104,7 @@ export default function ToolsPageClient() {
       />
 
       {/* Nuvem de Tags */}
-      <div className="w-full max-w-4xl p-5 flex justify-center text-center">
+      <div className="w-full p-5 flex justify-center text-center">
         <TagCloud
           minSize={2}
           maxSize={5}
