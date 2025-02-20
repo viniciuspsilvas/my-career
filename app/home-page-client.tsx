@@ -5,6 +5,7 @@ import { useState, useEffect, lazy, Suspense } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import GradientButton from "@/src/components/gradient-button";
+import { useResolvedTheme } from "@/src/hooks/useResolvedTheme";
 
 const About = lazy(() => import("@/app/about/page"));
 const Blog = lazy(() => import("@/app/blog/page"));
@@ -25,16 +26,14 @@ export default function HomePage() {
   const [isMobile, setIsMobile] = useState(false);
   const controls = useAnimation();
   const [ref, inView] = useInView();
+  const theme = useResolvedTheme();
 
-  useEffect(
-    () => {
-      setIsHydrated(true);
-      if (inView) {
-        controls.start("visible");
-      }
-    },
-    [controls, inView]
-  );
+  useEffect(() => {
+    setIsHydrated(true);
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -50,16 +49,23 @@ export default function HomePage() {
     return null;
   }
 
+  const backgroundStyle = theme === "dark"
+  ? {
+      backgroundImage: "linear-gradient(270deg, #1a1a1a, #354a60, #1a1a1a)",
+      backgroundSize: "400% 400%",
+      animation: "gradientBG 15s ease infinite"
+    }
+  : {
+      backgroundImage: "linear-gradient(270deg, #f0f4f8, #a8aeb5, #f0f4f8)",
+      backgroundSize: "400% 400%",
+      animation: "gradientBG 15s ease infinite"
+    };
+
   return (
     <>
       <div
         className="flex flex-col md:flex-row items-center justify-center h-screen px-6 md:px-16 relative overflow-hidden"
-        style={{
-          // TODO: Cores mais claras caso nao seja dark mode
-          background: "linear-gradient(270deg, #1a1a1a, #354a60, #1a1a1a)",
-          backgroundSize: "400% 400%",
-          animation: "gradientBG 15s ease infinite"
-        }}
+        style={backgroundStyle}
       >
         <style jsx>{`
           @keyframes gradientBG {
@@ -127,9 +133,9 @@ export default function HomePage() {
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="text-3xl md:text-5xl font-bold dark:text-gray-200 text-black-200"
+            className="text-3xl md:text-5xl font-bold dark:text-gray-200 text-gray-800"
           >
-            I&apos;m Vinicius Silva
+            Hey, I&apos;m Vinicius Silva 👋
           </motion.h1>
           <motion.h2
             variants={{
@@ -138,39 +144,35 @@ export default function HomePage() {
             }}
             className="text-xl md:text-2xl text-primary-600 font-semibold mt-2"
           >
-            Web Designer & Developer
+            Full Stack Developer & Problem Solver
           </motion.h2>
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
               visible: { opacity: 1, y: 0 }
             }}
-            className="mt-4 text-lg md:text-xl leading-relaxed"
+            className="mt-4 text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600"
           >
-            I&apos;m a web designer & front‑end developer focused on crafting
-            clean & user‑friendly experiences. I am passionate about building
-            excellent software that improves the lives of those around me.
+            With over 10 years of experience in web development, I&apos;m a full-stack developer who loves turning complex problems into simple, beautiful, and intuitive solutions. Whether it&apos;s crafting a sleek user interface or building robust backend systems, I&apos;m all about creating seamless digital experiences. Let&apos;s build something amazing together!
           </motion.p>
 
           <GradientButton />
         </motion.div>
-        </div>
+      </div>
 
-        {isMobile &&
-          sections.map(({ id, Component }) =>
-            <Suspense
-              fallback={
-                <div className="h-screen flex items-center justify-center">
-                  Loading...
-                </div>
-              }
-              key={id}
-            >
-              <Component />
-            </Suspense>
-            // TODO adicionar botao pra voltar ao topo da pagina
-            // TODO trigar as animation quando o usuario chegar na secao
-          )}
+      {isMobile &&
+        sections.map(({ id, Component }) =>
+          <Suspense
+            fallback={
+              <div className="h-screen flex items-center justify-center">
+                Loading...
+              </div>
+            }
+            key={id}
+          >
+            <Component />
+          </Suspense>
+        )}
     </>
   );
 }
