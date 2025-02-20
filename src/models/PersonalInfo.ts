@@ -16,7 +16,9 @@ const PersonalInfoSchema = new Schema<IPersonalInfo>(
     location: { type: String, required: true },
     profile: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const PersonalInfo = mongoose.models.PersonalInfo || mongoose.model<IPersonalInfo>("PersonalInfo", PersonalInfoSchema);
+export const PersonalInfo =
+  mongoose.models.PersonalInfo ||
+  mongoose.model<IPersonalInfo>("PersonalInfo", PersonalInfoSchema);

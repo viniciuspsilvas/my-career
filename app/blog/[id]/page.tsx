@@ -29,7 +29,7 @@ import PostPageClient from "./post-page-client";
 // };
 
 export default async function Page({
-  params
+  params,
 }: {
   params: Promise<{ id: string }>;
 }) {

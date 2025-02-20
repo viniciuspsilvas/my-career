@@ -14,15 +14,26 @@ import Loading from "@/src/components/global/loading";
 import ErrorMessage from "@/src/components/global/error-message";
 import Session from "@/src/components/global/session";
 import { Text } from "@/src/components/global/text";
-import {  useState } from "react";
+import { useState } from "react";
 import ExperienceModal from "@/src/components/experience-modal";
 import { IExperience } from "@/src/models/Experience";
 
-const InfoItem = ({ label, value, isLink }: { label: string; value: string; isLink?: boolean }) => (
+const InfoItem = ({
+  label,
+  value,
+  isLink,
+}: {
+  label: string;
+  value: string;
+  isLink?: boolean;
+}) => (
   <div className="text-gray-600 dark:text-gray-400">
     <Text category="label">{label}</Text>
     {isLink ? (
-      <a href={`mailto:${value}`} className="block text-gray-800 dark:text-gray-200 text-sm md:text-base underline">
+      <a
+        href={`mailto:${value}`}
+        className="block text-gray-800 dark:text-gray-200 text-sm md:text-base underline"
+      >
         {value}
       </a>
     ) : (
@@ -32,13 +43,26 @@ const InfoItem = ({ label, value, isLink }: { label: string; value: string; isLi
 );
 
 export default function AboutPageClient() {
-
-  const { data: personalInfos, isLoading: personalInfosLoading, error: personalInfosError } = usePersonalInfo();
+  const {
+    data: personalInfos,
+    isLoading: personalInfosLoading,
+    error: personalInfosError,
+  } = usePersonalInfo();
   const { data: stats, isLoading: statsLoading, error: statsError } = useStat();
-  const { data: skills, isLoading: skillsLoading, error: skillsError } = useSkill();
-  const { data: experiences, isLoading: experienceLoading, error: experienceError } = useExperience();
+  const {
+    data: skills,
+    isLoading: skillsLoading,
+    error: skillsError,
+  } = useSkill();
+  const {
+    data: experiences,
+    isLoading: experienceLoading,
+    error: experienceError,
+  } = useExperience();
 
-  const [selectedExperience, setSelectedExperience] = useState<IExperience| undefined>(undefined);
+  const [selectedExperience, setSelectedExperience] = useState<
+    IExperience | undefined
+  >(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = (experience: IExperience) => {
@@ -51,14 +75,24 @@ export default function AboutPageClient() {
     setSelectedExperience(undefined);
   };
 
-
-  if (personalInfosLoading || statsLoading || skillsLoading || experienceLoading) {
+  if (
+    personalInfosLoading ||
+    statsLoading ||
+    skillsLoading ||
+    experienceLoading
+  ) {
     return <Loading />;
   }
 
   const personalInfo = personalInfos ? personalInfos[0] : null;
 
-  if (personalInfosError || statsError || skillsError || experienceError || !personalInfo) {
+  if (
+    personalInfosError ||
+    statsError ||
+    skillsError ||
+    experienceError ||
+    !personalInfo
+  ) {
     return <ErrorMessage message="Error loading personal infos." />;
   }
 
@@ -93,15 +127,15 @@ export default function AboutPageClient() {
             <InfoItem label="Location" value={personalInfo.location} />
           </div>
 
-          <div className="flex justify-center items-end mb-4 md:mt-10"> 
+          <div className="flex justify-center items-end mb-4 md:mt-10">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
             >
-            <FaDownload />
-            <span>Download CV</span>
-          </motion.button>
+              <FaDownload />
+              <span>Download CV</span>
+            </motion.button>
           </div>
         </div>
 
@@ -169,7 +203,7 @@ export default function AboutPageClient() {
 
       <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
-             {/* Seção de Experiência & Educação */}
+      {/* Seção de Experiência & Educação */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -196,13 +230,24 @@ export default function AboutPageClient() {
               </div>
               {/* Conteúdo */}
               <div className="flex-1 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:scale-105 transition-all duration-300">
-                <Text category="h5" className="font-bold"> {item.title}</Text>
-                <Text category="p1" status='basic'> {item.company}</Text>
-                <Text category="small" status='basic'> {item.year}</Text>
-                <div dangerouslySetInnerHTML={ {
-                  __html: item.description
-                }}  className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9" />
-                 
+                <Text category="h5" className="font-bold">
+                  {" "}
+                  {item.title}
+                </Text>
+                <Text category="p1" status="basic">
+                  {" "}
+                  {item.company}
+                </Text>
+                <Text category="small" status="basic">
+                  {" "}
+                  {item.year}
+                </Text>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item.description,
+                  }}
+                  className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9"
+                />
               </div>
             </motion.div>
           ))}
@@ -211,7 +256,7 @@ export default function AboutPageClient() {
 
       {/* ExperienceModal */}
       <ExperienceModal
-        experience={selectedExperience }
+        experience={selectedExperience}
         isOpen={isModalOpen}
         onClose={closeModal}
       />

@@ -15,7 +15,8 @@ const ProjectSchema = new Schema<IProject>(
     image: { type: String, required: true },
     link: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Project = mongoose.models.Project || mongoose.model<IProject>("Project", ProjectSchema);
+export const Project =
+  mongoose.models.Project || mongoose.model<IProject>("Project", ProjectSchema);

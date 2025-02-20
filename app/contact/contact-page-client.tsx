@@ -1,9 +1,17 @@
-'use client';
+"use client";
 
-import { FaPaperPlane, FaEnvelope, FaPhone, FaFacebook, FaTwitter, FaYoutube, FaDribbble } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
-import { AnimatedTitleSection } from '@/src/components/global/animated-title-section';
-import Session from '@/src/components/global/session';
+import {
+  FaPaperPlane,
+  FaEnvelope,
+  FaPhone,
+  FaFacebook,
+  FaTwitter,
+  FaYoutube,
+  FaDribbble,
+} from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
+import Session from "@/src/components/global/session";
 
 export default function ContactPageClient() {
   return (
@@ -11,7 +19,11 @@ export default function ContactPageClient() {
       {/* Título Animado */}
       <AnimatedTitleSection
         backTitle="REACH OUT"
-        mainTitle={<>CONTACT <span className="text-primary-500">ME</span></>}
+        mainTitle={
+          <>
+            CONTACT <span className="text-primary-500">ME</span>
+          </>
+        }
         supportText="Have a question or want to collaborate? Feel free to reach out!"
       />
 
@@ -34,7 +46,9 @@ export default function ContactPageClient() {
             </div>
             <div>
               <p className="text-gray-600 dark:text-gray-400">Email</p>
-              <p className="text-gray-900 dark:text-white font-semibold">contact@vinitech.dev</p>
+              <p className="text-gray-900 dark:text-white font-semibold">
+                contact@vinitech.dev
+              </p>
             </div>
           </motion.div>
 
@@ -49,7 +63,9 @@ export default function ContactPageClient() {
             </div>
             <div>
               <p className="text-gray-600 dark:text-gray-400">Phone</p>
-              <p className="text-gray-900 dark:text-white font-semibold">+55 (11) 98765-4321</p>
+              <p className="text-gray-900 dark:text-white font-semibold">
+                +55 (11) 98765-4321
+              </p>
             </div>
           </motion.div>
         </motion.div>
@@ -88,7 +104,12 @@ export default function ContactPageClient() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Nome */}
           <div>
-            <label htmlFor="name" className="block text-gray-600 dark:text-gray-400 mb-2">Name</label>
+            <label
+              htmlFor="name"
+              className="block text-gray-600 dark:text-gray-400 mb-2"
+            >
+              Name
+            </label>
             <input
               type="text"
               id="name"
@@ -99,7 +120,12 @@ export default function ContactPageClient() {
 
           {/* E-mail */}
           <div>
-            <label htmlFor="email" className="block text-gray-600 dark:text-gray-400 mb-2">Email</label>
+            <label
+              htmlFor="email"
+              className="block text-gray-600 dark:text-gray-400 mb-2"
+            >
+              Email
+            </label>
             <input
               type="email"
               id="email"
@@ -111,7 +137,12 @@ export default function ContactPageClient() {
 
         {/* Assunto */}
         <div className="mt-6">
-          <label htmlFor="subject" className="block text-gray-600 dark:text-gray-400 mb-2">Subject</label>
+          <label
+            htmlFor="subject"
+            className="block text-gray-600 dark:text-gray-400 mb-2"
+          >
+            Subject
+          </label>
           <input
             type="text"
             id="subject"
@@ -122,7 +153,12 @@ export default function ContactPageClient() {
 
         {/* Mensagem */}
         <div className="mt-6">
-          <label htmlFor="message" className="block text-gray-600 dark:text-gray-400 mb-2">Message</label>
+          <label
+            htmlFor="message"
+            className="block text-gray-600 dark:text-gray-400 mb-2"
+          >
+            Message
+          </label>
           <textarea
             id="message"
             className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md p-3 h-32 focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors duration-300"

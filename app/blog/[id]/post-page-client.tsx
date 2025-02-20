@@ -52,8 +52,8 @@ export default function PostPageClient({ id }: PostPageClientProps) {
           {post.title}
         </Text>
         <Text category="small" status="basic" className="text-center">
-          <span className="hidden md:inline">Written  </span>
-          by {post.author} about {" "}
+          <span className="hidden md:inline">Written </span>
+          by {post.author} about{" "}
           {post.publishedAt
             ? getHumanReadableDateFormat(post.publishedAt)
             : "Unknown date"}
@@ -98,14 +98,14 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.6, duration: 0.5 }}
             className="mt-8 flex flex-wrap gap-2"
           >
-            {post.tags.map((tag, index) =>
+            {post.tags.map((tag, index) => (
               <span
                 key={index}
                 className="border border-primary-500 text-primary-500 px-3 py-1 rounded-full text-sm"
               >
                 {tag}
               </span>
-            )}
+            ))}
           </motion.div>
         </motion.div>
       </AnimatePresence>

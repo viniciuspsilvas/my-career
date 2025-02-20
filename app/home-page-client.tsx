@@ -18,7 +18,7 @@ const sections = [
   { id: "portfolio", Component: Portfolio },
   { id: "contact", Component: Contact },
   { id: "tools", Component: Tools },
-  { id: "blog", Component: Blog }
+  { id: "blog", Component: Blog },
 ];
 
 export default function HomePage() {
@@ -62,26 +62,26 @@ export default function HomePage() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
-
 
   if (!isHydrated) {
     return null;
   }
 
-  const backgroundStyle = theme === "dark"
-  ? {
-      backgroundImage: "linear-gradient(270deg, #1a1a1a, #354a60, #1a1a1a)",
-      backgroundSize: "400% 400%",
-      animation: "gradientBG 15s ease infinite"
-    }
-  : {
-      backgroundImage: "linear-gradient(270deg, #f0f4f8, #a8aeb5, #f0f4f8)",
-      backgroundSize: "400% 400%",
-      animation: "gradientBG 15s ease infinite"
-    };
+  const backgroundStyle =
+    theme === "dark"
+      ? {
+          backgroundImage: "linear-gradient(270deg, #1a1a1a, #354a60, #1a1a1a)",
+          backgroundSize: "400% 400%",
+          animation: "gradientBG 15s ease infinite",
+        }
+      : {
+          backgroundImage: "linear-gradient(270deg, #f0f4f8, #a8aeb5, #f0f4f8)",
+          backgroundSize: "400% 400%",
+          animation: "gradientBG 15s ease infinite",
+        };
 
   return (
     <>
@@ -112,27 +112,29 @@ export default function HomePage() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.3 }
-            }
+              transition: { staggerChildren: 0.3 },
+            },
           }}
           className="md:w-1/3 w-2/3 flex justify-center items-center"
         >
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="rounded-full md:rounded-2xl overflow-hidden shadow-[0px_0px_10px_4px_#808080]"
           >
             <Image
-              src={isMobile ? "/images/my-photo.jpg" : "/images/my-photo-big.jpg"}
+              src={
+                isMobile ? "/images/my-photo.jpg" : "/images/my-photo-big.jpg"
+              }
               alt="Vinicius Silva"
               width={isMobile ? 224 : 300}
               height={isMobile ? 224 : 400}
               priority
-              className={`w-40 h-40 md:w-56 md:h-full 2xl:w-72 2xl:h-auto rounded-lg object-cover ${isMobile
-                ? "rounded-full"
-                : ""}`}
+              className={`w-40 h-40 md:w-56 md:h-full 2xl:w-72 2xl:h-auto rounded-lg object-cover ${
+                isMobile ? "rounded-full" : ""
+              }`}
             />
           </motion.div>
         </motion.div>
@@ -145,15 +147,15 @@ export default function HomePage() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.3 }
-            }
+              transition: { staggerChildren: 0.3 },
+            },
           }}
           className="md:w-2/3 text-center md:text-left mt-6 md:mt-0 pr-6 "
         >
           <motion.h1
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="text-2xl sm:text-3xl md:text-5xl font-bold dark:text-gray-200 text-gray-800"
           >
@@ -162,20 +164,27 @@ export default function HomePage() {
           <motion.h2
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="text-base sm:text-xl md:text-2xl text-primary-600 font-semibold mt-4 sm:mt-2"
           >
-            Full Stack Developer <span className="hidden sm:block"> & Problem Solver</span>
+            Full Stack Developer{" "}
+            <span className="hidden sm:block"> & Problem Solver</span>
           </motion.h2>
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 }
+              visible: { opacity: 1, y: 0 },
             }}
             className="mt-4 text-sm sm:text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600 "
           >
-            With over 10 years of experience in web development, I’m a frontend-focused full-stack developer who loves turning complex problems into simple, intuitive solutions. My passion lies in crafting sleek, responsive user interfaces that provide seamless digital experiences. While I have full-stack capabilities, my expertise shines in building engaging and high-performance frontends. Let’s create something amazing together!
+            With over 10 years of experience in web development, I’m a
+            frontend-focused full-stack developer who loves turning complex
+            problems into simple, intuitive solutions. My passion lies in
+            crafting sleek, responsive user interfaces that provide seamless
+            digital experiences. While I have full-stack capabilities, my
+            expertise shines in building engaging and high-performance
+            frontends. Let’s create something amazing together!
           </motion.p>
 
           <GradientButton />
@@ -183,7 +192,7 @@ export default function HomePage() {
       </div>
 
       {isMobile &&
-        sections.map(({ id, Component }) =>
+        sections.map(({ id, Component }) => (
           <Suspense
             fallback={
               <div className="h-screen flex items-center justify-center">
@@ -194,7 +203,7 @@ export default function HomePage() {
           >
             <Component />
           </Suspense>
-        )}
+        ))}
 
       {isMobile && showScrollButton && (
         <motion.button

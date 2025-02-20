@@ -11,7 +11,8 @@ const StatSchema = new Schema<IStat>(
     label: { type: String, required: true },
     value: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Stat = mongoose.models.Stat || mongoose.model<IStat>("Stat", StatSchema);
+export const Stat =
+  mongoose.models.Stat || mongoose.model<IStat>("Stat", StatSchema);

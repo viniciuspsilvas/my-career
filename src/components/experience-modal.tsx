@@ -24,13 +24,17 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
         {experience?.title}
       </DialogTitle>
 
-      <Text category="p1" status="basic">
-        <Text status="basic">Company:</Text> {experience?.company}
-      </Text>
-
-      <Text category="small" status="basic">
-        {experience?.year}
-      </Text>
+      <div>
+        <div>
+          <Text category="small" status="basic">
+            Company:
+          </Text>{" "}
+          <Text status="basic">{experience?.company}</Text>
+        </div>
+        <Text category="small" status="basic">
+          {experience?.year}
+        </Text>
+      </div>
 
       <div
         className="text-gray-600 dark:text-gray-400 mt-4"
@@ -54,12 +58,14 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
         </>
       )}
 
-      <button
-        onClick={onClose}
-        className="mt-6 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all duration-300 block"
-      >
-        Close
-      </button>
+      <div className="flex justify-center">
+        <button
+          onClick={onClose}
+          className="mt-6 bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-600 transition-all duration-300"
+        >
+          Close
+        </button>
+      </div>
     </Modal>
   );
 };

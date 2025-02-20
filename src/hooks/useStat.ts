@@ -1,7 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IStat } from "../models/Stat";
 
-
 export function useStat(): UseQueryResult<IStat[]> {
   return useQuery<IStat[]>({
     queryKey: ["stat"],

@@ -2,7 +2,7 @@ import {
   Dialog,
   DialogPanel,
   Transition,
-  TransitionChild
+  TransitionChild,
 } from "@headlessui/react";
 import { Fragment } from "react";
 

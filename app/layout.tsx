@@ -11,12 +11,12 @@ const siteDescription =
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"]
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -33,16 +33,16 @@ export const metadata: Metadata = {
         url: "/images/home-preview.jpg",
         width: 1200,
         height: 630,
-        alt: `${siteName} Preview`
-      }
+        alt: `${siteName} Preview`,
+      },
     ],
     locale: siteLocale,
-    type: "website"
-  }
+    type: "website",
+  },
 };
 
 export default function RootLayout({
-  children
+  children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
@@ -52,9 +52,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <MainLayout>
-            {children}
-          </MainLayout>
+          <MainLayout>{children}</MainLayout>
         </Providers>
       </body>
     </html>

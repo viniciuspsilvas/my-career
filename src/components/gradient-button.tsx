@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -20,10 +20,12 @@ export const GradientButton = () => {
         animate={{
           backgroundColor: ["#003637", "#026466", "#003637"],
           scale: [1, 1.1, 1],
-          transition: { repeat: Infinity, duration: 1.5 }
+          transition: { repeat: Infinity, duration: 1.5 },
         }}
       >
-        <span className="relative z-10 text-sm sm:text-base">MORE ABOUT ME</span>
+        <span className="relative z-10 text-sm sm:text-base">
+          MORE ABOUT ME
+        </span>
         <div className="relative z-10 bg-primary-500 rounded-full py-4 px-4 w-12 h-12">
           <FaArrowRight className="text-white" />
         </div>

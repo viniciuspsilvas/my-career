@@ -14,37 +14,43 @@ const experiences = [
     year: "Feb 2023 – Jun 2023",
     title: "Front End Developer",
     company: "TEREM - Sydney, Australia",
-    description: "Worked as a React JS developer on the Find My Credit project for Qantas Airways. Developed a web application to help customers find their Covid19 Credit.",
+    description:
+      "Worked as a React JS developer on the Find My Credit project for Qantas Airways. Developed a web application to help customers find their Covid19 Credit.",
   },
   {
     year: "Jan 2024 – Sep 2024",
     title: "Full Stack Developer",
     company: "FLK IT OVER - Sydney, Australia",
-    description: "Key role in developing and maintaining a real estate platform. Worked on UI/UX with Radix UI, CSS Modules, Embla Carousel, and Framer Motion.",
+    description:
+      "Key role in developing and maintaining a real estate platform. Worked on UI/UX with Radix UI, CSS Modules, Embla Carousel, and Framer Motion.",
   },
   {
     year: "Apr 2021 - Dec 2022",
     title: "Full Stack Developer",
     company: "ZAPID HIRE - Sydney, Australia",
-    description: "Maintained applications written in ReactJS and React Native. Developed GraphQL server with Apollo, using JWT authentication and Prisma ORM.",
+    description:
+      "Maintained applications written in ReactJS and React Native. Developed GraphQL server with Apollo, using JWT authentication and Prisma ORM.",
   },
   {
     year: "Dec 2020 – Apr 2021",
     title: "Mobile Developer",
     company: "PAY IT LATER - Brisbane, Australia",
-    description: "Developed mobile applications for Android and iOS. Built reusable components with Storybook and implemented API calls using Apollo GraphQL.",
+    description:
+      "Developed mobile applications for Android and iOS. Built reusable components with Storybook and implemented API calls using Apollo GraphQL.",
   },
   {
     year: "Mar 2020 - Dec 2020",
     title: "Full Stack Developer",
     company: "Two Red Kites",
-    description: "Developed frontend and backend solutions, contributing to various projects.",
+    description:
+      "Developed frontend and backend solutions, contributing to various projects.",
   },
   {
     year: "Mar 2019 - Jun 2019",
     title: "React Mobile Developer",
     company: "Live Platforms Pty Ltd",
-    description: "Worked on mobile development using React Native and related technologies.",
+    description:
+      "Worked on mobile development using React Native and related technologies.",
   },
   {
     year: "Aug 2018 - Feb 2019",
@@ -56,7 +62,8 @@ const experiences = [
     year: "Feb 2015 - Apr 2016",
     title: "Web Developer",
     company: "Indra Brasil",
-    description: "Developed web applications with JavaScript and Java technologies.",
+    description:
+      "Developed web applications with JavaScript and Java technologies.",
   },
   {
     year: "Apr 2014 - Feb 2015",
@@ -80,7 +87,8 @@ const experiences = [
     year: "Aug 2008 - Nov 2009",
     title: ".NET Developer",
     company: "LG Informatica",
-    description: "Built and maintained .NET applications for various business needs.",
+    description:
+      "Built and maintained .NET applications for various business needs.",
   },
 ];
 
@@ -119,7 +127,8 @@ const personalInfo = {
   title: "Full Stack Developer",
   email: "viniciuspsilvas@gmail.com",
   location: "Gold Coast, NSW, Australia",
-  profile: "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions.",
+  profile:
+    "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions.",
 };
 
 const tools = [
@@ -206,12 +215,13 @@ const tools = [
 const blogPosts = [
   {
     title: "Mastering Web Performance: A Developer’s Guide to Core Web Vitals",
-    content: "## Why Speed Matters\n\nWe live in an age where waiting more than three seconds for a page to load feels like a lifetime. Google agrees, which is why site speed and performance directly impact SEO rankings and user experience.\n\nIf you want to keep users happy (and boost your site's visibility), you need to master Web Vitals – the key metrics that define a fast and smooth web experience. Let’s break them down.\n\n## Core Web Vitals Explained\n\nCore Web Vitals focus on three main aspects of performance and user experience:\n\n### 1. First Contentful Paint (FCP)\n**What it is:** FCP measures the time it takes for the first piece of content to appear on the screen.\n\nImagine ordering coffee and the barista at least acknowledges you straight away – that’s good FCP. A blank stare for 5 seconds? Not great.\n\n**How to improve:**\n- Reduce render-blocking resources (JavaScript & CSS).\n- Use server-side rendering and preloading strategies.\n- Optimise your server response time.\n\n### 2. Cumulative Layout Shift (CLS)\n**What it is:** Measures how much elements move unexpectedly while a page is loading.\n\nEver tried clicking a link, only for an ad to load and push everything down? That’s CLS at its worst.\n\n**How to improve:**\n- Define image and video dimensions to prevent layout shifts.\n- Avoid inserting dynamic content above existing elements.\n- Use font-display: swap to prevent text shifts.\n\n### 3. Interaction to Next Paint (INP)\n**What it is:** Measures how long it takes for a site to respond to user interactions.\n\nClick a button and nothing happens? That’s bad INP. Users expect instant feedback.\n\n**How to improve:**\n- Optimise event handlers and remove unnecessary JavaScript.\n- Reduce main thread work and use background tasks.\n- Implement lazy loading and defer non-essential scripts.\n\n## Time to First Byte (TTFB) - The Unsung Hero\n\n**What it is:** The time between the browser requesting a page and receiving the first byte of data.\n\nSlow TTFB is like waiting forever for a waiter to bring you a menu.\n\n**How to improve:**\n- Use a CDN (Content Delivery Network) to serve content faster.\n- Optimise database queries and server response times.\n- Implement caching strategies effectively.\n\n## Real-World Example: The Power of Optimisation\n\nWhen [Shopify](https://www.shopify.com/) optimised their JavaScript execution and implemented lazy loading, they slashed load times by **50%**, which led to higher conversions.\n\n## Final Thoughts\n\nWeb performance isn't just a nice-to-have – it’s a must-have. A slow website drives users away, impacts SEO, and hurts revenue.\n\n### What’s Next?\nRun a [Google Lighthouse audit](https://web.dev/measure/) to check your site’s performance. Found a bottleneck? Start optimising today! 🚀\n\nHave your own web performance tips? Share them in the comments below! Let’s make the web faster together.",
+    content:
+      "## Why Speed Matters\n\nWe live in an age where waiting more than three seconds for a page to load feels like a lifetime. Google agrees, which is why site speed and performance directly impact SEO rankings and user experience.\n\nIf you want to keep users happy (and boost your site's visibility), you need to master Web Vitals – the key metrics that define a fast and smooth web experience. Let’s break them down.\n\n## Core Web Vitals Explained\n\nCore Web Vitals focus on three main aspects of performance and user experience:\n\n### 1. First Contentful Paint (FCP)\n**What it is:** FCP measures the time it takes for the first piece of content to appear on the screen.\n\nImagine ordering coffee and the barista at least acknowledges you straight away – that’s good FCP. A blank stare for 5 seconds? Not great.\n\n**How to improve:**\n- Reduce render-blocking resources (JavaScript & CSS).\n- Use server-side rendering and preloading strategies.\n- Optimise your server response time.\n\n### 2. Cumulative Layout Shift (CLS)\n**What it is:** Measures how much elements move unexpectedly while a page is loading.\n\nEver tried clicking a link, only for an ad to load and push everything down? That’s CLS at its worst.\n\n**How to improve:**\n- Define image and video dimensions to prevent layout shifts.\n- Avoid inserting dynamic content above existing elements.\n- Use font-display: swap to prevent text shifts.\n\n### 3. Interaction to Next Paint (INP)\n**What it is:** Measures how long it takes for a site to respond to user interactions.\n\nClick a button and nothing happens? That’s bad INP. Users expect instant feedback.\n\n**How to improve:**\n- Optimise event handlers and remove unnecessary JavaScript.\n- Reduce main thread work and use background tasks.\n- Implement lazy loading and defer non-essential scripts.\n\n## Time to First Byte (TTFB) - The Unsung Hero\n\n**What it is:** The time between the browser requesting a page and receiving the first byte of data.\n\nSlow TTFB is like waiting forever for a waiter to bring you a menu.\n\n**How to improve:**\n- Use a CDN (Content Delivery Network) to serve content faster.\n- Optimise database queries and server response times.\n- Implement caching strategies effectively.\n\n## Real-World Example: The Power of Optimisation\n\nWhen [Shopify](https://www.shopify.com/) optimised their JavaScript execution and implemented lazy loading, they slashed load times by **50%**, which led to higher conversions.\n\n## Final Thoughts\n\nWeb performance isn't just a nice-to-have – it’s a must-have. A slow website drives users away, impacts SEO, and hurts revenue.\n\n### What’s Next?\nRun a [Google Lighthouse audit](https://web.dev/measure/) to check your site’s performance. Found a bottleneck? Start optimising today! 🚀\n\nHave your own web performance tips? Share them in the comments below! Let’s make the web faster together.",
     author: "Vinicius Silva",
     coverImage: "https://source.unsplash.com/800x400/?technology,performance",
     tags: ["Web Performance", "SEO", "Core Web Vitals", "Frontend Development"],
     published: true,
-    publishedAt: new Date("2025-04-15T08:00:00Z")
+    publishedAt: new Date("2025-04-15T08:00:00Z"),
   },
 
   {
@@ -277,19 +287,26 @@ const blogPosts = [
   `,
     author: "Vinicius Silva",
     coverImage: "https://source.unsplash.com/800x400/?technology,coding",
-    tags: ["Advanced Web Development", "Performance", "WebGL", "JavaScript", "WebWorkers"],
+    tags: [
+      "Advanced Web Development",
+      "Performance",
+      "WebGL",
+      "JavaScript",
+      "WebWorkers",
+    ],
     published: true,
-    publishedAt: new Date("2025-06-10T08:00:00Z")
+    publishedAt: new Date("2025-06-10T08:00:00Z"),
   },
 
   {
     title: "Mastering Backend Development: Node.js, Express, and Databases",
-    content: "Learn the key concepts of backend development, covering Node.js internals, Express.js, and database best practices.",
+    content:
+      "Learn the key concepts of backend development, covering Node.js internals, Express.js, and database best practices.",
     author: "Vinicius Silva",
     coverImage: "/images/backend-development.png",
     tags: ["Node.js", "Express.js", "Databases", "Backend Architecture"],
     published: false,
-  }
+  },
 ];
 
 const projects = [
@@ -306,7 +323,6 @@ const projects = [
     link: "https://myecommerce.com",
   },
 ];
-
 
 const seedProjects = async () => {
   try {

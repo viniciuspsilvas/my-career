@@ -20,7 +20,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     // Aplicar o tema inicial
     if (theme === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
       applyTheme(prefersDark);
     } else {
       applyTheme(theme === "dark");

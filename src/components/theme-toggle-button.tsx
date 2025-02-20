@@ -1,8 +1,8 @@
 "use client";
-import { useTheme } from '../hooks/useGlobalState';
-import { FaMoon, FaLaptop } from 'react-icons/fa';
-import { TbSunHigh } from 'react-icons/tb';
-import { ThemeMode } from '../redux/globalState';
+import { useTheme } from "../hooks/useGlobalState";
+import { FaMoon, FaLaptop } from "react-icons/fa";
+import { TbSunHigh } from "react-icons/tb";
+import { ThemeMode } from "../redux/globalState";
 
 const themeOptions: ThemeMode[] = ["light", "dark", "system"];
 
@@ -10,7 +10,8 @@ const ThemeToggleButton = () => {
   const { theme, toggleSelectTheme } = useTheme();
 
   const toggleTheme = () => {
-    const nextTheme = themeOptions[(themeOptions.indexOf(theme) + 1) % themeOptions.length];
+    const nextTheme =
+      themeOptions[(themeOptions.indexOf(theme) + 1) % themeOptions.length];
     toggleSelectTheme(nextTheme);
   };
 
@@ -22,7 +23,7 @@ const ThemeToggleButton = () => {
       {theme === "light" ? (
         <FaMoon />
       ) : theme === "dark" ? (
-        <TbSunHigh className='text-yellow-500' />
+        <TbSunHigh className="text-yellow-500" />
       ) : (
         <FaLaptop />
       )}

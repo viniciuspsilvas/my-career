@@ -1,7 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { IUser } from "../models/User";
 
-
 export function useUser(): UseQueryResult<IUser[]> {
   return useQuery<IUser[]>({
     queryKey: ["user"],

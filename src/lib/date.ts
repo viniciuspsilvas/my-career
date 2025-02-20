@@ -9,12 +9,12 @@ import {
   isToday,
   isTomorrow,
   isYesterday,
-  parse
-} from 'date-fns'
+  parse,
+} from "date-fns";
 
 export const getHumanReadableDateFormat = (date: Date, addSuffix = true) => {
-  return formatDistanceToNow(date, { addSuffix })
-}
+  return formatDistanceToNow(date, { addSuffix });
+};
 
 export const getDaysUntilBirthday = (dob: Date): string => {
   const today = TODAY; // Current date (using the exported `TODAY` constant)
@@ -34,59 +34,64 @@ export const getDaysUntilBirthday = (dob: Date): string => {
 
   // Check if the birthday is today
   if (isToday(nextBirthday)) {
-    return 'Today!';
+    return "Today!";
   }
 
   // Calculate the distance in days until the next birthday
   const daysUntil = formatDistanceToNowStrict(nextBirthday, {
-    unit: 'day', // Ensure the distance is calculated in days
-    roundingMethod: 'floor', // Round down to the nearest whole day
+    unit: "day", // Ensure the distance is calculated in days
+    roundingMethod: "floor", // Round down to the nearest whole day
   });
 
   // Return a human-readable message
   return `In ${daysUntil}`;
 };
 
-
-export const getHumanReadableDateFormatInDays = (date: Date, addSuffix = true) => {
+export const getHumanReadableDateFormatInDays = (
+  date: Date,
+  addSuffix = true,
+) => {
   if (isToday(date)) {
-    return 'Today'
+    return "Today";
   }
 
   if (isYesterday(date)) {
-    return 'Yesterday'
+    return "Yesterday";
   }
 
   if (isTomorrow(date)) {
-    return 'Tomorrow'
+    return "Tomorrow";
   }
 
   return formatDistanceToNowStrict(date, {
-    unit: 'day',
-    roundingMethod: 'floor',
-    addSuffix
-  })
-}
+    unit: "day",
+    roundingMethod: "floor",
+    addSuffix,
+  });
+};
 
-export const TODAY = new Date()
+export const TODAY = new Date();
 
-export const TIME_FORMAT = 'hh:mm aaa'
-export const DD_MM_DATE_FORMAT = 'dd/MM'
-export const PPPP_DATE_FORMAT = 'PPPP'
-export const DD_MM_YY_DATE_FORMAT = 'dd/MM/yy'
-export const DD_MM_YY_HH_MM_DATE_FORMAT = 'dd/MM/yy HH:mm'
+export const TIME_FORMAT = "hh:mm aaa";
+export const DD_MM_DATE_FORMAT = "dd/MM";
+export const PPPP_DATE_FORMAT = "PPPP";
+export const DD_MM_YY_DATE_FORMAT = "dd/MM/yy";
+export const DD_MM_YY_HH_MM_DATE_FORMAT = "dd/MM/yy HH:mm";
 
 export const parseTime = (dateString: string) => {
-  return parse(dateString, TIME_FORMAT, new Date())
-}
+  return parse(dateString, TIME_FORMAT, new Date());
+};
 
 export const formatTime = (date: Date) => {
-  return format(date, TIME_FORMAT)
-}
+  return format(date, TIME_FORMAT);
+};
 
-export const formatDate = (date: Date, dateFormat: string = DD_MM_YY_DATE_FORMAT) => {
-  return format(date, dateFormat)
-}
+export const formatDate = (
+  date: Date,
+  dateFormat: string = DD_MM_YY_DATE_FORMAT,
+) => {
+  return format(date, dateFormat);
+};
 
 // export function formatDate(input: string | number): string {
 //   const date = new Date(input);
@@ -106,13 +111,26 @@ export enum WeekDays {
   Wednesday,
   Thursday,
   Friday,
-  Saturday
+  Saturday,
 }
 
 export enum WeekShifts {
   Morning,
   Afternoon,
-  Evening
+  Evening,
 }
 
-export const MONTH_LABELS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+export const MONTH_LABELS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];

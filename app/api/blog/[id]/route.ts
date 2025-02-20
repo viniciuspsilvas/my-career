@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     await connectDB();
@@ -18,6 +18,9 @@ export async function GET(
     return NextResponse.json(post, { status: 200 });
   } catch (error) {
     console.error("Failed to fetch post by ID, error:", error);
-    return NextResponse.json({ error: "Failed to fetch post" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch post" },
+      { status: 500 },
+    );
   }
 }

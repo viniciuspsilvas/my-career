@@ -1,9 +1,8 @@
-
 import {
   isDrawerOpened,
   selectTheme,
   ThemeMode,
-  toggleDrawer as toggle,  // TODO: observe tha names duplicating, (reducer and and dispatch function)
+  toggleDrawer as toggle, // TODO: observe tha names duplicating, (reducer and and dispatch function)
   toggleTheme,
 } from "../redux/globalState";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
@@ -19,7 +18,6 @@ export const useTheme = () => {
 
   return { theme, toggleSelectTheme };
 };
-
 
 export const useDrawerMode = () => {
   const drawerOpened = useAppSelector(isDrawerOpened);

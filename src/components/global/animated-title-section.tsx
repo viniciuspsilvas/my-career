@@ -9,7 +9,11 @@ interface AnimatedTitleSectionProps {
   supportText: string;
 }
 
-export const AnimatedTitleSection = ({ backTitle, mainTitle, supportText }: AnimatedTitleSectionProps) => {
+export const AnimatedTitleSection = ({
+  backTitle,
+  mainTitle,
+  supportText,
+}: AnimatedTitleSectionProps) => {
   return (
     <>
       <motion.div

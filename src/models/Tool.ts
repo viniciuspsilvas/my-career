@@ -14,7 +14,8 @@ const ToolSchema = new Schema<ITool>(
     link: { type: String, required: true },
     image: { type: String, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Tool = mongoose.models.Tool || mongoose.model<ITool>("Tool", ToolSchema);
+export const Tool =
+  mongoose.models.Tool || mongoose.model<ITool>("Tool", ToolSchema);

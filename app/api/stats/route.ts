@@ -8,6 +8,8 @@ export async function GET() {
     return new Response(JSON.stringify(stats), { status: 200 });
   } catch (error) {
     console.error("Failed to fetch stats, error:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch stats" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Failed to fetch stats" }), {
+      status: 500,
+    });
   }
 }

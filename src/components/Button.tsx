@@ -1,5 +1,5 @@
-import React from 'react';
-import { cn } from '../lib/utils';
+import React from "react";
+import { cn } from "../lib/utils";
 
 type ButtonProps = {
   children: React.ReactNode;
@@ -12,9 +12,9 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, className }) => {
     <button
       onClick={onClick}
       className={cn(
-        'px-6 py-2 rounded-2xl font-semibold shadow-lg transition-all',
-        'bg-primary text-white hover:bg-primary-dark active:scale-95',
-        className
+        "px-6 py-2 rounded-2xl font-semibold shadow-lg transition-all",
+        "bg-primary text-white hover:bg-primary-dark active:scale-95",
+        className,
       )}
     >
       {children}

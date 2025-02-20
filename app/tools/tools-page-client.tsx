@@ -21,19 +21,18 @@ const themeColors = [
 ];
 
 const transformToolsToTags = (tools: ITool[]): Tag[] => {
-  return tools.map((tool, index:number) => ({
+  return tools.map((tool, index: number) => ({
     value: tool.title,
     count: index,
   }));
 };
 
-
 export default function ToolsPageClient() {
   const [selectedTool, setSelectedTool] = useState<ITool | null>(null);
 
-    const { data, isLoading, error } = useTools();
+  const { data, isLoading, error } = useTools();
 
-    const tags: Tag[] = useMemo(() => transformToolsToTags(data || []), [data]);
+  const tags: Tag[] = useMemo(() => transformToolsToTags(data || []), [data]);
 
   const handleSelectedTool = (tag: Tag) => {
     const tool = data?.find((t) => t.title === tag.value) || null;
@@ -52,8 +51,8 @@ export default function ToolsPageClient() {
         data-tooltip-content={tag.value}
         className="cursor-pointer hover:text-primary-500 transition-all duration-300 mx-2"
         style={{
-          animation: 'blinker 3s linear infinite',
-          animationDelay:`${Math.random() * 2}s`,
+          animation: "blinker 3s linear infinite",
+          animationDelay: `${Math.random() * 2}s`,
           fontSize: "clamp(0.8rem, 2vw, 1.5rem)",
           border: `2px solid ${color}`,
           margin: "16px",
@@ -77,29 +76,34 @@ export default function ToolsPageClient() {
     );
   };
 
-  if (isLoading) return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900"
-    >
+  if (isLoading)
+    return (
       <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full"
-      />
-    </motion.div>
-  );
+        initial={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+        className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900"
+      >
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+          className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full"
+        />
+      </motion.div>
+    );
 
-  if (error) return <p className="text-center text-red-500">Error loading projects.</p>;
-
+  if (error)
+    return <p className="text-center text-red-500">Error loading projects.</p>;
 
   return (
-    <Session >
+    <Session>
       <AnimatedTitleSection
         backTitle="STACK"
-        mainTitle={<>MY <span className="text-primary-500">TOOLS</span></>}
+        mainTitle={
+          <>
+            MY <span className="text-primary-500">TOOLS</span>
+          </>
+        }
         supportText="Explore the tools and technologies I use to build amazing projects!"
       />
 
@@ -108,10 +112,12 @@ export default function ToolsPageClient() {
         <TagCloud
           minSize={2}
           maxSize={5}
-          tags={tags?.map(({value, count}) => ({
-            value,
-            count,
-          })) || []}
+          tags={
+            tags?.map(({ value, count }) => ({
+              value,
+              count,
+            })) || []
+          }
           onClick={(tag) => handleSelectedTool(tag)}
           renderer={customRenderer}
         />

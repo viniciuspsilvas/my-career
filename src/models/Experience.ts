@@ -20,7 +20,9 @@ const ExperienceSchema = new Schema<IExperience>(
     link: { type: String, required: false },
     image: { type: String, required: false },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Experience = mongoose.models.Experience || mongoose.model<IExperience>("Experience", ExperienceSchema);
+export const Experience =
+  mongoose.models.Experience ||
+  mongoose.model<IExperience>("Experience", ExperienceSchema);

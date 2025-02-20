@@ -8,6 +8,8 @@ export async function GET() {
     return new Response(JSON.stringify(tools), { status: 200 });
   } catch (error) {
     console.error("Failed to fetch tools, error:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch tools" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Failed to fetch tools" }), {
+      status: 500,
+    });
   }
 }

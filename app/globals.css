@@ -8,19 +8,22 @@ body {
 }
 
 @keyframes blinker {
-  50% { opacity: 0.0; }
+  50% {
+    opacity: 0;
+  }
 }
 
 @layer base {
   p {
-    @apply mb-4; 
+    @apply mb-4;
   }
 
-  ul, ol {
+  ul,
+  ol {
     list-style: revert;
   }
 
   ul {
-    @apply mb-4; 
+    @apply mb-4;
   }
 }

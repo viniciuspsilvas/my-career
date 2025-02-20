@@ -10,7 +10,8 @@ const SkillSchema = new Schema<ISkill>(
     name: { type: String, required: true },
     percentage: { type: Number, required: true },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const Skill = mongoose.models.Skill || mongoose.model<ISkill>("Skill", SkillSchema);
+export const Skill =
+  mongoose.models.Skill || mongoose.model<ISkill>("Skill", SkillSchema);

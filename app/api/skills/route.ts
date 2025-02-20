@@ -8,6 +8,8 @@ export async function GET() {
     return new Response(JSON.stringify(skills), { status: 200 });
   } catch (error) {
     console.error("Failed to fetch skills, error:", error);
-    return new Response(JSON.stringify({ error: "Failed to fetch skills" }), { status: 500 });
+    return new Response(JSON.stringify({ error: "Failed to fetch skills" }), {
+      status: 500,
+    });
   }
 }

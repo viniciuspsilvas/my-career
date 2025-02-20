@@ -14,7 +14,6 @@ export const connectDB = async () => {
 
     await mongoose.connect(MONGO_URI, {
       dbName: "myCareer", // Substitua pelo nome do seu banco
-      
     });
 
     console.log("MongoDB connected");

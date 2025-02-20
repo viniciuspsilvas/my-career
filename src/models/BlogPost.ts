@@ -20,7 +20,9 @@ const BlogPostSchema = new Schema<IBlogPost>(
     published: { type: Boolean, default: false },
     publishedAt: { type: Date },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-export const BlogPost = mongoose.models.BlogPost || mongoose.model<IBlogPost>("BlogPost", BlogPostSchema);
+export const BlogPost =
+  mongoose.models.BlogPost ||
+  mongoose.model<IBlogPost>("BlogPost", BlogPostSchema);
