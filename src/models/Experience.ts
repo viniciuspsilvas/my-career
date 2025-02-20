@@ -5,6 +5,9 @@ export interface IExperience extends Document {
   title: string;
   company: string;
   description: string;
+  locality: string;
+  link: string;
+  image: string;
 }
 
 const ExperienceSchema = new Schema<IExperience>(
@@ -13,6 +16,9 @@ const ExperienceSchema = new Schema<IExperience>(
     title: { type: String, required: true },
     company: { type: String, required: true },
     description: { type: String, required: true },
+    locality: { type: String, required: false },
+    link: { type: String, required: false },
+    image: { type: String, required: false },
   },
   { timestamps: true }
 );

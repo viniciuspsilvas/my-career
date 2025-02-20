@@ -14,6 +14,9 @@ import Loading from "@/src/components/global/loading";
 import ErrorMessage from "@/src/components/global/error-message";
 import Session from "@/src/components/global/session";
 import { Text } from "@/src/components/global/text";
+import {  useState } from "react";
+import ExperienceModal from "@/src/components/experience-modal";
+import { IExperience } from "@/src/models/Experience";
 
 const InfoItem = ({ label, value, isLink }: { label: string; value: string; isLink?: boolean }) => (
   <div className="text-gray-600 dark:text-gray-400">
@@ -29,10 +32,25 @@ const InfoItem = ({ label, value, isLink }: { label: string; value: string; isLi
 );
 
 export default function AboutPageClient() {
+
   const { data: personalInfos, isLoading: personalInfosLoading, error: personalInfosError } = usePersonalInfo();
   const { data: stats, isLoading: statsLoading, error: statsError } = useStat();
   const { data: skills, isLoading: skillsLoading, error: skillsError } = useSkill();
   const { data: experiences, isLoading: experienceLoading, error: experienceError } = useExperience();
+
+  const [selectedExperience, setSelectedExperience] = useState<IExperience| undefined>(undefined);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (experience: IExperience) => {
+    setSelectedExperience(experience);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedExperience(undefined);
+  };
+
 
   if (personalInfosLoading || statsLoading || skillsLoading || experienceLoading) {
     return <Loading />;
@@ -151,14 +169,14 @@ export default function AboutPageClient() {
 
       <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
-      {/* Seção de Experiência & Educação */}
+             {/* Seção de Experiência & Educação */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-          EXPERIENCE & EDUCATION
+          EXPERIENCE
         </h2>
         <div className="space-y-8 relative">
           {/* Linha da Timeline */}
@@ -170,6 +188,7 @@ export default function AboutPageClient() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
               className="flex items-start space-x-4"
+              onClick={() => openModal(item)}
             >
               {/* Ícone */}
               <div className="w-10 h-10 bg-primary-500 text-white rounded-full flex items-center justify-center z-10">
@@ -177,23 +196,25 @@ export default function AboutPageClient() {
               </div>
               {/* Conteúdo */}
               <div className="flex-1 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md hover:scale-105 transition-all duration-300">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {item.company}
-                </p>
-                <p className="text-gray-600 dark:text-gray-400">
-                  {item.year}
-                </p>
-                <p className="text-gray-600 dark:text-gray-400 mt-2">
-                  {item.description}
-                </p>
+                <Text category="h5" className="font-bold"> {item.title}</Text>
+                <Text category="p1" status='basic'> {item.company}</Text>
+                <Text category="small" status='basic'> {item.year}</Text>
+                <div dangerouslySetInnerHTML={ {
+                  __html: item.description
+                }}  className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9" />
+                 
               </div>
             </motion.div>
           ))}
         </div>
       </motion.div>
+
+      {/* ExperienceModal */}
+      <ExperienceModal
+        experience={selectedExperience }
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </Session>
   );
 }
