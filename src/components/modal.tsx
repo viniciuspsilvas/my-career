@@ -25,7 +25,7 @@ const Modal = ({ children, isOpen, onClose }: ModalProps) => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-black bg-opacity-50" />
+          <div className="fixed inset-0 bg-black bg-opacity-90" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-y-auto ">

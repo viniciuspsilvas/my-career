@@ -1,4 +1,4 @@
-import {  DialogTitle } from "@headlessui/react";
+import { DialogTitle } from "@headlessui/react";
 import { Text } from "./global/text";
 import Modal from "./modal";
 
@@ -23,14 +23,11 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
       >
         {experience?.title}
       </DialogTitle>
-        
-        
+
       <Text category="p1" status="basic">
-      <Text  status="basic">
-      Company:
-      </Text> {experience?.company}
+        <Text status="basic">Company:</Text> {experience?.company}
       </Text>
-    
+
       <Text category="small" status="basic">
         {experience?.year}
       </Text>
@@ -40,23 +37,22 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
         dangerouslySetInnerHTML={{ __html: experience?.description || "" }}
       />
 
-      {experience?.link &&
-        
+      {experience?.link && (
         <>
-        <span className="inline"></span>
+          <span className="inline"></span>
 
-        <Text category="small" status="basic">
-        <a
-          href={experience?.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary-500 underline mt-4 "
-        >
-          {experience?.link}
-        </a>
-        </Text>
+          <Text category="small" status="basic">
+            <a
+              href={experience?.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary-500 underline mt-4 "
+            >
+              {experience?.link}
+            </a>
+          </Text>
         </>
-        }
+      )}
 
       <button
         onClick={onClose}
