@@ -153,7 +153,7 @@ export default function HomePage() {
             }}
             className="mt-4 text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600"
           >
-            With over 10 years of experience in web development, I&apos;m a full-stack developer who loves turning complex problems into simple, beautiful, and intuitive solutions. Whether it&apos;s crafting a sleek user interface or building robust backend systems, I&apos;m all about creating seamless digital experiences. Let&apos;s build something amazing together!
+            With over 10 years of experience in web development, I&apos;m a full-stack developer who loves turning complex problems into simple, and intuitive solutions. Whether it&apos;s crafting a sleek user interface or building robust backend systems, I&apos;m all about creating seamless digital experiences. Let&apos;s build something amazing together!
           </motion.p>
 
           <GradientButton />
