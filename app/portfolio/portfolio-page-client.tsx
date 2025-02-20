@@ -6,26 +6,19 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from '@/src/components/global/session';
+import Loading from "@/src/components/global/loading";
+import ErrorMessage from "@/src/components/global/error-message";
 
 export default function PortfolioPageClient() {
   const { data: projects, isLoading, error } = useProjects();
 
-  if (isLoading) return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900"
-    >
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-        className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full"
-      />
-    </motion.div>
-  );
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  if (error) return <p className="text-center text-red-500">Error loading projects.</p>;
+  if (error) {
+    return <ErrorMessage message="Error loading personal infos." />;
+  }
 
   return (
     <Session>

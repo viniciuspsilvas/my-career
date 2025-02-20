@@ -30,4 +30,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
  
 
  ##  Clean the project
- rm -rf node_modules .next .turbo package-lock.json yarn.lock pnpm-lock.yaml && npm cache clean --force
+ rm -rf node_modules .next .turbo yarn.lock && npm cache clean --force
