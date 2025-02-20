@@ -1,12 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Tag, TagCloud } from "react-tagcloud";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import { useTools } from "@/src/hooks/useTools";
+import { ITool } from "@/src/models/Tool";
+import React from "react";
 
 const themeColors = [
   "#b3f0eb",
@@ -17,13 +19,24 @@ const themeColors = [
   "#b2877f",
 ];
 
-export default function ToolsPage() {
-  const [selectedTool, setSelectedTool] = useState<Tag | null>(null);
+const transformToolsToTags = (tools: ITool[]): Tag[] => {
+  return tools.map((tool, index:number) => ({
+    value: tool.title,
+    count: index,
+  }));
+};
 
-    const { data: tools, isLoading, error } = useTools();
+
+export default function ToolsPage() {
+  const [selectedTool, setSelectedTool] = useState<ITool | null>(null);
+
+    const { data, isLoading, error } = useTools();
+
+    const tags: Tag[] = useMemo(() => transformToolsToTags(data || []), [data]);
 
   const handleSelectedTool = (tag: Tag) => {
-    setSelectedTool(tag);
+    const tool = data?.find((t) => t.title === tag.value) || null;
+    setSelectedTool(tool);
   };
 
   const customRenderer = (tag: Tag) => {
@@ -40,7 +53,6 @@ export default function ToolsPage() {
         style={{
           animation: 'blinker 3s linear infinite',
           animationDelay:`${Math.random() * 2}s`,
-
           fontSize: "clamp(0.8rem, 2vw, 1.5rem)",
           border: `2px solid ${color}`,
           margin: "16px",
@@ -58,7 +70,6 @@ export default function ToolsPage() {
           repeat: Infinity,
           repeatType: "mirror",
         }}
-        onClick={() => handleSelectedTool(tag)}
       >
         {tag.value}
       </motion.span>
@@ -98,11 +109,11 @@ export default function ToolsPage() {
           <TagCloud
             minSize={2}
             maxSize={5}
-            tags={tools.map((tool, index) => ({
-              value: tool.title,
-              count: index,
-            }))}
-            onClick={(tag) => setSelectedTool(tag)}
+            tags={tags?.map(({value, count}) => ({
+              value,
+              count,
+            })) || []}
+            onClick={(tag) => handleSelectedTool(tag)}
             renderer={customRenderer}
           />
         </div>
@@ -126,7 +137,7 @@ export default function ToolsPage() {
                 className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-sm text-center"
               >
                 <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">
-                  {selectedTool.value}
+                  {selectedTool.title}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
                   {selectedTool.description}

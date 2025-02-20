@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { ISkill } from "../models/Skill";
 
-export function useSkill() {
-  return useQuery({
+export function useSkill(): UseQueryResult<ISkill[]> {
+  return useQuery<ISkill[]>({
     queryKey: ["skill"],
     queryFn: async () => {
       const res = await fetch("/api/skills");

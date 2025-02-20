@@ -123,7 +123,7 @@ export const NavBar: FC<NavBarProps> = () => {
 
   const animateList = useCallback(() => {
     animate('li', { opacity: [0, 1], x: ['100vw', '0vw'] }, { delay: stagger(0.3), duration: 2, type: 'spring' })
-  }, [])
+  }, [animate])
 
   useEffect(() => {
     animateList()

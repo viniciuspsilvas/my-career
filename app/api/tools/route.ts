@@ -1,5 +1,5 @@
 import { connectDB } from "@/src/lib/mongodb";
-import { Tool } from "@/src/models/Tools";
+import { Tool } from "@/src/models/Tool";
 
 export async function GET() {
   try {

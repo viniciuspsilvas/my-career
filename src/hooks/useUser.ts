@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { IUser } from "../models/User";
 
-export function useUser() {
-  return useQuery({
+
+export function useUser(): UseQueryResult<IUser[]> {
+  return useQuery<IUser[]>({
     queryKey: ["user"],
     queryFn: async () => {
       const res = await fetch("/api/user");

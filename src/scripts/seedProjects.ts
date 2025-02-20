@@ -6,7 +6,7 @@ import { Experience } from "../models/Experience";
 import { Stat } from "../models/Stat";
 import { Skill } from "../models/Skill";
 import { PersonalInfo } from "../models/PersonalInfo";
-import { Tool } from "../models/Tools";
+import { Tool } from "../models/Tool";
 
 
 const experiences = [

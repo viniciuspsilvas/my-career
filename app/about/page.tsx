@@ -32,14 +32,16 @@ export default function AboutPage() {
       />
     </motion.div>
   );
+  
+  const personalInfo = personalInfos ? personalInfos[0] : null;
 
   if (personalInfosError 
     || statsError 
     || skillsError 
     || experienceError
-  ) return <p className="text-center text-red-500">Error loading projects.</p>;
+    || !personalInfo
+  ) return <p className="text-center text-red-500">Error loading personal infos.</p>;
 
-  const personalInfo = personalInfos[0];
 
   return (
     <section className="bg-white dark:bg-gray-900 min-h-screen p-8">
@@ -101,7 +103,7 @@ export default function AboutPage() {
 
           {/* Seção de Estatísticas */}
           <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, index : number) => (
+            {stats?.map((stat, index : number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -131,7 +133,7 @@ export default function AboutPage() {
             MY SKILLS
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {skills.map((skill, index : number) => (
+            {skills?.map((skill, index : number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -175,7 +177,7 @@ export default function AboutPage() {
           <div className="space-y-8 relative">
             {/* Linha da Timeline */}
             <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-100 dark:bg-gray-700" />
-            {experiences.map((item, index : number) => (
+            {experiences?.map((item, index : number) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}

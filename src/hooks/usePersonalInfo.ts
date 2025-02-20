@@ -1,7 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, UseQueryResult } from "@tanstack/react-query";
+import { IPersonalInfo } from "../models/PersonalInfo";
 
-export function usePersonalInfo() {
-  return useQuery({
+export function usePersonalInfo(): UseQueryResult<IPersonalInfo[]> {
+  return useQuery<IPersonalInfo[]>({
     queryKey: ["personalInfo"],
     queryFn: async () => {
       const res = await fetch("/api/personal-info");
