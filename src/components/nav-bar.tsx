@@ -11,14 +11,15 @@ import {
   FaEnvelopeOpen,
   FaHome,
   FaTools,
-  FaUser,
+  FaUser
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 
 import dynamic from "next/dynamic";
+import SocialsMediaLinks from "./global/socials-media-links";
 
 const ThemeToggleButton = dynamic(() => import("./theme-toggle-button"), {
-  ssr: false,
+  ssr: false
 });
 
 const containerVariants = {
@@ -30,9 +31,9 @@ const containerVariants = {
       duration: 1,
       type: "spring",
       stiffness: 200,
-      when: "beforeChildren",
-    },
-  },
+      when: "beforeChildren"
+    }
+  }
 };
 
 export type NavBarProps = object;
@@ -68,7 +69,9 @@ const ItemMenu: React.FC<{
         className="flex items-center"
       >
         <span
-          className={`w-[48px] h-[48px] flex items-center justify-center  ${currentPath === pathname ? "text-primary-500" : "text-white"}`}
+          className={`w-[48px] h-[48px] flex items-center justify-center  ${
+            currentPath === pathname ? "text-primary-500" : "text-white"
+          }`}
         >
           {icon}
         </span>
@@ -83,13 +86,13 @@ ItemMenu.displayName = "ItemMenu";
 const menuVariants = {
   hidden: { opacity: 0, x: "100%" },
   visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } },
-  exit: { opacity: 0, x: "100%", transition: { duration: 0.3 } },
+  exit: { opacity: 0, x: "100%", transition: { duration: 0.3 } }
 };
 
 const MobileMenuItem = ({
   pathname,
   label,
-  icon,
+  icon
 }: {
   pathname: string;
   label: string;
@@ -107,7 +110,9 @@ const MobileMenuItem = ({
       <Link
         href={pathname}
         onClick={toggleDrawer}
-        className={`flex items-center gap-6 ${currentPath === pathname ? "text-primary-500" : "text-white"}`}
+        className={`flex items-center gap-6 ${
+          currentPath === pathname ? "text-primary-500" : "text-white"
+        }`}
       >
         {icon}
         {label}
@@ -162,6 +167,9 @@ const MobileMenu = () => {
         />
         <ThemeToggleButton />
       </ul>
+      <div className="absolute bottom-0 ">
+        <SocialsMediaLinks className="text-gray-200 dark:text-gray-400" />
+      </div>
     </motion.div>
   );
 };
@@ -174,7 +182,7 @@ export const NavBar: FC<NavBarProps> = () => {
     animate(
       "li",
       { opacity: [0, 1], x: ["100vw", "0vw"] },
-      { delay: stagger(0.3), duration: 2, type: "spring" },
+      { delay: stagger(0.3), duration: 2, type: "spring" }
     );
   }, [animate]);
 

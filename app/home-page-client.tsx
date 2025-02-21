@@ -18,7 +18,7 @@ const sections = [
   { id: "portfolio", Component: Portfolio },
   { id: "contact", Component: Contact },
   { id: "tools", Component: Tools },
-  { id: "blog", Component: Blog },
+  { id: "blog", Component: Blog }
 ];
 
 export default function HomePage() {
@@ -62,7 +62,7 @@ export default function HomePage() {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: "smooth",
+      behavior: "smooth"
     });
   };
 
@@ -75,12 +75,12 @@ export default function HomePage() {
       ? {
           backgroundImage: "linear-gradient(270deg, #1a1a1a, #354a60, #1a1a1a)",
           backgroundSize: "400% 400%",
-          animation: "gradientBG 15s ease infinite",
+          animation: "gradientBG 15s ease infinite"
         }
       : {
           backgroundImage: "linear-gradient(270deg, #f0f4f8, #a8aeb5, #f0f4f8)",
           backgroundSize: "400% 400%",
-          animation: "gradientBG 15s ease infinite",
+          animation: "gradientBG 15s ease infinite"
         };
 
   return (
@@ -112,15 +112,15 @@ export default function HomePage() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.3 },
-            },
+              transition: { staggerChildren: 0.3 }
+            }
           }}
           className="md:w-1/3 w-2/3 flex justify-center items-center"
         >
           <motion.div
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 1, y: 0 }
             }}
             className="rounded-full md:rounded-2xl overflow-hidden shadow-[0px_0px_10px_4px_#808080]"
           >
@@ -147,15 +147,15 @@ export default function HomePage() {
             hidden: { opacity: 0 },
             visible: {
               opacity: 1,
-              transition: { staggerChildren: 0.3 },
-            },
+              transition: { staggerChildren: 0.3 }
+            }
           }}
           className="md:w-2/3 text-center md:text-left mt-6 md:mt-0 pr-6 "
         >
           <motion.h1
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 1, y: 0 }
             }}
             className="text-2xl sm:text-3xl md:text-5xl font-bold dark:text-gray-200 text-gray-800"
           >
@@ -164,7 +164,7 @@ export default function HomePage() {
           <motion.h2
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 1, y: 0 }
             }}
             className="text-base sm:text-xl md:text-2xl text-primary-600 font-semibold mt-4 sm:mt-2"
           >
@@ -174,7 +174,7 @@ export default function HomePage() {
           <motion.p
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 1, y: 0 }
             }}
             className="mt-4 text-sm sm:text-lg md:text-xl leading-relaxed dark:text-gray-300 text-gray-600 "
           >

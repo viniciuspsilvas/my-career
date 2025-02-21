@@ -248,7 +248,7 @@ export default function AboutPageClient() {
                   dangerouslySetInnerHTML={{
                     __html: item.description
                   }}
-                  className="text-gray-600 dark:text-gray-400 mt-2 space-y-2 [&>ul]:list-disc [&>ul]:pl-5"
+                  className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9 space-y-2 [&>ul]:list-disc [&>ul]:pl-5"
                 />
                 <div className="flex justify-end mt-2 ">
                   <MdOutlineUnfoldMore className="text-primary-500 text-xl" />

@@ -55,7 +55,7 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
         </div>
 
         <div
-          className="text-gray-600 dark:text-gray-400 mt-4"
+          className="text-gray-600 dark:text-gray-400 mt-4 [&>ul]:list-disc [&>ul]:pl-5"
           dangerouslySetInnerHTML={{ __html: experience?.description || "" }}
         />
 

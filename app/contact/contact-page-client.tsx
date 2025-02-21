@@ -1,17 +1,10 @@
 "use client";
 
-import {
-  FaPaperPlane,
-  FaEnvelope,
-  FaPhone,
-  FaFacebook,
-  FaTwitter,
-  FaYoutube,
-  FaDribbble,
-} from "react-icons/fa";
+import { FaPaperPlane, FaEnvelope, FaPhone } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
+import SocialsMediaLinks from "@/src/components/global/socials-media-links";
 
 export default function ContactPageClient() {
   return (
@@ -72,27 +65,7 @@ export default function ContactPageClient() {
       </AnimatePresence>
 
       {/* Redes Sociais */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-        className="flex justify-center space-x-6 mb-12"
-      >
-        {[
-          { icon: <FaFacebook className="text-2xl" />, link: "#" },
-          { icon: <FaTwitter className="text-2xl" />, link: "#" },
-          { icon: <FaYoutube className="text-2xl" />, link: "#" },
-          { icon: <FaDribbble className="text-2xl" />, link: "#" },
-        ].map((social, index) => (
-          <a
-            key={index}
-            href={social.link}
-            className="text-gray-600 dark:text-gray-400 hover:text-primary-500 transition-all duration-300"
-          >
-            {social.icon}
-          </a>
-        ))}
-      </motion.div>
+      <SocialsMediaLinks />
 
       {/* Formulário de Contato */}
       <motion.form
