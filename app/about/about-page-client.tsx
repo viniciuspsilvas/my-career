@@ -17,11 +17,12 @@ import { Text } from "@/src/components/global/text";
 import { useState } from "react";
 import ExperienceModal from "@/src/components/experience-modal";
 import { IExperience } from "@/src/models/Experience";
+import { MdOutlineUnfoldMore } from "react-icons/md";
 
 const InfoItem = ({
   label,
   value,
-  isLink,
+  isLink
 }: {
   label: string;
   value: string;
@@ -46,18 +47,18 @@ export default function AboutPageClient() {
   const {
     data: personalInfos,
     isLoading: personalInfosLoading,
-    error: personalInfosError,
+    error: personalInfosError
   } = usePersonalInfo();
   const { data: stats, isLoading: statsLoading, error: statsError } = useStat();
   const {
     data: skills,
     isLoading: skillsLoading,
-    error: skillsError,
+    error: skillsError
   } = useSkill();
   const {
     data: experiences,
     isLoading: experienceLoading,
-    error: experienceError,
+    error: experienceError
   } = useExperience();
 
   const [selectedExperience, setSelectedExperience] = useState<
@@ -188,8 +189,8 @@ export default function AboutPageClient() {
                     text: {
                       fill: "#07d2be",
                       fontSize: "24px",
-                      fontWeight: "bold",
-                    },
+                      fontWeight: "bold"
+                    }
                   }}
                 />
               </div>
@@ -221,7 +222,7 @@ export default function AboutPageClient() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.2, duration: 0.5 }}
-              className="flex items-start space-x-4"
+              className="flex items-start space-x-4 cursor-pointer"
               onClick={() => openModal(item)}
             >
               {/* Ícone */}
@@ -236,7 +237,8 @@ export default function AboutPageClient() {
                 </Text>
                 <Text category="p1" status="basic">
                   {" "}
-                  {item.company}
+                  {item.company} -{" "}
+                  <Text category="small"> {item.locality}</Text>
                 </Text>
                 <Text category="small" status="basic">
                   {" "}
@@ -244,10 +246,13 @@ export default function AboutPageClient() {
                 </Text>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: item.description,
+                    __html: item.description
                   }}
                   className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9"
                 />
+                <div className="flex justify-end mt-2 ">
+                  <MdOutlineUnfoldMore className="text-primary-500 text-xl" />
+                </div>
               </div>
             </motion.div>
           ))}
