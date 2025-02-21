@@ -8,6 +8,8 @@ export interface IExperience extends Document {
   locality: string;
   link: string;
   image: string;
+  tags: string[];
+  order: number;
 }
 
 const ExperienceSchema = new Schema<IExperience>(
@@ -19,8 +21,10 @@ const ExperienceSchema = new Schema<IExperience>(
     locality: { type: String, required: false },
     link: { type: String, required: false },
     image: { type: String, required: false },
+    tags: { type: [String], required: false },
+    order: { type: Number, required: true }
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 export const Experience =
