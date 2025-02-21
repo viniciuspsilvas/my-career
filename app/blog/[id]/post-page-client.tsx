@@ -9,6 +9,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { useBlogPostById } from "@/src/hooks/useBlogPosts";
 import { Text } from "@/src/components/global/text";
 import { getHumanReadableDateFormat } from "@/src/lib/date";
+import Tags from "@/src/components/global/tags";
 
 interface PostPageClientProps {
   id: string;
@@ -92,21 +93,7 @@ export default function PostPageClient({ id }: PostPageClientProps) {
           </motion.div>
 
           {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.5 }}
-            className="mt-8 flex flex-wrap gap-2"
-          >
-            {post.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="border border-primary-500 text-primary-500 px-3 py-1 rounded-full text-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </motion.div>
+          <Tags tags={post.tags} />
         </motion.div>
       </AnimatePresence>
     </Session>
