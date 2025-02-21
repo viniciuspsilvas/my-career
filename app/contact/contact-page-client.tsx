@@ -5,8 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
+import { useState } from "react";
 
 export default function ContactPageClient() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <Session>
       {/* Título Animado */}
@@ -40,7 +43,7 @@ export default function ContactPageClient() {
             <div>
               <p className="text-gray-600 dark:text-gray-400">Email</p>
               <p className="text-gray-900 dark:text-white font-semibold">
-                contact@vinitech.dev
+                viniciuspsilvas@gmail.com
               </p>
             </div>
           </motion.div>
@@ -50,6 +53,8 @@ export default function ContactPageClient() {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
             className="flex items-center space-x-4 bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-300"
+            onClick={() => setIsModalOpen(true)}
+            style={{ cursor: "pointer" }}
           >
             <div className="bg-primary-500 p-4 rounded-full">
               <FaPhone className="text-white text-2xl" />
@@ -57,11 +62,46 @@ export default function ContactPageClient() {
             <div>
               <p className="text-gray-600 dark:text-gray-400">Phone</p>
               <p className="text-gray-900 dark:text-white font-semibold">
-                +55 (11) 98765-4321
+                04******62
               </p>
             </div>
           </motion.div>
         </motion.div>
+      </AnimatePresence>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -50, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+                Contact Me Safely 😊
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                For security reasons, I prefer not to share my phone number
+                publicly. Please send me an email instead!
+              </p>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="bg-primary-500 text-white py-2 px-4 rounded-full hover:bg-primary-600 transition-all duration-300"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
 
       {/* Redes Sociais */}
