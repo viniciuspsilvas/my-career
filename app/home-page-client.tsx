@@ -168,8 +168,7 @@ export default function HomePage() {
             }}
             className="text-base sm:text-xl md:text-2xl text-primary-600 font-semibold mt-4 sm:mt-2"
           >
-            Full Stack Developer{" "}
-            <span className="hidden sm:block"> & Problem Solver</span>
+            Full Stack Developer
           </motion.h2>
           <motion.p
             variants={{
