@@ -15,7 +15,7 @@ export async function GET() {
 
     // Fetch all data from MongoDB collections
     const personalInfo = await PersonalInfo.findOne({}); // Assuming there's only one personal info document
-    const experiences = await Experience.find({});
+    const experiences = await Experience.find({}).sort({ order: "desc" });
     const skills = await Skill.find({});
     const stats = await Stat.find({});
     const tools = await Tool.find({});
