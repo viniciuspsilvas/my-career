@@ -7,11 +7,8 @@ import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
 import { useState } from "react";
 import {
-  GoogleReCaptchaProvider,
   useGoogleReCaptcha
 } from "react-google-recaptcha-v3";
-
-const RECAPTCHAKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
 const ContactForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,7 +59,7 @@ const ContactForm = () => {
       return;
     }
 
-    setIsLoading(true); 
+    setIsLoading(true);
 
     try {
       const recaptchaValue = await executeRecaptcha("contactFormSubmit");
@@ -84,12 +81,12 @@ const ContactForm = () => {
       });
 
       if (response.ok) {
-        setIsSuccessModalOpen(true); 
-        form.reset(); 
+        setIsSuccessModalOpen(true);
+        form.reset();
       } else {
         alert("Error sending message.");
       }
-    } catch (error) {
+    } catch {
       alert("Error sending message.");
     } finally {
       setIsLoading(false);
@@ -211,7 +208,7 @@ const ContactForm = () => {
                 Message Sent Successfully! 🎉
               </h2>
               <p className="text-gray-600 dark:text-gray-400 mb-4">
-                Thank you for reaching out. I'll get back to you as soon as
+                Thank you for reaching out. I&apos;ll get back to you as soon as
                 possible.
               </p>
               <button
@@ -337,9 +334,7 @@ const ContactForm = () => {
 export default function ContactPageClient() {
   return (
     <Session>
-      <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHAKEY}>
-        <ContactForm />
-      </GoogleReCaptchaProvider>
+      <ContactForm />
     </Session>
   );
 }
