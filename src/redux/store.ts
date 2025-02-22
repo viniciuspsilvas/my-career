@@ -2,7 +2,7 @@ import {
   Action,
   combineReducers,
   configureStore,
-  ThunkAction,
+  ThunkAction
 } from "@reduxjs/toolkit";
 import {
   FLUSH,
@@ -12,19 +12,21 @@ import {
   persistStore,
   PURGE,
   REGISTER,
-  REHYDRATE,
+  REHYDRATE
 } from "redux-persist";
 import globalReducer from "./globalState";
 import storage from "./storage";
+import resumeState from "./resumeState";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["global"], // Exclui 'authentication' da persistência
+  whitelist: ["global"] // Exclui 'authentication' da persistência
   // OR  blacklist: ['role'], // Não persiste o campo 'role'
 };
 const reducers = combineReducers({
   global: globalReducer,
+  resume: resumeState
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -34,10 +36,10 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
     }), //.concat(logger),
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== "production"
 });
 
 export const persistor = persistStore(store);

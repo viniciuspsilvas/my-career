@@ -6,10 +6,11 @@ import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
-import { useTools } from "@/src/hooks/useTools";
 import { ITool } from "@/src/models/Tool";
 import React from "react";
 import Session from "@/src/components/global/session";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
 
 const themeColors = [
   "#b3f0eb",
@@ -17,25 +18,26 @@ const themeColors = [
   "#d2e5d0",
   "#3f2f2a",
   "#d2b8b0",
-  "#b2877f",
+  "#b2877f"
 ];
 
 const transformToolsToTags = (tools: ITool[]): Tag[] => {
   return tools.map((tool, index: number) => ({
     value: tool.title,
-    count: index,
+    count: index
   }));
 };
 
 export default function ToolsPageClient() {
   const [selectedTool, setSelectedTool] = useState<ITool | null>(null);
 
-  const { data, isLoading, error } = useTools();
+  const { data } = useSelector((state: RootState) => state.resume);
+  const tools = data?.tools;
 
-  const tags: Tag[] = useMemo(() => transformToolsToTags(data || []), [data]);
+  const tags: Tag[] = useMemo(() => transformToolsToTags(tools || []), [tools]);
 
   const handleSelectedTool = (tag: Tag) => {
-    const tool = data?.find((t) => t.title === tag.value) || null;
+    const tool = tools?.find((t) => t.title === tag.value) || null;
     setSelectedTool(tool);
   };
 
@@ -58,42 +60,23 @@ export default function ToolsPageClient() {
           margin: "16px",
           padding: "5px",
           display: "inline-block",
-          color,
+          color
         }}
         animate={{
           scale: [1, 1.2, 1],
           x: [0, randomX, -randomX, 0],
-          y: [0, randomY, -randomY, 0],
+          y: [0, randomY, -randomY, 0]
         }}
         transition={{
           duration: randomDuration,
           repeat: Infinity,
-          repeatType: "mirror",
+          repeatType: "mirror"
         }}
       >
         {tag.value}
       </motion.span>
     );
   };
-
-  if (isLoading)
-    return (
-      <motion.div
-        initial={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-        className="fixed inset-0 flex items-center justify-center bg-white dark:bg-gray-900"
-      >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-          className="w-12 h-12 border-4 border-primary-500 border-t-transparent rounded-full"
-        />
-      </motion.div>
-    );
-
-  if (error)
-    return <p className="text-center text-red-500">Error loading projects.</p>;
 
   return (
     <Session>
@@ -115,7 +98,7 @@ export default function ToolsPageClient() {
           tags={
             tags?.map(({ value, count }) => ({
               value,
-              count,
+              count
             })) || []
           }
           onClick={(tag) => handleSelectedTool(tag)}

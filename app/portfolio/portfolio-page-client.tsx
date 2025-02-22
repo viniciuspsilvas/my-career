@@ -1,24 +1,17 @@
 "use client";
 
-import { useProjects } from "@/src/hooks/useProjects";
 import { IProject } from "@/src/models/Project";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
-import Loading from "@/src/components/global/loading";
-import ErrorMessage from "@/src/components/global/error-message";
+import { RootState } from "@/src/redux/store";
+import { useSelector } from "react-redux";
 
 export default function PortfolioPageClient() {
-  const { data: projects, isLoading, error } = useProjects();
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <ErrorMessage message="Error loading personal infos." />;
-  }
+    const { data } = useSelector((state: RootState) => state.resume);
+    const projects = data?.projects;
 
   return (
     <Session>

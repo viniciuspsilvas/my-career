@@ -5,12 +5,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { motion } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
-import { useExperience } from "@/src/hooks/useExperience";
-import { usePersonalInfo } from "@/src/hooks/usePersonalInfo";
-import { useSkill } from "@/src/hooks/useSkill";
-import { useStat } from "@/src/hooks/useStat";
 import { IoCode } from "react-icons/io5";
-import Loading from "@/src/components/global/loading";
 import ErrorMessage from "@/src/components/global/error-message";
 import Session from "@/src/components/global/session";
 import { Text } from "@/src/components/global/text";
@@ -18,6 +13,9 @@ import { useState } from "react";
 import ExperienceModal from "@/src/components/experience-modal";
 import { IExperience } from "@/src/models/Experience";
 import { MdOutlineUnfoldMore } from "react-icons/md";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
 
 const InfoItem = ({
   label,
@@ -44,27 +42,15 @@ const InfoItem = ({
 );
 
 export default function AboutPageClient() {
-  const {
-    data: personalInfos,
-    isLoading: personalInfosLoading,
-    error: personalInfosError
-  } = usePersonalInfo();
-  const { data: stats, isLoading: statsLoading, error: statsError } = useStat();
-  const {
-    data: skills,
-    isLoading: skillsLoading,
-    error: skillsError
-  } = useSkill();
-  const {
-    data: experiences,
-    isLoading: experienceLoading,
-    error: experienceError
-  } = useExperience();
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const { data } = useSelector((state: RootState) => state.resume);
 
   const [selectedExperience, setSelectedExperience] = useState<
     IExperience | undefined
   >(undefined);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const openModal = (experience: IExperience) => {
     setSelectedExperience(experience);
@@ -76,30 +62,52 @@ export default function AboutPageClient() {
     setSelectedExperience(undefined);
   };
 
-  if (
-    personalInfosLoading ||
-    statsLoading ||
-    skillsLoading ||
-    experienceLoading
-  ) {
-    return <Loading />;
-  }
+  const handleDownloadCV = async () => {
+    if (!executeRecaptcha) {
+      console.error("reCAPTCHA not available");
+      return;
+    }
 
-  const personalInfo = personalInfos ? personalInfos[0] : null;
+    const token = await executeRecaptcha("download_cv");
 
-  if (
-    personalInfosError ||
-    statsError ||
-    skillsError ||
-    experienceError ||
-    !personalInfo
-  ) {
+    setIsDownloading(true);
+    try {
+      const response = await fetch("/api/generate-pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ token })
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to generate PDF");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "Vinicius_Silva_CV.pdf";
+      a.click();
+    } catch (error) {
+      console.error("Error downloading CV:", error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
+  if (!data) {
     return <ErrorMessage message="Error loading personal infos." />;
   }
 
+  const personalInfo = data?.personalInfo;
+  const stats = data?.stats;
+  const skills = data?.skills;
+  const experiences = data?.experiences;
+
   return (
     <Session>
-      {/* Título Principal com Animação */}
       <AnimatedTitleSection
         backTitle="ABOUT"
         mainTitle={
@@ -130,12 +138,29 @@ export default function AboutPageClient() {
 
           <div className="flex justify-center items-end mb-4 md:mt-10">
             <motion.button
+              onClick={handleDownloadCV}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
+              disabled={isDownloading}
+              className={`mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md ${
+                isDownloading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              <FaDownload />
-              <span>Download CV</span>
+              {isDownloading ? (
+                <div className="flex items-center space-x-2">
+                  <CircularProgressbar
+                    value={50}
+                    strokeWidth={12}
+                    className="w-6 h-6"
+                  />
+                  <span>Generating...</span>
+                </div>
+              ) : (
+                <>
+                  <FaDownload />
+                  <span>Download CV</span>
+                </>
+              )}
             </motion.button>
           </div>
         </div>
