@@ -5,15 +5,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
-import { useRef, useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
-const RECAPTCHAKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || undefined;
+import { useState } from "react";
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha
+} from "react-google-recaptcha-v3";
 
-export default function ContactPageClient() {
+const RECAPTCHAKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
+
+const ContactForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [formErrors, setFormErrors] = useState<string[]>([]);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   const validateForm = (
     name: string,
@@ -52,38 +57,47 @@ export default function ContactPageClient() {
     }
     setFormErrors([]);
 
-    const recaptchaValue = recaptchaRef.current?.getValue();
-    if (!recaptchaValue) {
-      alert("Please verify that you are not a robot.");
+    if (!executeRecaptcha) {
+      alert("Recaptcha not available");
       return;
     }
 
-    const formData = {
-      name,
-      email,
-      subject,
-      message,
-      recaptcha: recaptchaValue
-    };
+    setIsLoading(true); 
 
-    const response = await fetch("/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    });
+    try {
+      const recaptchaValue = await executeRecaptcha("contactFormSubmit");
 
-    if (response.ok) {
-      alert("Message sent successfully!");
-      form.reset(); // Reset the form after successful submission
-    } else {
+      const formData = {
+        name,
+        email,
+        subject,
+        message,
+        recaptcha: recaptchaValue
+      };
+
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setIsSuccessModalOpen(true); 
+        form.reset(); 
+      } else {
+        alert("Error sending message.");
+      }
+    } catch (error) {
       alert("Error sending message.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Session>
+    <>
       {/* Título Animado */}
       <AnimatedTitleSection
         backTitle="REACH OUT"
@@ -141,7 +155,7 @@ export default function ContactPageClient() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Modal */}
+      {/* Modal de Contato */}
       <AnimatePresence>
         {isModalOpen && (
           <motion.div
@@ -176,10 +190,43 @@ export default function ContactPageClient() {
         )}
       </AnimatePresence>
 
-      {/* Redes Sociais */}
+      {/* Modal de Sucesso */}
+      <AnimatePresence>
+        {isSuccessModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4"
+            onClick={() => setIsSuccessModalOpen(false)}
+          >
+            <motion.div
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -50, opacity: 0 }}
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg max-w-md w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">
+                Message Sent Successfully! 🎉
+              </h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Thank you for reaching out. I'll get back to you as soon as
+                possible.
+              </p>
+              <button
+                onClick={() => setIsSuccessModalOpen(false)}
+                className="bg-primary-500 text-white py-2 px-4 rounded-full hover:bg-primary-600 transition-all duration-300"
+              >
+                Close
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <SocialsMediaLinks />
 
-      {/* Formulário de Contato */}
       <motion.form
         onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 20 }}
@@ -263,10 +310,6 @@ export default function ContactPageClient() {
           />
         </div>
 
-        {RECAPTCHAKEY && (
-          <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHAKEY} />
-        )}
-
         {/* Botão de Envio */}
         <div className="mt-8">
           <motion.button
@@ -274,12 +317,29 @@ export default function ContactPageClient() {
             whileTap={{ scale: 0.95 }}
             type="submit"
             className="w-full bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md"
+            disabled={isLoading}
           >
-            <span>Send Message</span>
-            <FaPaperPlane className="text-lg" />
+            {isLoading ? (
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-white"></div>
+            ) : (
+              <>
+                <span>Send Message</span>
+                <FaPaperPlane className="text-lg" />
+              </>
+            )}
           </motion.button>
         </div>
       </motion.form>
+    </>
+  );
+};
+
+export default function ContactPageClient() {
+  return (
+    <Session>
+      <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHAKEY}>
+        <ContactForm />
+      </GoogleReCaptchaProvider>
     </Session>
   );
 }
