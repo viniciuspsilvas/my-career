@@ -5,10 +5,82 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedTitleSection } from "@/src/components/global/animated-title-section";
 import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+const RECAPTCHAKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || undefined;
 
 export default function ContactPageClient() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [formErrors, setFormErrors] = useState<string[]>([]);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const validateForm = (
+    name: string,
+    email: string,
+    subject: string,
+    message: string
+  ) => {
+    const errors: string[] = [];
+    if (!name) errors.push("Name is required.");
+    if (!email) {
+      errors.push("Email is required.");
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      errors.push("Email address is invalid.");
+    }
+    if (!subject) errors.push("Subject is required.");
+    if (!message) errors.push("Message is required.");
+    return errors;
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const subject = (form.elements.namedItem("subject") as HTMLInputElement)
+      .value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement)
+      .value;
+
+    // Validate the form
+    const errors = validateForm(name, email, subject, message);
+    if (errors.length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors([]);
+
+    const recaptchaValue = recaptchaRef.current?.getValue();
+    if (!recaptchaValue) {
+      alert("Please verify that you are not a robot.");
+      return;
+    }
+
+    const formData = {
+      name,
+      email,
+      subject,
+      message,
+      recaptcha: recaptchaValue
+    };
+
+    const response = await fetch("/api/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+
+    if (response.ok) {
+      alert("Message sent successfully!");
+      form.reset(); // Reset the form after successful submission
+    } else {
+      alert("Error sending message.");
+    }
+  };
 
   return (
     <Session>
@@ -62,7 +134,7 @@ export default function ContactPageClient() {
             <div>
               <p className="text-gray-600 dark:text-gray-400">Phone</p>
               <p className="text-gray-900 dark:text-white font-semibold">
-                04******62
+                +61 04******62
               </p>
             </div>
           </motion.div>
@@ -109,11 +181,23 @@ export default function ContactPageClient() {
 
       {/* Formulário de Contato */}
       <motion.form
+        onSubmit={handleSubmit}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4, duration: 0.5 }}
         className="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-lg transition-colors duration-300"
       >
+        {/* Error Messages */}
+        {formErrors.length > 0 && (
+          <div className="mb-4">
+            {formErrors.map((error, index) => (
+              <div key={index} className="text-red-500">
+                {error}
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Nome */}
           <div>
@@ -178,6 +262,10 @@ export default function ContactPageClient() {
             placeholder="Your message..."
           />
         </div>
+
+        {RECAPTCHAKEY && (
+          <ReCAPTCHA ref={recaptchaRef} sitekey={RECAPTCHAKEY} />
+        )}
 
         {/* Botão de Envio */}
         <div className="mt-8">
