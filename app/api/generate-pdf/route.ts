@@ -6,27 +6,22 @@ import { generateHtml } from "@/src/lib/generateHtml";
 
 export async function POST(request: Request) {
   const { token } = await request.json();
-  const isProduction = process.env.NODE_ENV === "production";
 
-  if (isProduction) {
-    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const response = await fetch(
-      `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
-      {
-        method: "POST"
-      }
-    );
-
-    const data = await response.json();
-
-    if (!data.success || data.score < 0.5) {
-      return NextResponse.json(
-        { error: "reCAPTCHA validation failed" },
-        { status: 400 }
-      );
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  const response = await fetch(
+    `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
+    {
+      method: "POST"
     }
-  } else {
-    console.log("reCAPTCHA validation skipped in development mode.");
+  );
+
+  const data = await response.json();
+
+  if (!data.success || data.score < 0.5) {
+    return NextResponse.json(
+      { error: "reCAPTCHA validation failed" },
+      { status: 400 }
+    );
   }
 
   try {
@@ -37,15 +32,15 @@ export async function POST(request: Request) {
     const isProduction = process.env.NODE_ENV === "production";
 
     const browser = await puppeteer.launch({
-      args: isProduction ? chromium.args : [], // Usa args do Chromium apenas em produção
+      args: isProduction ? chromium.args : [],
       executablePath: isProduction
-        ? await chromium.executablePath() // Usa o Chromium otimizado em produção
-        : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // Caminho do Chrome no macOS
+        ? await chromium.executablePath()
+        : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
       headless: isProduction
         ? chromium.headless === "new"
           ? true
-          : Boolean(chromium.headless) // Converte para booleano
-        : true // Modo headless em ambos os ambientes
+          : Boolean(chromium.headless)
+        : true
     });
 
     const page = await browser.newPage();

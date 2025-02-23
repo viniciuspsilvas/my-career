@@ -62,38 +62,6 @@ export default function AboutPageClient() {
   };
 
   const handleDownloadCV = async () => {
-    if (process.env.NODE_ENV !== "production") {
-      console.log("reCAPTCHA is disabled in development mode.");
-      // Proceed with the download logic without reCAPTCHA
-      setIsDownloading(true);
-      try {
-        const response = await fetch("/api/generate-pdf", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ token: "mock-recaptcha-token" })
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to generate PDF");
-        }
-
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "Vinicius_Silva_CV.pdf";
-        a.click();
-      } catch (error) {
-        console.error("Error downloading CV:", error);
-        alert("Failed to download CV. Please try again later.");
-      } finally {
-        setIsDownloading(false);
-      }
-      return;
-    }
-
     if (!executeRecaptcha) {
       console.error("reCAPTCHA not available");
       alert(
@@ -185,11 +153,7 @@ export default function AboutPageClient() {
             >
               {isDownloading ? (
                 <div className="flex items-center space-x-2">
-                  <CircularProgressbar
-                    value={50}
-                    strokeWidth={12}
-                    className="w-6 h-6"
-                  />
+                  <div className="w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin" />
                   <span>Generating...</span>
                 </div>
               ) : (
@@ -243,7 +207,7 @@ export default function AboutPageClient() {
               className="text-center"
             >
               <div className="w-24 h-24 mx-auto mb-4">
-              <CircularProgressbar
+                <CircularProgressbar
                   value={skill.percentage}
                   text={`${skill.percentage}%`}
                   styles={{

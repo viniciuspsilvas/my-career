@@ -51,23 +51,17 @@ const ContactForm = () => {
     }
     setFormErrors([]);
 
-    const isProduction = process.env.NODE_ENV === "production";
+    let recaptchaValue = "mock-recaptcha-token";
 
-    let recaptchaValue = "mock-recaptcha-token"; 
-
-    if (isProduction) {
-      if (!executeRecaptcha) {
-        console.error("reCAPTCHA not available");
-        alert(
-          "reCAPTCHA is not available. Please refresh the page and try again."
-        );
-        return;
-      }
-
-      recaptchaValue = await executeRecaptcha("contactFormSubmit");
-    } else {
-      console.log("reCAPTCHA validation skipped in development mode.");
+    if (!executeRecaptcha) {
+      console.error("reCAPTCHA not available");
+      alert(
+        "reCAPTCHA is not available. Please refresh the page and try again."
+      );
+      return;
     }
+
+    recaptchaValue = await executeRecaptcha("contactFormSubmit");
 
     setIsLoading(true);
 
@@ -77,7 +71,7 @@ const ContactForm = () => {
         email,
         subject,
         message,
-        recaptcha: recaptchaValue 
+        recaptcha: recaptchaValue
       };
 
       const response = await fetch("/api/send-email", {
