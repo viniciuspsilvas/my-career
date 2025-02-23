@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import { fetchResumeData } from "@/src/lib/fetchResumeData";
 import { generateHtml } from "@/src/lib/generateHtml";
 
@@ -10,7 +11,7 @@ export async function POST(request: Request) {
   const response = await fetch(
     `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
     {
-      method: "POST"
+      method: "POST",
     }
   );
 
@@ -23,28 +24,43 @@ export async function POST(request: Request) {
     );
   }
 
-  // Fetch data from MongoDB
-  const resumeData = await fetchResumeData();
+  try {
+    const resumeData = await fetchResumeData();
 
-  // Generate HTML content
-  const htmlContent = generateHtml(resumeData);
+    const htmlContent = generateHtml(resumeData);
 
-  // Generate PDF
-  const browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  await page.setContent(htmlContent);
-  const pdfBuffer = await page.pdf({
-    format: "A4",
-    printBackground: true ,
+    chromium.setGraphicsMode = false; // Desativa o modo gráfico (reduz uso de memória)
 
-  });
-  await browser.close();
+    // Inicia o navegador
+    const browser = await puppeteer.launch({
+      args: chromium.args,
+      executablePath: await chromium.executablePath(),
+      headless: chromium.headless === "new" ? true : Boolean(chromium.headless),
+    });
 
-  // Return the PDF as a response
-  return new NextResponse(pdfBuffer, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": 'attachment; filename="Vinicius_Silva_CV.pdf"'
-    }
-  });
+    const page = await browser.newPage();
+    await page.setContent(htmlContent);
+
+    // Gera o PDF
+    const pdfBuffer = await page.pdf({
+      format: "A4",
+      printBackground: true,
+    });
+
+    await browser.close();
+
+    // Retorna o PDF como resposta
+    return new NextResponse(pdfBuffer, {
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": 'attachment; filename="Vinicius_Silva_CV.pdf"',
+      },
+    });
+  } catch (error) {
+    console.error("Error generating PDF:", error);
+    return NextResponse.json(
+      { error: "Failed to generate PDF" },
+      { status: 500 }
+    );
+  }
 }
