@@ -6,9 +6,7 @@ import { AnimatedTitleSection } from "@/src/components/global/animated-title-sec
 import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
 import { useState } from "react";
-import {
-  useGoogleReCaptcha
-} from "react-google-recaptcha-v3";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const ContactForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +32,6 @@ const ContactForm = () => {
     if (!message) errors.push("Message is required.");
     return errors;
   };
-
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -54,22 +51,33 @@ const ContactForm = () => {
     }
     setFormErrors([]);
 
-    if (!executeRecaptcha) {
-      alert("Recaptcha not available");
-      return;
+    const isProduction = process.env.NODE_ENV === "production";
+
+    let recaptchaValue = "mock-recaptcha-token"; 
+
+    if (isProduction) {
+      if (!executeRecaptcha) {
+        console.error("reCAPTCHA not available");
+        alert(
+          "reCAPTCHA is not available. Please refresh the page and try again."
+        );
+        return;
+      }
+
+      recaptchaValue = await executeRecaptcha("contactFormSubmit");
+    } else {
+      console.log("reCAPTCHA validation skipped in development mode.");
     }
 
     setIsLoading(true);
 
     try {
-      const recaptchaValue = await executeRecaptcha("contactFormSubmit");
-
       const formData = {
         name,
         email,
         subject,
         message,
-        recaptcha: recaptchaValue
+        recaptcha: recaptchaValue 
       };
 
       const response = await fetch("/api/send-email", {

@@ -6,22 +6,27 @@ import { generateHtml } from "@/src/lib/generateHtml";
 
 export async function POST(request: Request) {
   const { token } = await request.json();
+  const isProduction = process.env.NODE_ENV === "production";
 
-  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
-  const response = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
-    {
-      method: "POST",
-    }
-  );
-
-  const data = await response.json();
-
-  if (!data.success || data.score < 0.5) {
-    return NextResponse.json(
-      { error: "reCAPTCHA validation failed" },
-      { status: 400 }
+  if (isProduction) {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const response = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${token}`,
+      {
+        method: "POST"
+      }
     );
+
+    const data = await response.json();
+
+    if (!data.success || data.score < 0.5) {
+      return NextResponse.json(
+        { error: "reCAPTCHA validation failed" },
+        { status: 400 }
+      );
+    }
+  } else {
+    console.log("reCAPTCHA validation skipped in development mode.");
   }
 
   try {
@@ -40,7 +45,7 @@ export async function POST(request: Request) {
         ? chromium.headless === "new"
           ? true
           : Boolean(chromium.headless) // Converte para booleano
-        : true, // Modo headless em ambos os ambientes
+        : true // Modo headless em ambos os ambientes
     });
 
     const page = await browser.newPage();
@@ -49,7 +54,7 @@ export async function POST(request: Request) {
     // Gera o PDF
     const pdfBuffer = await page.pdf({
       format: "A4",
-      printBackground: true,
+      printBackground: true
     });
 
     await browser.close();
@@ -58,8 +63,8 @@ export async function POST(request: Request) {
     return new NextResponse(pdfBuffer, {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": 'attachment; filename="Vinicius_Silva_CV.pdf"',
-      },
+        "Content-Disposition": 'attachment; filename="Vinicius_Silva_CV.pdf"'
+      }
     });
   } catch (error) {
     console.error("Error generating PDF:", error);

@@ -43,7 +43,6 @@ const InfoItem = ({
 
 export default function AboutPageClient() {
   const { executeRecaptcha } = useGoogleReCaptcha();
-
   const { data } = useSelector((state: RootState) => state.resume);
 
   const [selectedExperience, setSelectedExperience] = useState<
@@ -63,8 +62,43 @@ export default function AboutPageClient() {
   };
 
   const handleDownloadCV = async () => {
+    if (process.env.NODE_ENV !== "production") {
+      console.log("reCAPTCHA is disabled in development mode.");
+      // Proceed with the download logic without reCAPTCHA
+      setIsDownloading(true);
+      try {
+        const response = await fetch("/api/generate-pdf", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ token: "mock-recaptcha-token" })
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to generate PDF");
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "Vinicius_Silva_CV.pdf";
+        a.click();
+      } catch (error) {
+        console.error("Error downloading CV:", error);
+        alert("Failed to download CV. Please try again later.");
+      } finally {
+        setIsDownloading(false);
+      }
+      return;
+    }
+
     if (!executeRecaptcha) {
       console.error("reCAPTCHA not available");
+      alert(
+        "reCAPTCHA is not available. Please refresh the page and try again."
+      );
       return;
     }
 
@@ -92,6 +126,7 @@ export default function AboutPageClient() {
       a.click();
     } catch (error) {
       console.error("Error downloading CV:", error);
+      alert("Failed to download CV. Please try again later.");
     } finally {
       setIsDownloading(false);
     }
@@ -142,6 +177,8 @@ export default function AboutPageClient() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               disabled={isDownloading}
+              aria-label="Download CV"
+              aria-disabled={isDownloading}
               className={`mt-6 bg-primary-500 text-white py-3 px-6 rounded-full flex items-center justify-center space-x-2 hover:bg-primary-600 transition-all duration-300 shadow-md ${
                 isDownloading ? "opacity-50 cursor-not-allowed" : ""
               }`}
@@ -206,7 +243,7 @@ export default function AboutPageClient() {
               className="text-center"
             >
               <div className="w-24 h-24 mx-auto mb-4">
-                <CircularProgressbar
+              <CircularProgressbar
                   value={skill.percentage}
                   text={`${skill.percentage}%`}
                   styles={{

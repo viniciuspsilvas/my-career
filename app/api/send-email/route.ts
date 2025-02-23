@@ -22,27 +22,32 @@ interface RecaptchaResponse {
 export async function POST(request: Request): Promise<Response> {
   const { name, email, subject, message, recaptcha }: RequestBody =
     await request.json();
+  const isProduction = process.env.NODE_ENV === "production";
 
-  if (
-    !RECAPTCHA_SECRET_KEY ||
-    !GOOGLE_NODE_MAILER_PASSWORD ||
-    !GOOGLE_NODE_MAILER_EMAIL
-  ) {
-    return new Response("Environment variables not set", { status: 500 });
-  }
-
-  const recaptchaSecretKey: string = RECAPTCHA_SECRET_KEY;
-  const recaptchaResponse: Response = await fetch(
-    `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptcha}`,
-    {
-      method: "POST"
+  if (isProduction) {
+    if (
+      !RECAPTCHA_SECRET_KEY ||
+      !GOOGLE_NODE_MAILER_PASSWORD ||
+      !GOOGLE_NODE_MAILER_EMAIL
+    ) {
+      return new Response("Environment variables not set", { status: 500 });
     }
-  );
 
-  const recaptchaData: RecaptchaResponse = await recaptchaResponse.json();
+    const recaptchaSecretKey: string = RECAPTCHA_SECRET_KEY;
+    const recaptchaResponse: Response = await fetch(
+      `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptcha}`,
+      {
+        method: "POST"
+      }
+    );
 
-  if (!recaptchaData.success) {
-    return new Response("reCAPTCHA verification failed", { status: 400 });
+    const recaptchaData: RecaptchaResponse = await recaptchaResponse.json();
+
+    if (!recaptchaData.success) {
+      return new Response("reCAPTCHA verification failed", { status: 400 });
+    }
+  } else {
+    console.log("reCAPTCHA validation skipped in development mode.");
   }
 
   const transporter = nodemailer.createTransport({
