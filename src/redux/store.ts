@@ -8,31 +8,21 @@ import {
   FLUSH,
   PAUSE,
   PERSIST,
-  persistReducer,
   persistStore,
   PURGE,
   REGISTER,
   REHYDRATE
 } from "redux-persist";
 import globalReducer from "./globalState";
-import storage from "./storage";
 import resumeState from "./resumeState";
 
-const persistConfig = {
-  key: "root",
-  storage,
-  whitelist: ["global"] // Exclui 'authentication' da persistência
-  // OR  blacklist: ['role'], // Não persiste o campo 'role'
-};
 const reducers = combineReducers({
   global: globalReducer,
   resume: resumeState
 });
 
-const persistedReducer = persistReducer(persistConfig, reducers);
-
 export const store = configureStore({
-  reducer: persistedReducer,
+  reducer: reducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

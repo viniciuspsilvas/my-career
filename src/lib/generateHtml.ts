@@ -13,7 +13,7 @@ export function generateHtml(data: IResume) {
   const educations = data.educations || [];
   const certifications = data.certifications || [];
   const references = data.references || [];
-  const interests = data.interests || [];
+  // const interests = data.interests || [];
 
   return `
       <html>
@@ -295,10 +295,6 @@ export function generateHtml(data: IResume) {
               }
 
               .interest {
-                margin-bottom: 15px;
-                display: flex;
-                align-items: center;
-                flex-direction: column;
               }
 
               .interest-title {
@@ -312,15 +308,13 @@ export function generateHtml(data: IResume) {
               }
 
               .section-interest {
-                font-size: 18px;
+                font-size: 16px;
                 color: #666;
-                word-spacing: 0.1em;
                 display: flex;
-                flex-wrap: nowrap;
+                flex-direction: column;
+                gap: 10px;
                 justify-content: space-between;
-                width: 50%;
-                margin-left: auto;
-                margin-right: auto;
+                align-items: center;
               }
             </style>
         </head>
@@ -427,7 +421,9 @@ export function generateHtml(data: IResume) {
                     <div class="experience-data-locality">${exp.year} - ${
                       exp.locality
                     }</div>
-                    <div class="exdiverience-description">${exp.description}</div>
+                    <div class="experience-description">${
+                      exp.description
+                    }</div>
                     <div class="tags">${exp.tags.join(", ")}</div>
                   </div>
                 `
@@ -461,9 +457,6 @@ export function generateHtml(data: IResume) {
                     </tbody>
                   </table>
                 </div>
-
-
-
                 <div class="section-right">
                   <h4 class="section-title">References</h4>
                       <div class="reference-section">
@@ -479,29 +472,14 @@ export function generateHtml(data: IResume) {
                       <div class="reference-position">
                       <i class="fa-solid fa-envelope"></i>
                       ${ref.email}</div>
-                    </div>
+                           </div>
                   `
                     )
                     .join("")}
                   </div>
                 </div>
 
-                <div class="section-right">
-                    <h4 class="section-title">Interests</h4>
-                   
-                    <div class="section-interest">
-                      ${interests
-                        .map(
-                          (interest) => `
-                        <div class="interest">
-                          <i class="interest-icon ${interest.icon}"></i>
-                          <h4 class="interest-title">${interest.title}</h4>
-                        </div>
-                      `
-                        )
-                        .join("")}
-                    </div>
-                  </div>
+                </div>
                 </div> <!-- Fechamento da div right-column -->
               </div> <!-- Fechamento da div right-column -->
             </div> <!-- Fechamento da div content -->
