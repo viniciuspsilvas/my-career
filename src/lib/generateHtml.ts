@@ -127,10 +127,10 @@ export function generateHtml(data: IResume) {
               h3 {
                 font-size: 16px;
                 color: #323232; 
-                margin-bottom: 10px;
+                margin-bottom: 5px;
                 text-transform: uppercase;
                 font-weight: bold;
-                 margin-top: 0px;
+                margin-top: 0px;
               }
 
               h4 {
@@ -139,6 +139,7 @@ export function generateHtml(data: IResume) {
                 text-transform: uppercase;
                 font-weight: bold;
                 margin-bottom: 0px;
+                margin-top: 5px;
               }
 
               .education-title {
@@ -191,6 +192,7 @@ export function generateHtml(data: IResume) {
               }
 
               .section-right {
+                margin-bottom: 15px;
               }
 
               .section-right:last-of-type {
@@ -408,9 +410,12 @@ export function generateHtml(data: IResume) {
             <div class="right-column">
               <div class="section-right">
                 <h3>Profile</h3>
-                <p class="profile">${personalInfo.profile}</p>
+                <div class="profile">${personalInfo.profile}</div>
 
-                <h3 class="section-title">Work Experience</h3>
+              </div>
+
+              <div class="section-right">
+                <h3>Work Experience</h3>
                 ${experiences
                   .map(
                     (exp: IExperience) => `
@@ -423,7 +428,7 @@ export function generateHtml(data: IResume) {
                     <div class="experience-data-locality">${exp.year} - ${
                       exp.locality
                     }</div>
-                    <p class="experience-description">${exp.description}</p>
+                    <div class="exdiverience-description">${exp.description}</div>
                     <div class="tags">${exp.tags.join(", ")}</div>
                   </div>
                 `
