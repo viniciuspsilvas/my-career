@@ -29,13 +29,18 @@ export async function POST(request: Request) {
 
     const htmlContent = generateHtml(resumeData);
 
-    chromium.setGraphicsMode = false; // Desativa o modo gráfico (reduz uso de memória)
+    const isProduction = process.env.NODE_ENV === "production";
 
-    // Inicia o navegador
     const browser = await puppeteer.launch({
-      args: chromium.args,
-      executablePath: await chromium.executablePath(),
-      headless: chromium.headless === "new" ? true : Boolean(chromium.headless),
+      args: isProduction ? chromium.args : [], // Usa args do Chromium apenas em produção
+      executablePath: isProduction
+        ? await chromium.executablePath() // Usa o Chromium otimizado em produção
+        : "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome", // Caminho do Chrome no macOS
+      headless: isProduction
+        ? chromium.headless === "new"
+          ? true
+          : Boolean(chromium.headless) // Converte para booleano
+        : true, // Modo headless em ambos os ambientes
     });
 
     const page = await browser.newPage();
