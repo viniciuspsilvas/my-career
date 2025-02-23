@@ -26,20 +26,22 @@ export function generateHtml(data: IResume) {
               }
             </style>
           <style>
-              @page {
-                size: A4;
-                margin: 10mm 5mm 5mm 0mm; /* top, right, bottom, left */
-              }
-
               @page :first {
                 margin: 0mm 0mm 10mm 0mm; /* top, right, bottom, left */
               }
+
+              @page {
+                size: A4;
+                margin: 10mm 5mm 0mm 0mm; /* top, right, bottom, left */
+              }
+
 
               body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 margin: 0;
                 padding: 0;
                 color: #333;
+                text-align: justify;
               }
 
               ul {
@@ -131,32 +133,33 @@ export function generateHtml(data: IResume) {
 
               h4 {
                 font-size: 14px;
-                color: #323232; /* Cor do H3 */
+                color: #323232;
                 text-transform: uppercase;
                 font-weight: bold;
+                margin-bottom: 0px;
               }
 
               .education-title {
-                color: #07d2be; /* Cor do education-title */
-                font-weight: bold; /* Texto em negrito */
+                color: #07d2be; 
+                font-weight: bold;
                 text-transform: uppercase;
               }
 
               .education-subtitle {
-                font-weight: bold; /* Texto em negrito */
+                font-weight: bold;
               }
 
               .experience-title {
-                color: #07d2be; /* Cor do experience-title */
-                font-weight: bold; /* Texto em negrito */
+                color: #07d2be;
+                font-weight: bold; 
               }
 
               .experience-subtitle {
-                font-weight: bold; /* Texto em negrito */
+                font-weight: bold;
               }
 
               .skill-name {
-                font-weight: bold; /* Texto em negrito */
+                font-weight: bold;
               }
 
               .progress-bar {
@@ -189,6 +192,10 @@ export function generateHtml(data: IResume) {
                   margin-bottom: 25px;
               }
 
+              .section-right:last-of-type {
+                  margin-bottom: 0px;
+              }
+
               .skill, .education, .certification, .reference, .interest {
                 margin-bottom: 15px;
               }
@@ -200,17 +207,9 @@ export function generateHtml(data: IResume) {
               .experience {
                 margin-bottom: 20px;
                 page-break-inside: avoid; 
-                break-inside: avoid; 
-              }
+                break-inside: avoid;               }
 
-              .experience-separator {
-                border: 0;
-                height: 1px;
-                background: #e5e5e5;
-                margin: 15px 0;
-                width: 75%;
-                margin-left: auto;
-                margin-right: auto;
+              .experience-data-locality{
               }
 
               .experience-company, .skill-percentage, .education-institution, .certification-institution, .reference-position, .interest-description {
@@ -219,7 +218,7 @@ export function generateHtml(data: IResume) {
               }
 
               .experience-description {
-                  font-size: 14px;
+                  font-size: 12px;
               }
               
               .experience-company {
@@ -253,6 +252,7 @@ export function generateHtml(data: IResume) {
 
               .experience-table-head th {
                 padding: 8px;
+                text-align: left;
               }
 
               .experience-table tbody tr:nth-child(odd) {
@@ -398,9 +398,7 @@ export function generateHtml(data: IResume) {
                 <div class="section-title">Languages</div>
                 <ul>
                 ${(personalInfo.languages ?? [])
-                  .map(
-                    (language) => `${language}`
-                  )
+                  .map((language) => `${language}`)
                   .join(", ")}
                 </ul>
               </div>
@@ -421,7 +419,9 @@ export function generateHtml(data: IResume) {
                     }  <span class="experience-company"> | ${
                       exp.company
                     }</span></h4>
-                    <div>${exp.year} - ${exp.locality}</div>
+                    <div class="experience-data-locality">${exp.year} - ${
+                      exp.locality
+                    }</div>
                     <p class="experience-description">${exp.description}</p>
                     <div class="tags">${exp.tags.join(", ")}</div>
                   </div>
