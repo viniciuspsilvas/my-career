@@ -204,7 +204,6 @@ export function generateHtml(data: IResume) {
               }
 
               .profile{
-                font-size: 16px;
               }
 
               .experience {
