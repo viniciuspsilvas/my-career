@@ -28,7 +28,7 @@ export function generateHtml(data: IResume) {
           <style>
               @page {
                 size: A4;
-                margin: 10mm 10mm 15mm 10mm; /* top, right, bottom, left */
+                margin: 10mm 10mm 5mm 10mm; /* top, right, bottom, left */
               }
 
               @page :first {
