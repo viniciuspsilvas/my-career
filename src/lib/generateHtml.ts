@@ -35,7 +35,6 @@ export function generateHtml(data: IResume) {
                 margin: 10mm 5mm 0mm 0mm; /* top, right, bottom, left */
               }
 
-
               body {
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 margin: 0;
@@ -119,16 +118,19 @@ export function generateHtml(data: IResume) {
               }
 
               .right-column {
+                display: flex;
+                flex-direction: column;
                 padding-left: 20px;
                 grid-column: 2 / span 3;
               }
 
               h3 {
                 font-size: 16px;
-                color: #323232; /* Cor do H3 */
+                color: #323232; 
                 margin-bottom: 10px;
                 text-transform: uppercase;
                 font-weight: bold;
+                 margin-top: 0px;
               }
 
               h4 {
@@ -189,7 +191,6 @@ export function generateHtml(data: IResume) {
               }
 
               .section-right {
-                  margin-bottom: 25px;
               }
 
               .section-right:last-of-type {
@@ -349,7 +350,8 @@ export function generateHtml(data: IResume) {
                     <div class="education">
                       <div class="education-title">${edu.courseName}</div>
                       <div class="education-locality">${edu.locality}</div>
-                      <div class="education-institution">${edu.institution} - ${edu.year}</div>
+                      <div class="education-institution">${edu.institution}</div>
+                      <div class="education-institution">${edu.year}</div>
                     </div>
                   `
                     )
@@ -402,9 +404,8 @@ export function generateHtml(data: IResume) {
                   .join(", ")}
                 </ul>
               </div>
-
-              </div> <!-- Fechamento da div left-column -->
-              <div class="right-column">
+            </div> <!-- Fechamento da div left-column -->
+            <div class="right-column">
               <div class="section-right">
                 <h3>Profile</h3>
                 <p class="profile">${personalInfo.profile}</p>
@@ -432,7 +433,7 @@ export function generateHtml(data: IResume) {
                   </div>
 
                 <div class="section-right">
-                <h4 class="section-title">Previous Experiences</h4>
+                  <h3 class="section-title">Previous Experiences</h3>
                   <table class="experience-table">
                     <thead class="experience-table-head">
                       <tr>
