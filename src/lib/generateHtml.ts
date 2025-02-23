@@ -6,9 +6,9 @@ import { ITool } from "../models/Tool";
 export function generateHtml(data: IResume) {
   const { personalInfo, skills, tools } = data;
 
-  const experiences = data.experiences.slice(0, 3);
+  const experiences = data.experiences.slice(0, 4);
 
-  const experienceTable = data.experiences.slice(3);
+  const experienceTable = data.experiences.slice(4);
 
   const educations = data.educations || [];
   const certifications = data.certifications || [];
@@ -26,252 +26,301 @@ export function generateHtml(data: IResume) {
               }
             </style>
           <style>
-          @page {
-            size: A4;
-            margin: 10mm 10mm 15mm 10mm; /* top, right, bottom, left */
-          }
+              @page {
+                size: A4;
+                margin: 10mm 10mm 15mm 10mm; /* top, right, bottom, left */
+              }
 
-          @page :first {
-          //   margin-bottom: 50mm; /* Margem maior apenas na primeira página */
-          margin: 0mm 0mm 10mm 0mm; /* top, right, bottom, left */
-          }
-            body {
-              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              margin: 0;
-              padding: 0;
-              color: #333;
-            }
-            ul {
-               list-style-type: disc; /* Bullets padrão */
-              padding-left: 20px; /* Espaçamento para os bullets */
-            }
+              @page :first {
+                margin: 0mm 0mm 10mm 0mm; /* top, right, bottom, left */
+              }
 
-            .resume {
-              display: flex;
-              justify-content: space-between;
-              flex-direction: column;
-            }
-            .header {
-              background-color: #323232 !important;
-              color: #fff !important;
-              text-align: center;
-              -webkit-print-color-adjust: exact; /* Força o navegador a renderizar o background */
-              print-color-adjust: exact; /* Padrão moderno */
-            }
-            .titles {
+              body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                margin: 0;
+                padding: 0;
+                color: #333;
+              }
+
+              ul {
+                list-style-type: disc; /* Bullets padrão */
+                padding-left: 20px; /* Espaçamento para os bullets */
+              }
+
+              .resume {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+              }
+
+              .header {
+                background-color: #323232 !important;
+                color: #fff !important;
+                text-align: center;
+                -webkit-print-color-adjust: exact; /* Força o navegador a renderizar o background */
+                print-color-adjust: exact; /* Padrão moderno */
+              }
+
+              .titles {
                 padding-top: 30px;
                 padding-bottom: 30px;
-            }
-            .header-footer-email{
-              grid-column: 2 / span 2;
-              border-right: 2px solid white;
-              border-left: 2px solid white;
-            }
-            .header h1 {
-              margin-bottom: 5px;
-              color: #ffffff; /* Cor do H1 */
-              text-transform: uppercase;
-              font-family: 'Poppins', sans-serif;
-              font-feature-settings: normal;
-              font-size: 48px;
-              font-variation-settings: normal;
-              font-weight: 700;
-            }
-            .header h2 {
-              font-size: 18px;
-              color: #07d2be;
-              margin-bottom: 20px;
-              text-transform: uppercase;
-              font-weight: 700;
-              letter-spacing: 0.2em;
-              word-spacing: 0.1em;
-            }
-            .header-footer {
-              background: #07d2be; 
-              color: #fff; 
-              text-align: center; 
-              padding: 10px;
-              display: grid;
-              grid-template-columns: 1fr 1fr 1fr 1fr;
-            }
-            .content {
-              background: #fff; 
-              color: #323232;
-              display: grid;
-              grid-template-columns: 1fr 1fr 1fr 1fr;
-              padding: 20px;
-              font-size: 12px;
-            }
-            .left-column {
-              border-right: 2px solid #e0e0e0;
-              padding-right: 20px;
               }
-            .right-column {
-              padding-left: 20px;
-              grid-column: 2 / span 3;
-            }
-            h3 {
-              font-size: 16px;
-              color: #323232; /* Cor do H3 */
-              margin-bottom: 10px;
-              text-transform: uppercase;
-              font-weight: bold;
-            }
-            h4 {
-              font-size: 14px;
-              color: #323232; /* Cor do H3 */
-              text-transform: uppercase;
-              font-weight: bold;
-            }
-            .education-title {
-              color: #07d2be; /* Cor do education-title */
-              font-weight: bold; /* Texto em negrito */
-              
-              text-transform: uppercase;
-            }
-            .education-subtitle {
-              font-weight: bold; /* Texto em negrito */
-            }
-            .experience-title {
-              color: #07d2be; /* Cor do experience-title */
-              font-weight: bold; /* Texto em negrito */
-            }
-            .experience-subtitle {
-              font-weight: bold; /* Texto em negrito */
-            }
-            .skill-name {
-              font-weight: bold; /* Texto em negrito */
-            }
-            .progress-bar {
-              background: #e0e0e0;
-              border-radius: 3px;
-              overflow: hidden;
-              height: 7px;
-              margin-top: 5px;
-            }
-            .progress-bar-fill {
-              background: #07d2be; /* Cor da barra de progresso */
-              height: 100%;
-            }
-            .section-title {
-              font-size: 14px;
-              font-weight: bold;
-              margin-bottom: 10px;
-              text-transform: uppercase;
-            }
-            .section {
-              margin-bottom: 30px;
-            }
-            .section-right {
-              margin-bottom: 30px;
-            }
-            .skill, .education, .certification, .reference, .interest {
-              margin-bottom: 15px;
-            }
-            .experience {
-              margin-bottom: 15px;
-            }
-            .experience-separator {
-              border: 0;
-              height: 1px;
-              background: #e5e5e5;
-              margin: 15px 0;
-              width: 75%;
-              
-              margin-left: auto;
-              margin-right: auto;
 
-            }
-            .experience-company, .skill-percentage, .education-institution, .certification-institution, .reference-position, .interest-description {
-              color: #666;
-              font-size: 12px;
-            }
-            .experience-company {
-              font-weight: bold;
-            } 
-            a {
-              color: #007bff;
-              text-decoration: none;
-            }
-            a:hover {
-              text-decoration: underline;
-            }
-            .tags {
-              font-style: italic;
-              color: #666;
-            }
-            .experience-table{
-              width: 100%;
-              border-collapse: collapse;
-              margin-top: 20px;
-              margin-bottom: 20px;
-              font-size: 10px;
-            }
-            .experience-table-head{
-              background-color: #07d2be;
-              color: white;
-            }
-            .experience-table-head th{
-              padding: 8px;
-            }
-            .experience-table tbody tr:nth-child(odd){
-              background-color: #f9f9f9;
-            }
-            .experience-table tbody tr:nth-child(even){
-              background-color: #f0f0f0;
-            }
-            .experience-table tbody tr td{
-              padding:8px;
-            }
-            .section-expertise{
-              font-size: 12px;
-              color: #666;
-              word-spacing: 0.1em;
-              font-weight: bold;
-            }
-            .reference-section{
-              display: grid;
-              grid-template-columns: 1fr 1fr;
-            }
-            .reference{
-              margin-bottom: 15px;
-            }
-            .reference-name{
-              font-weight: bold;
-            }
-            .reference-position{
-              color: #666;
-              font-size: 12px;
-            }
-            .interest{
-              margin-bottom: 15px;
-              display: flex;
-              align-items: center;
-              flex-direction: column;
+              .header-footer-email {
+                grid-column: 2 / span 2;
+                border-right: 2px solid white;
+                border-left: 2px solid white;
+              }
 
-            }
-            .interest-title{
-              font-size: 12px;
-            }
-            .interest-icon{
-              font-size: 28px;
-              color: #07d2be;
-              margin-right: 5px;
-            }
-            .section-interest{
-              font-size: 18px;
-              color: #666;
-              word-spacing: 0.1em;
-              display: flex;
-              flex-wrap: nowrap;
-              justify-content: space-between;
+              .header h1 {
+                margin-bottom: 5px;
+                color: #ffffff; /* Cor do H1 */
+                text-transform: uppercase;
+                font-family: 'Poppins', sans-serif;
+                font-feature-settings: normal;
+                font-size: 48px;
+                font-variation-settings: normal;
+                font-weight: 700;
+              }
+
+              .header h2 {
+                font-size: 18px;
+                color: #07d2be;
+                margin-bottom: 20px;
+                text-transform: uppercase;
+                font-weight: 700;
+                letter-spacing: 0.2em;
+                word-spacing: 0.1em;
+              }
+
+              .header-footer {
+                background: #07d2be;
+                color: #fff;
+                text-align: center;
+                padding: 10px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+              }
+
+              .content {
+                background: #fff;
+                color: #323232;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                padding: 20px;
+                font-size: 12px;
+              }
+
+              .left-column {
+                border-right: 2px solid #e0e0e0;
+                padding-right: 20px;
+              }
+
+              .right-column {
+                padding-left: 20px;
+                grid-column: 2 / span 3;
+              }
+
+              h3 {
+                font-size: 16px;
+                color: #323232; /* Cor do H3 */
+                margin-bottom: 10px;
+                text-transform: uppercase;
+                font-weight: bold;
+              }
+
+              h4 {
+                font-size: 14px;
+                color: #323232; /* Cor do H3 */
+                text-transform: uppercase;
+                font-weight: bold;
+              }
+
+              .education-title {
+                color: #07d2be; /* Cor do education-title */
+                font-weight: bold; /* Texto em negrito */
+                text-transform: uppercase;
+              }
+
+              .education-subtitle {
+                font-weight: bold; /* Texto em negrito */
+              }
+
+              .experience-title {
+                color: #07d2be; /* Cor do experience-title */
+                font-weight: bold; /* Texto em negrito */
+              }
+
+              .experience-subtitle {
+                font-weight: bold; /* Texto em negrito */
+              }
+
+              .skill-name {
+                font-weight: bold; /* Texto em negrito */
+              }
+
+              .progress-bar {
+                background: #e0e0e0;
+                border-radius: 3px;
+                overflow: hidden;
+                height: 7px;
+                margin-top: 5px;
+              }
+
+              .progress-bar-fill {
+                background: #07d2be; /* Cor da barra de progresso */
+                height: 100%;
+              }
+
+              .section-title {
+                font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 10px;
+                text-transform: uppercase;
+              }
+
+              .section {
+                margin-bottom: 50px;
+                page-break-inside: avoid; 
+                break-inside: avoid; 
+              }
+
+              .section-right {
+                  margin-bottom: 25px;
+              }
+
+              .skill, .education, .certification, .reference, .interest {
+                margin-bottom: 15px;
+              }
+
+              .profile{
+                font-size: 16px;
+              }
+
+              .experience {
+                margin-bottom: 20px;
+                page-break-inside: avoid; 
+                break-inside: avoid; 
+              }
+
+              .experience-separator {
+                border: 0;
+                height: 1px;
+                background: #e5e5e5;
+                margin: 15px 0;
+                width: 75%;
+                margin-left: auto;
+                margin-right: auto;
+              }
+
+              .experience-company, .skill-percentage, .education-institution, .certification-institution, .reference-position, .interest-description {
+                color: #666;
+                font-size: 12px;
+              }
+
+              .experience-description {
+                  font-size: 14px;
+              }
               
-              width: 50%;
-              margin-left: auto;
-              margin-right: auto;
+              .experience-company {
+                font-weight: bold;
+              }
 
-            }
-          </style>
+              a {
+                color: #007bff;
+                text-decoration: none;
+              }
+
+              a:hover {
+                text-decoration: underline;
+              }
+
+              .tags {
+                font-style: italic;
+                color: #666;
+              }
+
+              .experience-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 10px;
+              }
+
+              .experience-table-head {
+                background-color: #07d2be;
+                color: white;
+              }
+
+              .experience-table-head th {
+                padding: 8px;
+              }
+
+              .experience-table tbody tr:nth-child(odd) {
+                background-color: #f9f9f9;
+              }
+
+              .experience-table tbody tr:nth-child(even) {
+                background-color: #f0f0f0;
+              }
+
+              .experience-table tbody tr td {
+                padding: 8px;
+              }
+
+              .section-expertise {
+                font-size: 12px;
+                color: #666;
+                word-spacing: 0.1em;
+                font-weight: bold;
+              }
+
+              .reference-section {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+              }
+
+              .reference {
+                margin-bottom: 15px;
+              }
+
+              .reference-name {
+                font-weight: bold;
+              }
+
+              .reference-position {
+                color: #666;
+                font-size: 12px;
+              }
+
+              .interest {
+                margin-bottom: 15px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+              }
+
+              .interest-title {
+                font-size: 12px;
+              }
+
+              .interest-icon {
+                font-size: 28px;
+                color: #07d2be;
+                margin-right: 5px;
+              }
+
+              .section-interest {
+                font-size: 18px;
+                color: #666;
+                word-spacing: 0.1em;
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+                width: 50%;
+                margin-left: auto;
+                margin-right: auto;
+              }
+            </style>
         </head>
         <body>
           <div class="resume">
@@ -350,21 +399,17 @@ export function generateHtml(data: IResume) {
                 <ul>
                 ${(personalInfo.languages ?? [])
                   .map(
-                    (language) => `
-                  <li class="certification">
-                    <div class="certification-title">${language}</div>
-                  </li>
-                `
+                    (language) => `${language}`
                   )
-                  .join("")}
+                  .join(", ")}
                 </ul>
               </div>
 
               </div> <!-- Fechamento da div left-column -->
               <div class="right-column">
-                    <div class="section-right">
+              <div class="section-right">
                 <h3>Profile</h3>
-                <p>${personalInfo.profile}</p>
+                <p class="profile">${personalInfo.profile}</p>
 
                 <h3 class="section-title">Work Experience</h3>
                 ${experiences
@@ -377,7 +422,7 @@ export function generateHtml(data: IResume) {
                       exp.company
                     }</span></h4>
                     <div>${exp.year} - ${exp.locality}</div>
-                    <p>${exp.description}</p>
+                    <p class="experience-description">${exp.description}</p>
                     <div class="tags">${exp.tags.join(", ")}</div>
                   </div>
                 `
@@ -386,7 +431,7 @@ export function generateHtml(data: IResume) {
               
                   </div>
 
-                <div class="section">
+                <div class="section-right">
                 <h4 class="section-title">Previous Experiences</h4>
                   <table class="experience-table">
                     <thead class="experience-table-head">
@@ -414,7 +459,7 @@ export function generateHtml(data: IResume) {
 
 
 
-                <div class="section">
+                <div class="section-right">
                   <h4 class="section-title">References</h4>
                       <div class="reference-section">
                   ${references
@@ -436,7 +481,7 @@ export function generateHtml(data: IResume) {
                   </div>
                 </div>
 
-                <div class="section">
+                <div class="section-right">
                     <h4 class="section-title">Interests</h4>
                    
                     <div class="section-interest">

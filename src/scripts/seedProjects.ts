@@ -130,9 +130,9 @@ const personalInfo = {
   fullName: "Vinicius Silva",
   title: "Full Stack Developer",
   email: "viniciuspsilvas@gmail.com",
-  location: "Gold Coast, NSW, Australia",
+  location: "Gold Coast, Australia",
   profile:
-    "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions.",
+    "Programmer analyst professional, offering over 10 years of experience with solid knowledge in the field of web development. I am skilled in fact finding and analysis, discovering problems and providing the most appropriate solutions.",
   languages: ["English", "Portuguese"]
 };
 
