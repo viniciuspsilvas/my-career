@@ -495,17 +495,17 @@ const seedAll = async () => {
     await connectDB();
 
     await Promise.all([
-      // seedProjects(),
-      // seedExperiences(),
-      // seedStats(),
-      // seedSkills(),
-      // seedPersonalInfo(),
-      // seedTools(),
-      // seedBlogPosts(),
+      seedProjects(),
+      seedExperiences(),
+      seedStats(),
+      seedSkills(),
+      seedPersonalInfo(),
+      seedTools(),
+      seedBlogPosts(),
       seedEducation(),
-      // seedCertifications(),
-      // seedReferences(),
-      // seedInterests()
+      seedCertifications(),
+      seedReferences(),
+      seedInterests()
     ]);
 
     console.log("All seeds inserted successfully");

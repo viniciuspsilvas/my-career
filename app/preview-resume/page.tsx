@@ -1,4 +1,3 @@
-// src/app/preview-resume/page.tsx
 "use client";
 
 import { generateHtml } from "@/src/lib/generateHtml";
@@ -18,7 +17,7 @@ export default function PreviewResume() {
       setHtmlContent(html);
     }
     loadData();
-  }, []);
+  }, [data]);
 
   return <div dangerouslySetInnerHTML={{ __html: htmlContent }} />;
 }
