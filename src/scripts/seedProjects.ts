@@ -8,6 +8,10 @@ import { Skill } from "../models/Skill";
 import { PersonalInfo } from "../models/PersonalInfo";
 import { Tool } from "../models/Tool";
 import { BlogPost } from "../models/BlogPost";
+import { Certification } from "../models/Certification";
+import { Education } from "../models/Education";
+import { Reference } from "../models/Reference";
+import { Interest } from "../models/Interest";
 
 const experiences = [
   {
@@ -15,81 +19,81 @@ const experiences = [
     title: "Front End Developer",
     company: "TEREM - Sydney, Australia",
     description:
-      "Worked as a React JS developer on the Find My Credit project for Qantas Airways. Developed a web application to help customers find their Covid19 Credit.",
+      "Worked as a React JS developer on the Find My Credit project for Qantas Airways. Developed a web application to help customers find their Covid19 Credit."
   },
   {
     year: "Jan 2024 – Sep 2024",
     title: "Full Stack Developer",
     company: "FLK IT OVER - Sydney, Australia",
     description:
-      "Key role in developing and maintaining a real estate platform. Worked on UI/UX with Radix UI, CSS Modules, Embla Carousel, and Framer Motion.",
+      "Key role in developing and maintaining a real estate platform. Worked on UI/UX with Radix UI, CSS Modules, Embla Carousel, and Framer Motion."
   },
   {
     year: "Apr 2021 - Dec 2022",
     title: "Full Stack Developer",
     company: "ZAPID HIRE - Sydney, Australia",
     description:
-      "Maintained applications written in ReactJS and React Native. Developed GraphQL server with Apollo, using JWT authentication and Prisma ORM.",
+      "Maintained applications written in ReactJS and React Native. Developed GraphQL server with Apollo, using JWT authentication and Prisma ORM."
   },
   {
     year: "Dec 2020 – Apr 2021",
     title: "Mobile Developer",
     company: "PAY IT LATER - Brisbane, Australia",
     description:
-      "Developed mobile applications for Android and iOS. Built reusable components with Storybook and implemented API calls using Apollo GraphQL.",
+      "Developed mobile applications for Android and iOS. Built reusable components with Storybook and implemented API calls using Apollo GraphQL."
   },
   {
     year: "Mar 2020 - Dec 2020",
     title: "Full Stack Developer",
     company: "Two Red Kites",
     description:
-      "Developed frontend and backend solutions, contributing to various projects.",
+      "Developed frontend and backend solutions, contributing to various projects."
   },
   {
     year: "Mar 2019 - Jun 2019",
     title: "React Mobile Developer",
     company: "Live Platforms Pty Ltd",
     description:
-      "Worked on mobile development using React Native and related technologies.",
+      "Worked on mobile development using React Native and related technologies."
   },
   {
     year: "Aug 2018 - Feb 2019",
     title: "React Mobile Developer",
     company: "Mindroom Innovation",
-    description: "Developed mobile applications and optimized UI components.",
+    description: "Developed mobile applications and optimized UI components."
   },
   {
     year: "Feb 2015 - Apr 2016",
     title: "Web Developer",
     company: "Indra Brasil",
     description:
-      "Developed web applications with JavaScript and Java technologies.",
+      "Developed web applications with JavaScript and Java technologies."
   },
   {
     year: "Apr 2014 - Feb 2015",
     title: "Java Developer",
     company: "Sinos Algar Tecnologia",
-    description: "Built Java applications and maintained enterprise systems.",
+    description: "Built Java applications and maintained enterprise systems."
   },
   {
     year: "Sep 2013 - Mar 2014",
     title: "Java Developer",
     company: "Urcal Projetos",
-    description: "Worked on Java-based solutions for various clients.",
+    description: "Worked on Java-based solutions for various clients."
   },
   {
     year: "Dec 2009 - Jul 2013",
     title: "Java Developer",
     company: "Politec Indra",
-    description: "Developed enterprise applications with Java.",
+    description: "Developed enterprise applications with Java."
   },
   {
     year: "Aug 2008 - Nov 2009",
     title: ".NET Developer",
     company: "LG Informatica",
     description:
-      "Built and maintained .NET applications for various business needs.",
-  },
+      "Built and maintained .NET applications for various business needs."
+  }
 ];
 
 const stats = [
@@ -98,7 +102,7 @@ const stats = [
   { label: "Node.js", value: "80%" },
   { label: "React", value: "70%" },
   { label: "React Native", value: "65%" },
-  { label: "Redux", value: "70%" },
+  { label: "Redux", value: "70%" }
   // { label: "Storybook", value: "60%" },
   // { label: "Styled Components", value: "50%" },
   // { label: "iOS & Android", value: "60%" },
@@ -119,7 +123,7 @@ const skills = [
   { name: "PostgreSQL", percentage: 60 },
   { name: "Docker", percentage: 75 },
   { name: "CI/CD", percentage: 70 },
-  { name: "DevOps", percentage: 65 },
+  { name: "DevOps", percentage: 65 }
 ];
 
 const personalInfo = {
@@ -129,6 +133,7 @@ const personalInfo = {
   location: "Gold Coast, NSW, Australia",
   profile:
     "Experienced full-stack developer with expertise in JavaScript, React, Node.js, and cloud solutions.",
+  languages: ["English", "Portuguese"]
 };
 
 const tools = [
@@ -136,80 +141,80 @@ const tools = [
     title: "VS Code",
     description: "Powerful code editor with great extensions.",
     link: "https://code.visualstudio.com/",
-    image: "/images/vscode.png",
+    image: "/images/vscode.png"
   },
   {
     title: "TypeScript",
     description: "Typed superset of JavaScript for scalability.",
     link: "https://www.typescriptlang.org/",
-    image: "/images/typescript.png",
+    image: "/images/typescript.png"
   },
   {
     title: "React JS",
     description: "Library for building UI components.",
     link: "https://react.dev/",
-    image: "/images/react.png",
+    image: "/images/react.png"
   },
   {
     title: "React Query",
     description: "Data fetching and state management tool.",
     link: "https://tanstack.com/query/latest",
-    image: "/images/react-query.png",
+    image: "/images/react-query.png"
   },
   {
     title: "Tailwind",
     description: "Utility-first CSS framework for fast styling.",
     link: "https://tailwindcss.com/",
-    image: "/images/tailwind.png",
+    image: "/images/tailwind.png"
   },
   {
     title: "Next JS",
     description: "Full-stack React framework for web apps.",
     link: "https://nextjs.org/",
-    image: "/images/nextjs.png",
+    image: "/images/nextjs.png"
   },
   {
     title: "Node.js",
     description: "JavaScript runtime for backend development.",
     link: "https://nodejs.org/",
-    image: "/images/nodejs.png",
+    image: "/images/nodejs.png"
   },
   {
     title: "Prisma",
     description: "Modern ORM for Node.js and TypeScript.",
     link: "https://www.prisma.io/",
-    image: "/images/prisma.png",
+    image: "/images/prisma.png"
   },
   {
     title: "Mongoose",
     description: "MongoDB object modeling for Node.js.",
     link: "https://mongoosejs.com/",
-    image: "/images/mongoose.png",
+    image: "/images/mongoose.png"
   },
   {
     title: "PostgreSQL",
     description: "Powerful relational database system.",
     link: "https://www.postgresql.org/",
-    image: "/images/postgresql.png",
+    image: "/images/postgresql.png"
   },
   {
     title: "MongoDB",
     description: "NoSQL document-oriented database.",
     link: "https://www.mongodb.com/",
-    image: "/images/mongodb.png",
+    image: "/images/mongodb.png"
   },
   {
     title: "Azure",
     description: "Cloud computing platform from Microsoft.",
     link: "https://azure.microsoft.com/",
-    image: "/images/azure.png",
+    image: "/images/azure.png"
   },
   {
     title: "AWS",
     description: "Amazon Web Services for cloud computing.",
     link: "https://aws.amazon.com/",
-    image: "/images/aws.png",
-  },
+    image: "/images/aws.png"
+  }
 ];
 
 const blogPosts = [
@@ -221,7 +226,7 @@ const blogPosts = [
     coverImage: "https://source.unsplash.com/800x400/?technology,performance",
     tags: ["Web Performance", "SEO", "Core Web Vitals", "Frontend Development"],
     published: true,
-    publishedAt: new Date("2025-04-15T08:00:00Z"),
+    publishedAt: new Date("2025-04-15T08:00:00Z")
   },
 
   {
@@ -292,10 +297,10 @@ const blogPosts = [
       "Performance",
       "WebGL",
       "JavaScript",
-      "WebWorkers",
+      "WebWorkers"
     ],
     published: true,
-    publishedAt: new Date("2025-06-10T08:00:00Z"),
+    publishedAt: new Date("2025-06-10T08:00:00Z")
   },
 
   {
@@ -305,8 +310,8 @@ const blogPosts = [
     author: "Vinicius Silva",
     coverImage: "/images/backend-development.png",
     tags: ["Node.js", "Express.js", "Databases", "Backend Architecture"],
-    published: false,
-  },
+    published: false
+  }
 ];
 
 const projects = [
@@ -314,15 +319,77 @@ const projects = [
     title: "Portfolio Website",
     description: "A modern portfolio built with Next.js and TailwindCSS.",
     image: "https://via.placeholder.com/300",
-    link: "https://myportfolio.com",
+    link: "https://myportfolio.com"
   },
   {
     title: "E-commerce App",
     description: "An online store built with React, Node.js, and MongoDB.",
     image: "https://via.placeholder.com/300",
-    link: "https://myecommerce.com",
-  },
+    link: "https://myecommerce.com"
+  }
 ];
+
+const education = [
+  {
+    courseName: "Project Management",
+    institution: "Mindroom Innovation",
+    locality: "Gold Coast, Australia",
+    year: "2018-2020"
+  },
+  {
+    courseName: "Cert Iv In Media",
+    institution: "Eip",
+    locality: "Gold Coast, Australia",
+    year: "2018"
+  },
+  {
+    courseName: "Master In Business Management",
+    institution: "Getulio Vargas Foundation",
+    locality: "Rio De Janeiro, Brazil",
+    year: "2013-2014"
+  },
+  {
+    courseName: "B.S. In Computer Science",
+    institution: "Pontifical Catholic University",
+    locality: "Goiânia, Brazil",
+    year: "2007-2012"
+  }
+];
+
+const certifications = [
+  {
+    name: "Certified Scrum Master",
+    institution: "Scrum Alliance"
+  },
+  {
+    name: "SUn Certified Java Programmer",
+    institution: "Oracle"
+  }
+];
+
+const references = [
+  {
+    name: "Wade Noordink",
+    description: "Senior Software Engineer",
+    phone: "0452420202",
+    email: "wade.noordink@trinoor.comcom"
+  },
+  {
+    name: "Aaron Burke",
+    description: "Tech Lead",
+    phone: "0421 212 255",
+    email: "aaron.burke@trinoor.com"
+  }
+];
+
+const interests = [
+  { title: "Music", icon: "fa-solid fa-music" },
+  { title: "Coding", icon: "fa-solid fa-laptop-code" },
+  { title: "Travels", icon: "fa-solid fa-plane-departure" },
+  { title: "Sport", icon: "fa-solid fa-person-biking" }
+];
+
+// @@@
 
 const seedProjects = async () => {
   try {
@@ -387,18 +454,58 @@ const seedBlogPosts = async () => {
   }
 };
 
+const seedEducation = async () => {
+  try {
+    await Education.insertMany(education);
+    console.log("Education inserted successfully");
+  } catch (error) {
+    console.error("Error inserting Education seeds:", error);
+  }
+};
+
+const seedCertifications = async () => {
+  try {
+    await Certification.insertMany(certifications);
+    console.log("Certifications inserted successfully");
+  } catch (error) {
+    console.error("Error inserting Certification seeds:", error);
+  }
+};
+
+const seedReferences = async () => {
+  try {
+    await Reference.insertMany(references);
+    console.log("References inserted successfully");
+  } catch (error) {
+    console.error("Error inserting Reference seeds:", error);
+  }
+};
+
+const seedInterests = async () => {
+  try {
+    await Interest.insertMany(interests);
+    console.log("Interests inserted successfully");
+  } catch (error) {
+    console.error("Error inserting Interest seeds:", error);
+  }
+};
+
 const seedAll = async () => {
   try {
     await connectDB();
 
     await Promise.all([
-      seedProjects(),
-      seedExperiences(),
-      seedStats(),
-      seedSkills(),
-      seedPersonalInfo(),
-      seedTools(),
-      seedBlogPosts(),
+      // seedProjects(),
+      // seedExperiences(),
+      // seedStats(),
+      // seedSkills(),
+      // seedPersonalInfo(),
+      // seedTools(),
+      // seedBlogPosts(),
+      seedEducation(),
+      // seedCertifications(),
+      // seedReferences(),
+      // seedInterests()
     ]);
 
     console.log("All seeds inserted successfully");

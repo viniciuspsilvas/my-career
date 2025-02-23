@@ -10,50 +10,10 @@ export function generateHtml(data: IResume) {
 
   const experienceTable = data.experiences.slice(3);
 
-  const education = [
-    {
-      courseName: "Bachelor of Science in Computer Science",
-      institution: "University of California, Los Angeles",
-      year: "2016 - 2020"
-    },
-    {
-      courseName: "High School Diploma",
-      institution: "Los Angeles High School",
-      year: "2012 - 2016"
-    }
-  ];
-
-  const certifications = [
-    {
-      name: "Certified Scrum Master",
-      institution: "Scrum Alliance"
-    },
-    {
-      name: "SUn Certified Java Programmer",
-      institution: "Oracle"}
-  ];
-
-  const references = [
-    {
-      name: "John Doe",
-      description: "Senior Software Engineer",
-      phone: "0452420202",
-      email: "joshn@gmail.com"
-    },
-    {
-      name: "Jane Doe",
-      description: "Tech Lead",
-      phone: "0452420202",
-      email: "joshn@gmail.com"
-    }
-  ];
-
-  const interests = [
-    { title: "Music", icon: "fa-solid fa-music" },
-    { title: "Coding", icon: "fa-solid fa-laptop-code" },
-    { title: "Travels", icon: "fa-solid fa-plane-departure" },
-    { title: "Sport", icon: "fa-solid fa-person-biking" }
-  ];
+  const educations = data.educations || [];
+  const certifications = data.certifications || [];
+  const references = data.references || [];
+  const interests = data.interests || [];
 
   return `
       <html>
@@ -334,11 +294,12 @@ export function generateHtml(data: IResume) {
               <div class="left-column">
                 <div class="section">
                   <div class="section-title">Education</div>
-                  ${education
+                  ${educations
                     .map(
                       (edu) => `
                     <div class="education">
                       <div class="education-title">${edu.courseName}</div>
+                      <div class="education-locality">${edu.locality}</div>
                       <div class="education-institution">${edu.institution} - ${edu.year}</div>
                     </div>
                   `
@@ -377,6 +338,21 @@ export function generateHtml(data: IResume) {
                   <li class="certification">
                     <div class="certification-title">${cert.name}</div>
                     <div class="certification-institution">${cert.institution}</div>
+                  </li>
+                `
+                  )
+                  .join("")}
+                </ul>
+              </div>
+
+              <div class="section">
+                <div class="section-title">Languages</div>
+                <ul>
+                ${(personalInfo.languages ?? [])
+                  .map(
+                    (language) => `
+                  <li class="certification">
+                    <div class="certification-title">${language}</div>
                   </li>
                 `
                   )
@@ -447,8 +423,12 @@ export function generateHtml(data: IResume) {
                     <div class="reference">
                       <div class="reference-name">${ref.name}</div>
                       <div class="reference-position">${ref.description}</div>
-                      <div class="reference-position">${ref.phone}</div>
-                      <div class="reference-position">${ref.email}</div>
+                      <div class="reference-position">
+                        <i class="fa-solid fa-phone"></i>
+                      ${ref.phone}</div>
+                      <div class="reference-position">
+                      <i class="fa-solid fa-envelope"></i>
+                      ${ref.email}</div>
                     </div>
                   `
                     )
