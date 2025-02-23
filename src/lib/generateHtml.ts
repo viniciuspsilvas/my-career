@@ -28,7 +28,7 @@ export function generateHtml(data: IResume) {
           <style>
               @page {
                 size: A4;
-                margin: 10mm 10mm 5mm 10mm; /* top, right, bottom, left */
+                margin: 10mm 5mm 5mm 0mm; /* top, right, bottom, left */
               }
 
               @page :first {
@@ -337,7 +337,7 @@ export function generateHtml(data: IResume) {
                 <span class="header-footer-location">
                 <i class="fa-solid fa-location-dot"></i>
                 ${personalInfo.location}</span>
-              </div>
+              </div> 
             </div>
             <div class="content">
               <div class="left-column">
