@@ -12,6 +12,8 @@ export async function GET() {
 
     const isProduction = process.env.NODE_ENV === "production";
 
+    console.log("# Generation PDF in production:", isProduction);
+
     const browser = await puppeteer.launch({
       args: isProduction ? chromium.args : [], 
       executablePath: isProduction

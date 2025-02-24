@@ -38,6 +38,27 @@ export default function MainLayout({
       <NavBar />
       <main>{children}</main>
       {/* <Footer /> */}
+
+
+      {/* reCAPTCHA Disclaimer
+      <footer className="text-center text-sm text-gray-500 dark:text-gray-400 mt-8">
+        This site is protected by reCAPTCHA and the Google{" "}
+        <a
+          href="https://policies.google.com/privacy"
+          className="text-primary-500 hover:underline"
+        >
+          Privacy Policy
+        </a>{" "}
+        and{" "}
+        <a
+          href="https://policies.google.com/terms"
+          className="text-primary-500 hover:underline"
+        >
+          Terms of Service
+        </a>{" "}
+        apply.
+      </footer>
+       */}
     </div>
   );
 }

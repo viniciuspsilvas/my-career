@@ -6,7 +6,9 @@ import { AnimatedTitleSection } from "@/src/components/global/animated-title-sec
 import Session from "@/src/components/global/session";
 import SocialsMediaLinks from "@/src/components/global/socials-media-links";
 import { useState } from "react";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useGoogleReCaptcha, GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
+const RECAPTCHAKEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || "";
 
 const ContactForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -96,7 +98,7 @@ const ContactForm = () => {
   };
 
   return (
-    <>
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHAKEY}>
       {/* Título Animado */}
       <AnimatedTitleSection
         backTitle="REACH OUT"
@@ -329,7 +331,7 @@ const ContactForm = () => {
           </motion.button>
         </div>
       </motion.form>
-    </>
+    </GoogleReCaptchaProvider>
   );
 };
 
