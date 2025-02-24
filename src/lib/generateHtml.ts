@@ -2,7 +2,7 @@ import { IExperience } from "../models/Experience";
 import { IResume } from "../models/Resume";
 import { ISkill } from "../models/Skill";
 import { ITool } from "../models/Tool";
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "OLD https://vinitech.dev";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://vinitech.dev";
 
 
 export function generateHtml(data: IResume) {
