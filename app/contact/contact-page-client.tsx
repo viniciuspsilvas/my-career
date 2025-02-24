@@ -98,7 +98,7 @@ const ContactForm = () => {
   };
 
   return (
-    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHAKEY}>
+    <>
       {/* Título Animado */}
       <AnimatedTitleSection
         backTitle="REACH OUT"
@@ -331,14 +331,16 @@ const ContactForm = () => {
           </motion.button>
         </div>
       </motion.form>
-    </GoogleReCaptchaProvider>
+    </>
   );
 };
 
 export default function ContactPageClient() {
   return (
-    <Session>
-      <ContactForm />
-    </Session>
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHAKEY}>
+      <Session>
+        <ContactForm />
+      </Session>
+    </GoogleReCaptchaProvider>
   );
 }
