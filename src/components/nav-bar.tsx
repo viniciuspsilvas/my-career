@@ -6,8 +6,8 @@ import { FC, memo, useCallback, useEffect } from "react";
 import { useDrawerMode } from "../hooks/useGlobalState";
 import { motion, useAnimate, stagger } from "framer-motion";
 import {
-  FaBriefcase,
-  FaComment,
+  // FaBriefcase,
+  // FaComment,
   FaEnvelopeOpen,
   FaHome,
   FaTools,
@@ -145,11 +145,11 @@ const MobileMenu = () => {
           pathname={Routes.about}
           icon={<FaUser />}
         />
-        <MobileMenuItem
+        {/* <MobileMenuItem
           label="Portfolio"
           pathname={Routes.portfolio}
           icon={<FaBriefcase />}
-        />
+        /> */}
         <MobileMenuItem
           label="Contact"
           pathname={Routes.contact}
@@ -160,11 +160,11 @@ const MobileMenu = () => {
           pathname={Routes.tools}
           icon={<FaTools />}
         />
-        <MobileMenuItem
+        {/* <MobileMenuItem
           label="Blog"
           pathname={Routes.blog}
           icon={<FaComment />}
-        />
+        /> */}
         <ThemeToggleButton />
       </ul>
       <div className="absolute bottom-0 ">
@@ -236,18 +236,18 @@ export const NavBar: FC<NavBarProps> = () => {
         >
           <ItemMenu label="Home" pathname={Routes.root} icon={<FaHome />} />
           <ItemMenu label="About" pathname={Routes.about} icon={<FaUser />} />
-          <ItemMenu
+          {/* <ItemMenu
             label="Portfolio"
             pathname={Routes.portfolio}
             icon={<FaBriefcase />}
-          />
+          /> */}
           <ItemMenu
             label="Contact"
             pathname={Routes.contact}
             icon={<FaEnvelopeOpen />}
           />
           <ItemMenu label="Tools" pathname={Routes.tools} icon={<FaTools />} />
-          <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} />
+          {/* <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} /> */}
         </ul>
       </div>
 
