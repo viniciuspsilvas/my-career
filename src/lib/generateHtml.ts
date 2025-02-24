@@ -2,6 +2,8 @@ import { IExperience } from "../models/Experience";
 import { IResume } from "../models/Resume";
 import { ISkill } from "../models/Skill";
 import { ITool } from "../models/Tool";
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "OLD https://vinitech.dev";
+
 
 export function generateHtml(data: IResume) {
   const { personalInfo, skills, tools } = data;
@@ -13,7 +15,7 @@ export function generateHtml(data: IResume) {
   const educations = data.educations || [];
   const certifications = data.certifications || [];
   const references = data.references || [];
-  // const interests = data.interests || [];
+  const interests = data.interests || [];
 
   return `
       <html>
@@ -65,6 +67,10 @@ export function generateHtml(data: IResume) {
               .titles {
                 padding-top: 30px;
                 padding-bottom: 30px;
+              }
+
+              .header-footer-site {
+      
               }
 
               .header-footer-email {
@@ -295,6 +301,10 @@ export function generateHtml(data: IResume) {
               }
 
               .interest {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                justify-content: space-between;
               }
 
               .interest-title {
@@ -304,17 +314,16 @@ export function generateHtml(data: IResume) {
               .interest-icon {
                 font-size: 28px;
                 color: #07d2be;
-                margin-right: 5px;
               }
 
               .section-interest {
-                font-size: 16px;
                 color: #666;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                justify-content: space-between;
-                align-items: center;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr;
+                margin-left: 20px;
+                gap: 5px;  
+
               }
             </style>
         </head>
@@ -326,7 +335,10 @@ export function generateHtml(data: IResume) {
                 <h2>${personalInfo.title}</h2>
               </div>
               <div class="header-footer">
-                <div></div>
+                  <span class="header-footer-site">
+                    <i class="fa-solid fa-globe"></i>
+                    ${SITE_URL}
+                  </span>
                 <span class="header-footer-email">
                   <i class="fa-regular fa-envelope"></i>
                 ${personalInfo.email}</span>
@@ -399,6 +411,21 @@ export function generateHtml(data: IResume) {
                   .join(", ")}
                 </ul>
               </div>
+              <div class="section">
+                <div class="section-title">Interests</div>
+                <div class="section-interest">
+                  ${interests
+                    .map(
+                      (interest) => `
+                    <div class="interest">
+                      <i class="interest-icon ${interest.icon}"></i>
+                      <span class="interest-title">${interest.title}</span>
+                    </div>
+                  `
+                    )
+                    .join("")}
+                </div>
+              </div>
             </div> <!-- Fechamento da div left-column -->
             <div class="right-column">
               <div class="section-right">
@@ -421,9 +448,7 @@ export function generateHtml(data: IResume) {
                     <div class="experience-data-locality">${exp.year} - ${
                       exp.locality
                     }</div>
-                    <div class="experience-description">${
-                      exp.description
-                    }</div>
+                    <div class="experience-description">${exp.description}</div>
                     <div class="tags">${exp.tags.join(", ")}</div>
                   </div>
                 `
