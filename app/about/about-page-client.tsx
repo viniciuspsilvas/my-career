@@ -59,26 +59,19 @@ export default function AboutPageClient() {
     setSelectedExperience(undefined);
   };
 
-  const handleDownloadCV = async () => {
+  const handleDownloadCV = () => {
     setIsDownloading(true);
     try {
-      const response = await fetch("/api/generate-pdf", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to generate PDF");
-      }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
+      // Path to the pre-generated CV in the public folder
+      const fileUrl = "/Vinicius_Silva_CV.pdf";
+      
+      // Create a temporary anchor element
       const a = document.createElement("a");
-      a.href = url;
-      a.download = "Vinicius_Silva_CV.pdf";
-      a.click();
+      a.href = fileUrl;
+      a.download = "Vinicius_Silva_CV.pdf"; // The name of the file to be downloaded
+      document.body.appendChild(a); // Append the anchor to the body
+      a.click(); // Programmatically click the anchor to trigger the download
+      document.body.removeChild(a); // Remove the anchor from the document
     } catch (error) {
       console.error("Error downloading CV:", error);
       alert("Failed to download CV. Please try again later.");
@@ -141,7 +134,7 @@ export default function AboutPageClient() {
               {isDownloading ? (
                 <div className="flex items-center space-x-2">
                   <div className="w-5 h-5 border-2 border-white border-t-2 border-t-transparent rounded-full animate-spin" />
-                  <span>Generating...</span>
+                  <span>Downloading...</span>
                 </div>
               ) : (
                 <>
