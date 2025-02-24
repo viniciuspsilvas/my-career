@@ -13,7 +13,6 @@ import { useState } from "react";
 import ExperienceModal from "@/src/components/experience-modal";
 import { IExperience } from "@/src/models/Experience";
 import { MdOutlineUnfoldMore } from "react-icons/md";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 
@@ -42,7 +41,6 @@ const InfoItem = ({
 );
 
 export default function AboutPageClient() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
   const { data } = useSelector((state: RootState) => state.resume);
 
   const [selectedExperience, setSelectedExperience] = useState<
@@ -62,24 +60,13 @@ export default function AboutPageClient() {
   };
 
   const handleDownloadCV = async () => {
-    if (!executeRecaptcha) {
-      console.error("reCAPTCHA not available");
-      alert(
-        "reCAPTCHA is not available. Please refresh the page and try again."
-      );
-      return;
-    }
-
-    const token = await executeRecaptcha("download_cv");
-
     setIsDownloading(true);
     try {
       const response = await fetch("/api/generate-pdf", {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ token })
+        }
       });
 
       if (!response.ok) {
