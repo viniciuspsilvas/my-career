@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 import puppeteer from "puppeteer-core"; 
 import chromium from "@sparticuz/chromium"; 
 import { fetchResumeData } from "@/src/lib/fetchResumeData";
-import { generateHtml } from "@/src/lib/generateHtml";
+import { generateCVHtml } from "@/src/lib/generateCVHtml";
 
 export async function GET() {
   try {
     const resumeData = await fetchResumeData();
 
-    const htmlContent = generateHtml(resumeData);
+    const htmlContent = generateCVHtml(resumeData);
 
     const isProduction = process.env.NODE_ENV === "production";
 

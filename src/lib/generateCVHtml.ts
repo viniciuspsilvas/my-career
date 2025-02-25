@@ -5,7 +5,7 @@ import { ITool } from "../models/Tool";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://vinitech.dev";
 
 
-export function generateHtml(data: IResume) {
+export function generateCVHtml(data: IResume) {
   const { personalInfo, skills, tools } = data;
 
   const experiences = data.experiences.slice(0, 4);

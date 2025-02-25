@@ -1,6 +1,6 @@
 "use client";
 
-import { generateHtml } from "@/src/lib/generateHtml";
+import { generateCVHtml } from "@/src/lib/generateCVHtml";
 import { RootState } from "@/src/redux/store";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -13,7 +13,7 @@ export default function PreviewResume() {
     async function loadData() {
       
       if (!data) return;
-      const html = generateHtml(data);
+      const html = generateCVHtml(data);
       setHtmlContent(html);
     }
     loadData();
