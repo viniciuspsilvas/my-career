@@ -22,3 +22,9 @@ body {
 .grecaptcha-badge {
   visibility: hidden;
 }
+
+.line-clamp-fallback {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

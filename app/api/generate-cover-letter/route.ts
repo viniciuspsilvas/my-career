@@ -142,7 +142,6 @@ export async function POST(request: Request) {
       completion.choices[0].message.content ||
       "Failed to generate cover letter";
 
-    console.log("Cover letter generated:", coverLetter);
     const htmlContent = generateCoverLetterHtml(personalInfo, coverLetter);
 
     // NOT CHATGPT
