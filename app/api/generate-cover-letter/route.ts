@@ -1,7 +1,7 @@
 // app/api/generate-cover-letter/route.ts
 import { connectDB } from "@/src/lib/mongodb";
 import OpenAI from "openai";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
 import { NextResponse } from "next/server";
 import { Experience } from "@/src/models/Experience";
 import { PersonalInfo } from "@/src/models/PersonalInfo";
