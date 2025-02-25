@@ -151,17 +151,21 @@ export async function POST(request: Request) {
 
     console.log("# Generation PDF in production:", isProduction);
 
+
+    const executablePath = isProduction
+      ? await chromium.executablePath()
+      : "/Applications/Chromium.app/Contents/MacOS/Chromium";
+
+    console.log("Executable Path:", executablePath);
+
     const browser = await puppeteer.launch({
       args: isProduction ? chromium.args : [],
-      executablePath: isProduction
-        ? await chromium.executablePath()
-        : "/Applications/Chromium.app/Contents/MacOS/Chromium",
-      headless: isProduction
-        ? chromium.headless === "new"
-          ? true
-          : Boolean(chromium.headless)
-        : true
+      executablePath,
+      headless: isProduction ? chromium.headless === "new" ? true : Boolean(chromium.headless) : true,
     });
+
+    console.log("Browser launched successfully");
+
 
     const page = await browser.newPage();
     await page.setContent(htmlContent);

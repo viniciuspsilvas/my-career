@@ -1,30 +1,30 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer-core"; 
-import chromium from "@sparticuz/chromium"; 
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 import { fetchResumeData } from "@/src/lib/fetchResumeData";
 import { generateCVHtml } from "@/src/lib/generateCVHtml";
 
 export async function GET() {
   try {
     const resumeData = await fetchResumeData();
-
     const htmlContent = generateCVHtml(resumeData);
 
     const isProduction = process.env.NODE_ENV === "production";
-
     console.log("# Generation PDF in production:", isProduction);
 
+    const executablePath = isProduction
+      ? await chromium.executablePath()
+      : "/Applications/Chromium.app/Contents/MacOS/Chromium";
+
+    console.log("Executable Path:", executablePath);
+
     const browser = await puppeteer.launch({
-      args: isProduction ? chromium.args : [], 
-      executablePath: isProduction
-        ? await chromium.executablePath() 
-        : "/Applications/Chromium.app/Contents/MacOS/Chromium", 
-      headless: isProduction
-        ? chromium.headless === "new"
-          ? true
-          : Boolean(chromium.headless) 
-        : true,
+      args: isProduction ? chromium.args : [],
+      executablePath,
+      headless: isProduction ? chromium.headless === "new" ? true : Boolean(chromium.headless) : true,
     });
+
+    console.log("Browser launched successfully");
 
     const page = await browser.newPage();
     await page.setContent(htmlContent);
