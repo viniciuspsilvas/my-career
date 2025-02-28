@@ -6,7 +6,7 @@ import { FC, memo, useCallback, useEffect } from "react";
 import { useDrawerMode } from "../hooks/useGlobalState";
 import { motion, useAnimate, stagger } from "framer-motion";
 import {
-  // FaBriefcase,
+  FaBriefcase,
   // FaComment,
   FaEnvelopeOpen,
   FaHome,
@@ -145,11 +145,11 @@ const MobileMenu = () => {
           pathname={Routes.about}
           icon={<FaUser />}
         />
-        {/* <MobileMenuItem
+        <MobileMenuItem
           label="Portfolio"
           pathname={Routes.portfolio}
           icon={<FaBriefcase />}
-        /> */}
+        />
         <MobileMenuItem
           label="Contact"
           pathname={Routes.contact}
@@ -236,11 +236,11 @@ export const NavBar: FC<NavBarProps> = () => {
         >
           <ItemMenu label="Home" pathname={Routes.root} icon={<FaHome />} />
           <ItemMenu label="About" pathname={Routes.about} icon={<FaUser />} />
-          {/* <ItemMenu
+          <ItemMenu
             label="Portfolio"
             pathname={Routes.portfolio}
             icon={<FaBriefcase />}
-          /> */}
+          />
           <ItemMenu
             label="Contact"
             pathname={Routes.contact}

@@ -10,12 +10,12 @@ import { useResolvedTheme } from "@/src/hooks/useResolvedTheme";
 const About = lazy(() => import("@/app/about/page"));
 // const Blog = lazy(() => import("@/app/blog/page"));
 const Contact = lazy(() => import("@/app/contact/page"));
-// const Portfolio = lazy(() => import("@/app/portfolio/page"));
+const Portfolio = lazy(() => import("@/app/portfolio/page"));
 const Tools = lazy(() => import("@/app/tools/page"));
 
 const sections = [
   { id: "about", Component: About },
-  // { id: "portfolio", Component: Portfolio },
+  { id: "portfolio", Component: Portfolio },
   { id: "contact", Component: Contact },
   { id: "tools", Component: Tools },
   // { id: "blog", Component: Blog }

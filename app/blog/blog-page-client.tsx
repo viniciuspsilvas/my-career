@@ -18,7 +18,7 @@ export default function BlogPageClient() {
   }
 
   if (error) {
-    return <ErrorMessage message="Error loading personal infos." />;
+    return <ErrorMessage message="Error loading blog posts." />;
   }
 
   return (

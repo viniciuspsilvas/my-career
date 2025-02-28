@@ -6,6 +6,7 @@ export interface IProject extends Document {
   description: string;
   image: string;
   link?: string;
+  tags?: string[];
 }
 
 const ProjectSchema = new Schema<IProject>(
@@ -14,6 +15,7 @@ const ProjectSchema = new Schema<IProject>(
     description: { type: String, required: true },
     image: { type: String, required: true },
     link: { type: String },
+    tags: { type: [String], default: [] },
   },
   { timestamps: true },
 );

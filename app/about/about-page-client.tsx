@@ -108,7 +108,7 @@ export default function AboutPageClient() {
         supportText="Learn more about my background, skills, and experience!"
       />
 
-      {/* Seção de Informações Pessoais */}
+      {/* Personal info session */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -153,7 +153,7 @@ export default function AboutPageClient() {
           </div>
         </div>
 
-        {/* Seção de Estatísticas */}
+        {/* Stats session */}
         <div className="grid grid-cols-2 gap-4">
           {stats?.map((stat, index: number) => (
             <motion.div
@@ -174,7 +174,7 @@ export default function AboutPageClient() {
 
       <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
-      {/* Seção de Habilidades */}
+      {/* Skills session */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -217,7 +217,7 @@ export default function AboutPageClient() {
 
       <hr className="border-gray-200 dark:border-gray-700 my-16 md:my-20 w-2/3 mx-auto" />
 
-      {/* Seção de Experiência & Educação */}
+      {/* Experience session */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -227,7 +227,7 @@ export default function AboutPageClient() {
           EXPERIENCE
         </h2>
         <div className="space-y-8 relative">
-          {/* Linha da Timeline */}
+          {/* Timeline */}
           <div className="absolute left-5 top-0 bottom-0 w-0.5 bg-gray-100 dark:bg-gray-700" />
           {experiences?.map((item, index: number) => (
             <motion.div
