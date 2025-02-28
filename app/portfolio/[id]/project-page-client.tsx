@@ -38,7 +38,7 @@ export default function ProjectPageClient({ id }: ProjectPageClientProps) {
         className="mb-8"
       >
         <Link
-          href="/blog"
+          href="/portfolio"
           className="inline-flex items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
         >
           <FaArrowLeft className="mr-2" />

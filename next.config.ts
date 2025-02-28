@@ -7,6 +7,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
+      {
+        protocol: "https",
+        hostname: "vinitech.dev",
+      }
     ],
   },
   serverExternalPackages: ["@sparticuz/chromium", "puppeteer-core"],
