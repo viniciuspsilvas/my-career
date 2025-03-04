@@ -8,7 +8,6 @@ import { PersonalInfo } from "@/src/models/PersonalInfo";
 import { Skill } from "@/src/models/Skill";
 import chromium from "@sparticuz/chromium";
 import { generateCoverLetterHtml } from "@/src/lib/generateCoverLetterHtml";
-// import coverLetterModel from "@/src/lib/coverLetterModel";
 
 const website = process.env.NEXT_PUBLIC_SITE_URL || "https://vinitech.dev";
 
