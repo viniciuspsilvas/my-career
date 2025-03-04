@@ -9,6 +9,7 @@ import { useBlogPosts } from "@/src/hooks/useBlogPosts";
 import { getHumanReadableDateFormat } from "@/src/lib/date";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function BlogPageClient() {
   const { data, isLoading, error } = useBlogPosts();
@@ -41,12 +42,20 @@ export default function BlogPageClient() {
               animate={{ opacity: 1, y: 0 }}
               whileHover={{
                 scale: 1.05,
-                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)"
               }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
             >
-              {/* <img src={post.coverImage} alt={post.title} className="w-full h-48 object-cover rounded-t-lg mb-4" /> */}
+              {post.coverImage && (
+                <Image
+                  src={post.coverImage}
+                  alt={post.title}
+                  width={100}
+                  height={100}
+                  className="w-full h-48 object-cover rounded"
+                />
+              )}
 
               <div className="flex flex-col justify-between h-full gap-4">
                 <Text
@@ -55,12 +64,12 @@ export default function BlogPageClient() {
                 >
                   {post.title}
                 </Text>
-                <Text
-                  category="p1"
-                  className="line-clamp-3 sm:line-clamp-5 text-gray-700 dark:text-gray-300"
-                >
-                  {post.content}
-                </Text>
+
+                <div
+                  dangerouslySetInnerHTML={{ __html: post.content }}
+                  className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9 space-y-2 [&>ul]:list-disc [&>ul]:pl-5 line-clamp-fallback"
+                  style={{ WebkitLineClamp: 5 }}
+                />
                 <Text
                   category="small"
                   status="basic"

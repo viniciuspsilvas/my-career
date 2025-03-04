@@ -9,6 +9,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { Text } from "@/src/components/global/text";
 import Tags from "@/src/components/global/tags";
 import { useProjectById } from "@/src/hooks/useProjects";
+import Image from "next/image";
 
 interface ProjectPageClientProps {
   id: string;
@@ -69,6 +70,15 @@ export default function ProjectPageClient({ id }: ProjectPageClientProps) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           /> */}
+          {project.image && (
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={500}
+              height={100}
+              className="w-full h-48 object-cover rounded"
+            />
+          )}
 
           <motion.div
             initial={{ opacity: 0 }}
@@ -76,7 +86,6 @@ export default function ProjectPageClient({ id }: ProjectPageClientProps) {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="prose dark:prose-invert max-w-none"
           >
-
             <div
               dangerouslySetInnerHTML={{ __html: project.description }}
               className="text-gray-600 dark:text-gray-400 mt-2 space-y-2 [&>ul]:list-disc [&>ul]:pl-5 "

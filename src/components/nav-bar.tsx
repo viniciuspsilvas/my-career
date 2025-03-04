@@ -7,7 +7,7 @@ import { useDrawerMode } from "../hooks/useGlobalState";
 import { motion, useAnimate, stagger } from "framer-motion";
 import {
   FaBriefcase,
-  // FaComment,
+  FaComment,
   FaEnvelopeOpen,
   FaHome,
   FaTools,
@@ -160,11 +160,11 @@ const MobileMenu = () => {
           pathname={Routes.tools}
           icon={<FaTools />}
         />
-        {/* <MobileMenuItem
+        <MobileMenuItem
           label="Blog"
           pathname={Routes.blog}
           icon={<FaComment />}
-        /> */}
+        />
         <ThemeToggleButton />
       </ul>
       <div className="absolute bottom-0 ">
@@ -247,7 +247,7 @@ export const NavBar: FC<NavBarProps> = () => {
             icon={<FaEnvelopeOpen />}
           />
           <ItemMenu label="Tools" pathname={Routes.tools} icon={<FaTools />} />
-          {/* <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} /> */}
+          <ItemMenu label="Blog" pathname={Routes.blog} icon={<FaComment />} />
         </ul>
       </div>
 
