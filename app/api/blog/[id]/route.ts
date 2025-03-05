@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     await connectDB();
@@ -20,7 +20,34 @@ export async function GET(
     console.error("Failed to fetch post by ID, error:", error);
     return NextResponse.json(
       { error: "Failed to fetch post" },
-      { status: 500 },
+      { status: 500 }
+    );
+  }
+}
+
+export async function PUT(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    await connectDB();
+    const { id } = await params;
+    const body = await request.json();
+
+    const updatedPost = await BlogPost.findByIdAndUpdate(id, body, {
+      new: true
+    });
+
+    if (!updatedPost) {
+      return NextResponse.json({ error: "Post not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(updatedPost, { status: 200 });
+  } catch (error) {
+    console.error("Failed to update post, error:", error);
+    return NextResponse.json(
+      { error: "Failed to update post" },
+      { status: 500 }
     );
   }
 }
