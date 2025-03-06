@@ -89,7 +89,7 @@ const SimpleEditor = forwardRef<Quill | null, SimpleEditorProps>(
       }
     }, [defaultValue]);
 
-    return <div ref={containerRef}></div>;
+    return <div ref={containerRef} className='h-32 mb-16' />;
   },
 );
 
