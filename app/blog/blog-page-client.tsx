@@ -10,6 +10,7 @@ import { getHumanReadableDateFormat } from "@/src/lib/date";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import PostContent from "@/src/components/PostContent";
 
 export default function BlogPageClient() {
   const { data, isLoading, error } = useBlogPosts();
@@ -66,10 +67,12 @@ export default function BlogPageClient() {
                 </Text>
 
                 <div
-                  dangerouslySetInnerHTML={{ __html: post.content }}
                   className="text-gray-600 dark:text-gray-400 mt-2 line-clamp-5 sm:line-clamp-7 md:line-clamp-9 space-y-2 [&>ul]:list-disc [&>ul]:pl-5 line-clamp-fallback"
                   style={{ WebkitLineClamp: 5 }}
-                />
+                >
+                  <PostContent content={post.content} />
+                </div>
+
                 <Text
                   category="small"
                   status="basic"

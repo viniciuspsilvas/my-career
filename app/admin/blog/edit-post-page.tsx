@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Session from "@/src/components/global/session";
 import Loading from "@/src/components/global/loading";
@@ -9,20 +9,19 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import { useBlogPostById, useUpdateBlogPost } from "@/src/hooks/useBlogPosts";
 import { Text } from "@/src/components/global/text";
-import SimpleEditor from "@/src/components/SimpleEditor";
+import MarkdownEditor from "@/src/components/MarkdownEditor";
 
 interface EditPostPageProps {
   id?: string;
 }
 
 export default function EditPostPage({ id = "" }: EditPostPageProps) {
-  const quillRef = useRef(null);
 
   const { data: post, isLoading, error } = useBlogPostById(id);
   const { mutate: updatePost, isPending: isUpdating } = useUpdateBlogPost();
 
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState("**hello** world");
   const [coverImage, setCoverImage] = useState("");
   const [tags, setTags] = useState<string[]>([]);
 
@@ -141,10 +140,9 @@ export default function EditPostPage({ id = "" }: EditPostPageProps) {
               >
                 Content
               </label>
-              <SimpleEditor
+              <MarkdownEditor
                 defaultValue={content}
                 onChange={setContent}
-                ref={quillRef}
               />
             </div>
 

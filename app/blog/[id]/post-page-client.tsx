@@ -11,6 +11,7 @@ import { Text } from "@/src/components/global/text";
 import { getHumanReadableDateFormat } from "@/src/lib/date";
 import Tags from "@/src/components/global/tags";
 import Image from "next/image";
+import PostContent from "@/src/components/PostContent";
 
 interface PostPageClientProps {
   id: string;
@@ -96,10 +97,8 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="prose dark:prose-invert max-w-none"
           >
-            <div
-              dangerouslySetInnerHTML={{ __html: post.content }}
-              className="text-gray-600 dark:text-gray-400 mt-2 space-y-2 [&>ul]:list-disc [&>ul]:pl-5 "
-            />
+
+          <PostContent content={post.content} />
           </motion.div>
 
           {/* Tags */}
