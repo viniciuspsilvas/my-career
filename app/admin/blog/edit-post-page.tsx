@@ -12,10 +12,10 @@ import { Text } from "@/src/components/global/text";
 import SimpleEditor from "@/src/components/SimpleEditor";
 
 interface EditPostPageProps {
-  id: string;
+  id?: string;
 }
 
-export default function EditPostPage({ id }: EditPostPageProps) {
+export default function EditPostPage({ id = "" }: EditPostPageProps) {
   const quillRef = useRef(null);
 
   const { data: post, isLoading, error } = useBlogPostById(id);
@@ -41,7 +41,7 @@ export default function EditPostPage({ id }: EditPostPageProps) {
       title,
       content,
       coverImage,
-      tags,
+      tags
     };
 
     updatePost(
@@ -65,7 +65,7 @@ export default function EditPostPage({ id }: EditPostPageProps) {
     return <ErrorMessage message="Error loading post." />;
   }
 
-  if (!post) {
+  if (id && !post) {
     return <ErrorMessage message="Post not found." />;
   }
 
@@ -88,7 +88,7 @@ export default function EditPostPage({ id }: EditPostPageProps) {
 
       <div className="flex flex-col items-center gap-2 md:gap-4 ">
         <Text category="h1" className="text-center">
-          Edit Post
+          {id ? "Edit" : "New"} Post
         </Text>
       </div>
 

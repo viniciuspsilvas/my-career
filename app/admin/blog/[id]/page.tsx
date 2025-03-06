@@ -1,4 +1,4 @@
-import EditPostPageClient from "./edit-post-page";
+import EditPostPageClient from "../edit-post-page";
 
 export default async function Page({
   params,
