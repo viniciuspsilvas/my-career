@@ -70,25 +70,14 @@ export default function PostPageClient({ id }: PostPageClientProps) {
           transition={{ duration: 0.5 }}
           className="max-w-4xl mx-auto px-4 py-8"
         >
-          {/* Imagem de Capa */}
-          {/* <motion.img
-            src={post.coverImage}
-            alt={post.title}
-            className="w-full h-64 object-cover rounded-lg shadow-lg mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          /> */}
-
-
           {post.coverImage && (
-            <Image
-              src={post.coverImage}
-              alt={post.title}
-              width={500}
-              height={100}
-              className="w-full h-48 object-cover rounded"
-            />
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                width={500}
+                height={100}
+                className="w-full h-48 object-cover rounded mb-6"
+              />
           )}
           {/* Conteúdo do Post */}
           <motion.div
@@ -97,8 +86,7 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="prose dark:prose-invert max-w-none"
           >
-
-          <PostContent content={post.content} />
+            <PostContent content={post.content} />
           </motion.div>
 
           {/* Tags */}
