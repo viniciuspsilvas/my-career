@@ -10,7 +10,7 @@ import { getHumanReadableDateFormat } from "@/src/lib/date";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import PostContent from "@/src/components/PostContent";
+import MarkdownContent from "@/src/components/MarkdownContent";
 
 export default function BlogPageClient() {
   const { data, isLoading, error } = useBlogPosts();
@@ -70,7 +70,7 @@ export default function BlogPageClient() {
                   className="text-gray-600 dark:text-gray-400 line-clamp-5 sm:line-clamp-7 md:line-clamp-9 line-clamp-fallback"
                   style={{ WebkitLineClamp: 5 }}
                 >
-                  <PostContent content={post.content} />
+                  <MarkdownContent content={post.content} />
                 </div>
 
                 <Text

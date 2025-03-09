@@ -11,7 +11,7 @@ import { Text } from "@/src/components/global/text";
 import { getHumanReadableDateFormat } from "@/src/lib/date";
 import Tags from "@/src/components/global/tags";
 import Image from "next/image";
-import PostContent from "@/src/components/PostContent";
+import MarkdownContent from "@/src/components/MarkdownContent";
 
 interface PostPageClientProps {
   id: string;
@@ -86,7 +86,7 @@ export default function PostPageClient({ id }: PostPageClientProps) {
             transition={{ delay: 0.4, duration: 0.5 }}
             className="prose dark:prose-invert max-w-none"
           >
-            <PostContent content={post.content} />
+            <MarkdownContent content={post.content} />
           </motion.div>
 
           {/* Tags */}

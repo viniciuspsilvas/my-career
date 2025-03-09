@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
-interface PostContentProps {
+interface MarkdownContentProps {
   content: string;
 }
 
@@ -13,7 +13,7 @@ interface CodeProps {
   children?: React.ReactNode;
 }
 
-const PostContent: React.FC<PostContentProps> = ({ content }) => {
+const MarkdownContent: React.FC<MarkdownContentProps> = ({ content }) => {
   return (
     <ReactMarkdown
       components={{
@@ -41,4 +41,4 @@ const PostContent: React.FC<PostContentProps> = ({ content }) => {
   );
 };
 
-export default PostContent;
+export default MarkdownContent;
