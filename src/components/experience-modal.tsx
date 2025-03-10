@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { IExperience } from "../models/Experience";
 import Tags from "./global/tags";
+import { useState } from "react";
+import MarkdownContent from "./MarkdownContent";
 
 interface ModalProps {
   experience?: IExperience;
@@ -13,6 +15,8 @@ interface ModalProps {
 }
 
 const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
+  const [showNotes] = useState(process.env.NODE_ENV !== "production");
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <motion.div
@@ -77,6 +81,16 @@ const ExperienceModal = ({ experience, isOpen, onClose }: ModalProps) => {
         )}
 
         {experience?.tags && <Tags tags={experience.tags} />}
+
+        {showNotes && experience?.notes && (
+          <div className="text-gray-600 dark:text-gray-400 mt-4 [&>ul]:list-disc [&>ul]:pl-5">
+
+            <h2 className=" font-bold text-2xl">My Notes</h2>
+
+
+            <MarkdownContent content={experience?.notes} />
+          </div>
+        )}
 
         <div className="flex justify-center">
           <button
