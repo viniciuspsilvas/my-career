@@ -12,6 +12,9 @@ import { Certification } from "../models/Certification";
 import { Education } from "../models/Education";
 import { Reference } from "../models/Reference";
 import { Interest } from "../models/Interest";
+import { FlashCard } from "../models/FlashCard";
+
+import { flashcards } from "./seedFlashcards";
 
 const experiences = [
   {
@@ -389,8 +392,6 @@ const interests = [
   { title: "Sport", icon: "fa-solid fa-person-biking" }
 ];
 
-// @@@
-
 const seedProjects = async () => {
   try {
     await Project.insertMany(projects);
@@ -490,6 +491,15 @@ const seedInterests = async () => {
   }
 };
 
+const seedFlashcards = async () => {
+  try {
+    await FlashCard.insertMany(flashcards);
+    console.log("Flashcards inserted successfully");
+  } catch (error) {
+    console.error("Error inserting flashcard seeds:", error);
+  }
+};
+
 const seedAll = async () => {
   try {
     await connectDB();
@@ -505,7 +515,8 @@ const seedAll = async () => {
       seedEducation(),
       seedCertifications(),
       seedReferences(),
-      seedInterests()
+      seedInterests(),
+      seedFlashcards()
     ]);
 
     console.log("All seeds inserted successfully");
