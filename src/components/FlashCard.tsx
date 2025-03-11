@@ -13,7 +13,7 @@ interface FlashCardProps {
 export default function FlashCard({ flashCard: { question, tip, answer }, flipped, onFlip }: FlashCardProps) {
   return (
     <motion.div
-      className="w-96 h-60 bg-white dark:bg-gray-700 shadow-xl rounded-2xl p-6 flex justify-center items-center  cursor-pointer"
+      className="w-96  bg-white dark:bg-gray-700 shadow-xl rounded-2xl p-6 flex justify-center items-center  cursor-pointer"
       onClick={onFlip}
       aria-label={flipped ? "Answer" : "Question"}
       role="button"
