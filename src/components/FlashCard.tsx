@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { IFlashCard } from "../models/FlashCard";
+import MarkdownContent from "./MarkdownContent";
 
 interface FlashCardProps {
   flashCard: IFlashCard;
@@ -12,7 +13,7 @@ interface FlashCardProps {
 export default function FlashCard({ flashCard: { question, tip, answer }, flipped, onFlip }: FlashCardProps) {
   return (
     <motion.div
-      className="w-96 h-60 bg-white dark:bg-gray-700 shadow-xl rounded-2xl p-6 flex justify-center items-center text-center cursor-pointer"
+      className="w-96 h-60 bg-white dark:bg-gray-700 shadow-xl rounded-2xl p-6 flex justify-center items-center  cursor-pointer"
       onClick={onFlip}
       aria-label={flipped ? "Answer" : "Question"}
       role="button"
@@ -23,7 +24,7 @@ export default function FlashCard({ flashCard: { question, tip, answer }, flippe
       transition={{ duration: 0.5 }}
     >
       {!flipped ? (
-        <div>
+        <div className="text-center">
           <p className="text-xl font-semibold">{question}</p>
           {tip && <p className="mt-2 text-gray-500 italic">💡 {tip}</p>}
         </div>
@@ -33,7 +34,7 @@ export default function FlashCard({ flashCard: { question, tip, answer }, flippe
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <p className="text-lg font-semibold">{answer}</p>
+          <MarkdownContent content={answer} />
         </motion.div>
       )}
     </motion.div>
