@@ -759,5 +759,215 @@ export const flashcards = [
     answer: "Decorators are an experimental feature in TypeScript that allow you to modify classes and methods at design time. For example, marking a class property as `readonly`.",
     type: "frontend",
     tags: ["typescript", "frontend"]
+  },
+  {
+    question: "How do you optimize a website's assets?",
+    tip: "Think about file handling and performance",
+    answer: "You can optimize a website's assets through file concatenation, file compression, CDN hosting, offloading assets, reorganizing and redefining code, and more.",
+    type: "frontend",
+    tags: ["optimization", "performance"]
+  },
+  {
+    question: "What are the three ways to reduce page load time?",
+    tip: "Think about performance optimization techniques",
+    answer: "To reduce page load time, you can: 1. Reduce image sizes. 2. Remove unnecessary widgets. 3. Perform HTTP compression. Additionally, you can put CSS at the top, script references at the bottom, reduce lookups, minimize redirects, and enable caching.",
+    type: "frontend",
+    tags: ["performance", "optimization"]
+  },
+  {
+    question: "What kind of things must you be wary of when designing or developing multilingual sites?",
+    tip: "Think about language and encoding",
+    answer: "When designing multilingual sites, you should: 1. Set the default language using Unicode encoding. 2. Use the `lang` attribute. 3. Be aware of standard font sizes and text direction. 4. Consider language word length.",
+    type: "frontend",
+    tags: ["multilingual", "html"]
+  },
+  {
+    question: "What is HTML?",
+    tip: "Think about markup languages",
+    answer: "HTML stands for Hypertext Markup Language. It is the dominant markup language for creating websites and anything that can be viewed inside a web browser.",
+    type: "html",
+    tags: ["html", "basics"]
+  },
+  {
+    question: "What is the difference between HTML elements and tags?",
+    tip: "Think about syntax and structure",
+    answer: "HTML elements communicate to the browser how to render the actual text. When surrounded by angular brackets, they form HTML tags. Tags usually come in pairs and surround the actual text.",
+    type: "html",
+    tags: ["html", "elements"]
+  },
+  {
+    question: "What is 'Semantic HTML'?",
+    tip: "Think about meaning and structure",
+    answer: "Semantic HTML is a coding style where the tags embody what the text is meant to convey. Tags like `<b>` for bold and `<i>` for italic should not be used because they only represent formatting and provide no meaning or structure.",
+    type: "html",
+    tags: ["html", "semantics"]
+  },
+  {
+    question: "What does DOCTYPE mean?",
+    tip: "Think about document rendering",
+    answer: "The `DOCTYPE` tells the browser which type of HTML is used on a web page. It helps the browser determine how to render the page. Failing to use a `DOCTYPE` or using the wrong one may load the page in quirks mode.",
+    type: "html",
+    tags: ["html", "doctype"]
+  },
+  {
+    question: "What's the difference between standards mode and quirks mode?",
+    tip: "Think about browser rendering",
+    answer: "Quirks mode is a default compatibility mode that may differ between browsers, leading to inconsistencies in appearance. Standards mode ensures consistent rendering across browsers.",
+    type: "html",
+    tags: ["html", "rendering"]
+  },
+  {
+    question: "What are the limitations when serving XHTML pages?",
+    tip: "Think about browser compatibility",
+    answer: "The biggest limitation is poor browser support. Some browsers, like Internet Explorer, cannot parse XHTML as XML, making it less extensible than promised.",
+    type: "html",
+    tags: ["html", "xhtml"]
+  },
+  {
+    question: "How do you make comments without text being picked up by the browser?",
+    tip: "Think about HTML syntax",
+    answer: "Comments in HTML start with `<!--` and end with `-->`. They are used to explain or clarify code and prevent the browser from recognizing the text.",
+    type: "html",
+    tags: ["html", "comments"]
+  },
+  {
+    question: "What is the difference between linking to an image, a website, and an email address?",
+    tip: "Think about HTML attributes",
+    answer: "To link an image, use the `<img>` tag with the `src` attribute. To link a website, use the `<a>` tag with the `href` attribute. To link an email, use `mailto:` followed by the email address in the `href` attribute.",
+    type: "html",
+    tags: ["html", "links"]
+  },
+  {
+    question: "My hyperlink or image is not displaying correctly, what is wrong with it?",
+    tip: "Think about common HTML errors",
+    answer: "Common issues include missing tag brackets, missing quotes for `href` or `src`, or incorrect alternate text. Verify the link itself to ensure it is correct.",
+    type: "html",
+    tags: ["html", "debugging"]
+  },
+  {
+    question: "What is the syntax difference between a bulleted list and a numbered list?",
+    tip: "Think about HTML list tags",
+    answer: "Bulleted lists use the `<ul>` tag (unordered list). Numbered lists use the `<ol>` tag (ordered list).",
+    type: "html",
+    tags: ["html", "lists"]
+  },
+  {
+    question: "How are absolute, relative, static, and fixed positions different from each other?",
+    tip: "Think about CSS positioning",
+    answer: "Static: Default position, unchangeable. Relative: Position can be changed using attributes like alignment and size. Absolute: Position is relative to the parent element. Fixed: Position is relative to the browser window and remains fixed during scrolling.",
+    type: "css",
+    tags: ["css", "positioning"]
+  },
+  {
+    question: "What is meant by a responsive website?",
+    tip: "Think about adaptability",
+    answer: "A responsive website fits any screen resolution, device type, and size, ensuring it looks good and is understandable to the user on all devices.",
+    type: "frontend",
+    tags: ["responsive", "css"]
+  },
+  {
+    question: "Explain the difference between inline, inline-block, and block.",
+    tip: "Think about CSS display properties",
+    answer: "Block: Starts on a new line and takes up the full width. Inline: Does not start on a new line and only takes up as much width as necessary. Inline-block: Similar to inline but allows padding and margins on all sides.",
+    type: "css",
+    tags: ["css", "display"]
+  },
+  {
+    question: "Does HTML need a compiler?",
+    tip: "Think about front-end languages",
+    answer: "No, HTML does not need a compiler because it is a front-end language. Other programming languages like Java or C++ require compilers to convert code into machine language.",
+    type: "html",
+    tags: ["html", "basics"]
+  },
+  {
+    question: "What is the difference between document and window?",
+    tip: "Think about browser objects",
+    answer: "Window: The first thing that loads into the browser, with properties like `innerWidth`, `innerHeight`, and `name`. Document: Loads inside the window object and represents the HTML, PHP, or other documents with properties like `title`, `URL`, and `cookies`.",
+    type: "javascript",
+    tags: ["javascript", "dom"]
+  },
+  {
+    question: "What is web accessibility?",
+    tip: "Think about inclusivity",
+    answer: "Web accessibility means providing access to websites for differently-abled and disabled persons so they can understand, navigate, and interact with the web easily.",
+    type: "frontend",
+    tags: ["accessibility", "best-practices"]
+  },
+  {
+    question: "What is JavaScript hoisting?",
+    tip: "Think about variable declaration",
+    answer: "JavaScript hoisting allows variables to be accessed before they are declared. However, only declared variables are hoisted, and accessing them before assignment results in `undefined`.",
+    type: "javascript",
+    tags: ["javascript", "hoisting"]
+  },
+  {
+    question: "Create an array in JavaScript with a list of cities and assign that array to the variable `City`.",
+    tip: "Think about JavaScript arrays",
+    answer: "```javascript\nvar City = [\"New York\", \"London\", \"Sydney\", \"Hyderabad\", \"Montreal\"];\n```",
+    type: "javascript",
+    tags: ["javascript", "arrays"]
+  },
+  {
+    question: "How do you select all elements with the class of 'Apple' in jQuery?",
+    tip: "Think about jQuery selectors",
+    answer: "```javascript\n$(\".Apple\").show();\n```",
+    type: "javascript",
+    tags: ["jquery", "selectors"]
+  },
+  {
+    question: "Declare a new variable in PHP equal to the number 6.",
+    tip: "Think about PHP syntax",
+    answer: "```php\n$number = 6;\n```",
+    type: "php",
+    tags: ["php", "variables"]
+  },
+  {
+    question: "How do you check if a variable has been set in PHP?",
+    tip: "Think about PHP functions",
+    answer: "Use the `isset()` function: ```php\nisset($variable);\n```",
+    type: "php",
+    tags: ["php", "variables"]
+  },
+  {
+    question: "How do you access a GET request URL parameter with PHP?",
+    tip: "Think about PHP superglobals",
+    answer: "Use the `$_GET` method: ```php\n$_GET['parameter'];\n```",
+    type: "php",
+    tags: ["php", "get"]
+  },
+  {
+    question: "What is the difference between HTML and XHTML?",
+    tip: "Think about markup languages",
+    answer: "HTML: Hypertext Markup Language. XHTML: Extensible Hypertext Markup Language, which is stricter and XML-based. XHTML does not allow coding lapses.",
+    type: "html",
+    tags: ["html", "xhtml"]
+  },
+  {
+    question: "What is the difference between local storage, session storage, and cookies?",
+    tip: "Think about client-side storage",
+    answer: "Local Storage: Stores data without expiry limits. Session Storage: Stores data only while the window is open. Cookies: Stores data between the client and server.",
+    type: "javascript",
+    tags: ["javascript", "storage"]
+  },
+  {
+    question: "What can you do to increase page performance?",
+    tip: "Think about optimization techniques",
+    answer: "To increase page performance, you can: 1. Reduce image sizes. 2. Clear caches. 3. Reduce external HTTP requests. 4. Load JavaScript asynchronously. 5. Optimize the site for mobile.",
+    type: "frontend",
+    tags: ["performance", "optimization"]
+  },
+  {
+    question: "Describe the new elements in HTML.",
+    tip: "Think about HTML5",
+    answer: "New elements in HTML include semantic tags (e.g., `<header>`, `<footer>`, `<figure>`, `<mark>`) and multimedia/graphic tags (e.g., `<audio>`, `<canvas>`).",
+    type: "html",
+    tags: ["html", "html5"]
+  },
+  {
+    question: "Tell me how float works.",
+    tip: "Think about CSS layout",
+    answer: "Float pushes an element to the right or left. The `float` property has four values: `inherit`, `left`, `right`, and `none`.",
+    type: "css",
+    tags: ["css", "float"]
   }
 ];
