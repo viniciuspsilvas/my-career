@@ -74,8 +74,8 @@ export default function ProjectPageClient({ id }: ProjectPageClientProps) {
             <Image
               src={project.image}
               alt={project.title}
-              width={500}
-              height={100}
+              width={800}
+              height={600}
               className="w-full h-48 object-cover rounded"
             />
           )}

@@ -65,8 +65,8 @@ export default function PortfolioPageClient() {
                   <Image
                     src={project.image}
                     alt={project.title}
-                    width={100}
-                    height={100}
+                    width={400}
+                    height={300}
                     className="w-full h-48 object-cover rounded"
                   />
                 )}
